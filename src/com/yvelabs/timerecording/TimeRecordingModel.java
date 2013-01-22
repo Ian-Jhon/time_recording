@@ -43,6 +43,9 @@ public class TimeRecordingModel {
 		this.recordId = recordId;
 	}
 	public Date getCreateTime() {
+		if (createTime == null) {
+			createTime = new Date();
+		}
 		return createTime;
 	}
 	public void setCreateTime(Date createTime) {

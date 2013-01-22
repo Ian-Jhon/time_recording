@@ -20,10 +20,10 @@ public class EventCategoryDAO {
 	//	private static final String EVENT_RECORDS_SELECT = "select _id, event_name, event_category, event_date, useing_time, summary, create_time from t_event_records where 1 = 1";
 
 	
-	private SQLiteDatabase db;
+	private Context context;
 	
-	public EventCategoryDAO (Context context) {
-		db = new MyDBHelper(context).getWritableDatabase();
+	public EventCategoryDAO () {
+		this.context = context;
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class EventCategoryDAO {
 	 */
 	public List<Integer> insertReturnId(List<EventCategoryModel> categoryModels) {
 		List<Integer> resultIds = new ArrayList<Integer>();
-
+		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
 		try {
 			db.beginTransaction();
 			for (EventCategoryModel categoryModel : categoryModels) {
@@ -84,6 +84,7 @@ public class EventCategoryDAO {
 	 * @param categoryModels
 	 */
 	public void insert (List<EventCategoryModel> categoryModels) {
+		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
 		try {
 			db.beginTransaction();
 			for (EventCategoryModel categoryModel : categoryModels) {
@@ -103,7 +104,7 @@ public class EventCategoryDAO {
 	 * @param categoryModels
 	 */
 	public void delete (List<EventCategoryModel> categoryModels) {
-		
+		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
 		try {
 			db.beginTransaction();
 			for (EventCategoryModel categoryModel : categoryModels) {
@@ -152,6 +153,8 @@ public class EventCategoryDAO {
 	public List<EventCategoryModel> query (EventCategoryModel parameter) {
 		List<EventCategoryModel> eventCategorys = new ArrayList<EventCategoryModel>();
 		Cursor c = null;
+		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
+		
 		try {
 			//ππ‘Ï≤È—Øsql
 			StringBuilder sql = new StringBuilder(EVENT_CATEGORY_SELECT);

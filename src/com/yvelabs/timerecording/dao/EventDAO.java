@@ -15,10 +15,10 @@ public class EventDAO {
 	private static final String DELETE = " delete from t_event where 1 = 1 ";
 	private static final String SELECT = " select _id, event_name, event_category_name, status, event_order from t_event where 1 = 1 ";
 	
-	private SQLiteDatabase db;
+	private Context context;
 	
 	public EventDAO (Context context) {
-		db = new MyDBHelper(context).getWritableDatabase();
+		this.context = context;
 	}
 	
 	public void insert (EventModel eventModel) {
@@ -28,6 +28,7 @@ public class EventDAO {
 	}
 	
 	public void insert (List<EventModel> eventModels) {
+		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
 		try {
 			db.beginTransaction();
 			for (EventModel eventModel : eventModels) {
@@ -43,7 +44,7 @@ public class EventDAO {
 	}
 	
 	public int delete (List<EventModel> eventModels) {
-		
+		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
 		int count = 0;
 		try {
 			db.beginTransaction();
@@ -100,7 +101,7 @@ public class EventDAO {
 	public List<EventModel> query (EventModel parameter) {
 		List<EventModel> resultList = new ArrayList<EventModel>();
 		Cursor c = null;
-		
+		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
 		try {
 			StringBuilder sql = new StringBuilder(SELECT);
 			List<String> paraList = new ArrayList<String>();

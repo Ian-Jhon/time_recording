@@ -5,10 +5,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -25,7 +27,6 @@ import android.widget.TextView;
 
 import com.yvelabs.chronometer.Chronometer;
 import com.yvelabs.chronometer.utils.FontUtils;
-import com.yvelabs.timerecording.utils.LogUtils;
 
 public class Recorder extends Fragment {
 
@@ -85,24 +86,18 @@ public class Recorder extends Fragment {
 		eventChro.setFont(FontUtils.FONT_DUPLEX);
 		eventChro.reset();
 		
+		
+		//chronometer reset
 		resetBut.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startBut.setVisibility(View.VISIBLE);
-				pauseBut.setVisibility(View.GONE);
-				eventChro.reset();
-				
-				//初始化 event model
-				currentEvent.setStartElapsedTime(0);
-				currentEvent.setChro_state(EventModel.STATE_STOP);
-				currentEvent.setStartTime(null);
-				
-				//刷新列表
-				recorderEventListAdapter.notifyDataSetChanged();
-				
+				DialogFragment newFragment = MyAlertDialogFragment.newInstance(
+			            R.string.app_name, android.R.drawable.ic_dialog_alert, null, new ResetOkListener(), new NormalCancelListener());
+			    newFragment.show(getFragmentManager(), "dialog");
 			}
 		});
 		
+		//chronometer start
 		startBut.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -119,6 +114,7 @@ public class Recorder extends Fragment {
 			}
 		});
 		
+		//chronometer pause
 		pauseBut.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -134,22 +130,14 @@ public class Recorder extends Fragment {
 			}
 		});
 		
+		//chronometer stop
 		stopBut.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				eventChro.stop();
-				startBut.setVisibility(View.VISIBLE);
-				pauseBut.setVisibility(View.GONE);
 				
-				//TODO 保存数据进 t_event_reords
-				
-				//初始化 该事件 event model
-				currentEvent.setStartElapsedTime(0);
-				currentEvent.setChro_state(EventModel.STATE_STOP);
-				currentEvent.setStartTime(null);
-				
-				//刷新列表
-				recorderEventListAdapter.notifyDataSetChanged();
+				DialogFragment newFragment = MyAlertDialogFragment.newInstance(
+			            R.string.recorder_page_stop, android.R.drawable.ic_dialog_alert, null, new StopOkListener(), new NormalCancelListener());
+			    newFragment.show(getFragmentManager(), "dialog");
 			}
 		});
 		
@@ -225,7 +213,6 @@ public class Recorder extends Fragment {
 		
 		@Override
 		public void run() {
-			
 			//载入新数据
 			Message msg = controlPanelHandler.obtainMessage();
 			Bundle date=new Bundle();
@@ -266,6 +253,52 @@ public class Recorder extends Fragment {
 			}
 		}
 	}
+	
+	class ResetOkListener implements DialogInterface.OnClickListener {
+		@Override
+		public void onClick(DialogInterface dialog, int which) {
+			//
+			startBut.setVisibility(View.VISIBLE);
+			pauseBut.setVisibility(View.GONE);
+			eventChro.reset();
+			
+			//初始化 event model
+			currentEvent.setStartElapsedTime(0);
+			currentEvent.setChro_state(EventModel.STATE_STOP);
+			currentEvent.setStartTime(null);
+			
+			//刷新列表
+			recorderEventListAdapter.notifyDataSetChanged();
+		}
+	}
+	
+	class StopOkListener implements DialogInterface.OnClickListener {
+		@Override
+		public void onClick(DialogInterface dialog, int which) {
+			 //
+			eventChro.stop();
+			startBut.setVisibility(View.VISIBLE);
+			pauseBut.setVisibility(View.GONE);
+			
+			//TODO 保存数据进 t_event_reords
+			
+			//初始化 该事件 event model
+			currentEvent.setStartElapsedTime(0);
+			currentEvent.setChro_state(EventModel.STATE_STOP);
+			currentEvent.setStartTime(null);
+			
+			//刷新列表
+			recorderEventListAdapter.notifyDataSetChanged();
+		}
+	}
+	
+	class NormalCancelListener implements DialogInterface.OnClickListener {
+		@Override
+		public void onClick(DialogInterface dialog, int which) {
+			
+		}
+	}
+	
 }
 
 

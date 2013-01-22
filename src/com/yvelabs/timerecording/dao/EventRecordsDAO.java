@@ -11,16 +11,16 @@ import android.database.sqlite.SQLiteDatabase;
 import com.yvelabs.timerecording.TimeRecordingModel;
 import com.yvelabs.timerecording.utils.MyDBHelper;
 
-public class TimeRecordsDAO {
+public class EventRecordsDAO {
 	
-	private static final String INSERT = " insert into t_event_records(event_name, event_category_name, event_date, useing_time, summary) values(?, ?, ?, ?, ?) ";
+	private static final String INSERT = " insert into t_event_records(event_name, event_category_name, event_date, useing_time, summary, create_time) values(?, ?, ?, ?, ?, ?) ";
 	private static final String DELETE = " delete from t_event_records where 1 = 1 ";
 	private static final String SELECT = " select _id, event_name, event_category_name, event_date, useing_time, summary, create_time from t_event_records where 1 = 1 ";
 
-	private SQLiteDatabase db;
+	private Context context;
 
-	public TimeRecordsDAO(Context context) {
-		db = new MyDBHelper(context).getWritableDatabase();
+	public EventRecordsDAO(Context context) {
+		this.context = context;
 	}
 	
 	public void insert (TimeRecordingModel model) {
@@ -31,11 +31,12 @@ public class TimeRecordsDAO {
 	}
 
 	public void insert (List<TimeRecordingModel> modelList) {
+		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
 		try {
 			db.beginTransaction();
 			
 			for (TimeRecordingModel model : modelList) {
-				db.execSQL(INSERT, new Object[]{model.getEventName(), model.getEventCategoryName(), model.getEventDate(), model.getUseingTime(), model.getSummary()});
+				db.execSQL(INSERT, new Object[]{model.getEventName(), model.getEventCategoryName(), model.getEventDate().getTime(), model.getUseingTime(), model.getSummary(), model.getCreateTime().getTime()});
 			}
 			db.setTransactionSuccessful();
 		} finally {
@@ -48,6 +49,7 @@ public class TimeRecordsDAO {
 	
 	public int delete (List<TimeRecordingModel> modelList) {
 		int count = 0;
+		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
 		try {
 			db.beginTransaction();
 			
@@ -111,6 +113,7 @@ public class TimeRecordsDAO {
 	public List<TimeRecordingModel> query (TimeRecordingModel parameter) {
 		List<TimeRecordingModel> resultList = new ArrayList<TimeRecordingModel>(); 
 		Cursor c = null;
+		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
 		
 		try {
 			StringBuilder sql = new StringBuilder(SELECT);
