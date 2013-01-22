@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Time Recording</string>
+    <string name="my_recorder">My recorder</string>
+    <string name="add_records">Add records</string>
+    <string name="history">History</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+
+</resources>

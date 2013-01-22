@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="recorder_list_bg">#404040</drawable>
+    <drawable name="recorder_main_bg">#7B7D7B</drawable>
+    <drawable name="recorder_event_text_blue">#28B7EB</drawable>
+    <drawable name="recorder_event_text_white">#F2F2F2</drawable>
+    <drawable name="recorder_event_chro">#D65963</drawable>
+    <drawable name="pager_title_strip">#33b5e5</drawable>
+    <drawable name="text_color">#fff</drawable>
+</resources>

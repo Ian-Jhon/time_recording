@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/list_event_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@drawable/recorder_event_text_white"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/list_event_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="bottom"
+        android:layout_toRightOf="@+id/list_event_name"
+        android:layout_alignBottom="@+id/list_event_name"
+        android:textColor="@drawable/recorder_event_text_white"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/list_event_start_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/list_event_name"
+        android:textColor="@drawable/recorder_event_text_blue"
+        android:textSize="10sp" />
+
+    <ImageView
+        android:id="@+id/list_event_state_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/list_event_start_time"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"/>
+    
+</RelativeLayout>
