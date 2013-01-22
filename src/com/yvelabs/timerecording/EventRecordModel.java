@@ -2,7 +2,7 @@ package com.yvelabs.timerecording;
 
 import java.util.Date;
 
-public class TimeRecordingModel {
+public class EventRecordModel {
 	
 	private int recordId = -1;
 	private String eventCategoryName;

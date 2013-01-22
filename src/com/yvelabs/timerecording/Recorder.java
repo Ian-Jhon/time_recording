@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import com.yvelabs.chronometer.Chronometer;
 import com.yvelabs.chronometer.utils.FontUtils;
+import com.yvelabs.timerecording.dao.EventRecordsDAO;
 
 public class Recorder extends Fragment {
 
@@ -275,12 +276,19 @@ public class Recorder extends Fragment {
 	class StopOkListener implements DialogInterface.OnClickListener {
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
-			 //
+			//
 			eventChro.stop();
 			startBut.setVisibility(View.VISIBLE);
 			pauseBut.setVisibility(View.GONE);
 			
 			//TODO 保存数据进 t_event_reords
+			EventRecordModel eventRecordModel = new EventRecordModel();
+			eventRecordModel.setEventName(currentEvent.getEventName());
+			eventRecordModel.setEventCategoryName(currentEvent.getEventCategoryName());
+			eventRecordModel.setEventDate(new Date());
+			eventRecordModel.setUseingTime(eventChro.duringTime());
+			eventRecordModel.setSummary("test summary");
+			new EventRecordsDAO(Recorder.this.getActivity()).insert(eventRecordModel);
 			
 			//初始化 该事件 event model
 			currentEvent.setStartElapsedTime(0);

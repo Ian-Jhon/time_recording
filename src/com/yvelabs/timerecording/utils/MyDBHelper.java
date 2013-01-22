@@ -31,11 +31,11 @@ public class MyDBHelper extends SQLiteOpenHelper {
 		eventRecordsTableSql.append("CREATE TABLE IF NOT EXISTS t_event_records ");
 		eventRecordsTableSql.append("(_id INTEGER PRIMARY KEY AUTOINCREMENT, ");
 		eventRecordsTableSql.append("event_name VARCHAR(50), ");
-		eventRecordsTableSql.append("event_category VARCHAR(30), ");
+		eventRecordsTableSql.append("event_category_name VARCHAR(30), ");
 		eventRecordsTableSql.append("event_date NUMERIC,");
 		eventRecordsTableSql.append("useing_time NUMERIC,");
-		eventRecordsTableSql.append("create_time NUMERIC,");
-		eventRecordsTableSql.append("summary VARCHAR(500)");
+		eventRecordsTableSql.append("summary VARCHAR(500),");
+		eventRecordsTableSql.append("create_time NUMERIC");
 		eventRecordsTableSql.append(")");
 		db.execSQL(eventRecordsTableSql.toString());
 		
@@ -43,7 +43,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
 		eventTableSql.append("CREATE TABLE IF NOT EXISTS t_event");
 		eventTableSql.append("(_id INTEGER PRIMARY KEY AUTOINCREMENT, ");
 		eventTableSql.append("event_name VARCHAR(50), ");
-		eventTableSql.append("event_category VARCHAR(30), ");
+		eventTableSql.append("event_category_name VARCHAR(30), ");
 		eventTableSql.append("status VARCHAR(5),");
 		eventTableSql.append("event_order INTEGER");
 		eventTableSql.append(")");
@@ -52,7 +52,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
 		StringBuilder eventCategoryTableSql = new StringBuilder();
 		eventCategoryTableSql.append("CREATE TABLE IF NOT EXISTS t_event_category");
 		eventCategoryTableSql.append("(_id INTEGER PRIMARY KEY AUTOINCREMENT, ");
-		eventCategoryTableSql.append("event_category VARCHAR(30), ");
+		eventCategoryTableSql.append("event_category_name VARCHAR(30), ");
 		eventCategoryTableSql.append("status VARCHAR(5)");
 		eventCategoryTableSql.append(")");
 		db.execSQL(eventCategoryTableSql.toString());

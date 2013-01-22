@@ -8,7 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.yvelabs.timerecording.TimeRecordingModel;
+import com.yvelabs.timerecording.EventRecordModel;
 import com.yvelabs.timerecording.utils.MyDBHelper;
 
 public class EventRecordsDAO {
@@ -23,19 +23,19 @@ public class EventRecordsDAO {
 		this.context = context;
 	}
 	
-	public void insert (TimeRecordingModel model) {
-		List<TimeRecordingModel> modelList = new ArrayList<TimeRecordingModel>();
+	public void insert (EventRecordModel model) {
+		List<EventRecordModel> modelList = new ArrayList<EventRecordModel>();
 		modelList.add(model);
 		
 		insert(modelList);
 	}
 
-	public void insert (List<TimeRecordingModel> modelList) {
+	public void insert (List<EventRecordModel> modelList) {
 		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
 		try {
 			db.beginTransaction();
 			
-			for (TimeRecordingModel model : modelList) {
+			for (EventRecordModel model : modelList) {
 				db.execSQL(INSERT, new Object[]{model.getEventName(), model.getEventCategoryName(), model.getEventDate().getTime(), model.getUseingTime(), model.getSummary(), model.getCreateTime().getTime()});
 			}
 			db.setTransactionSuccessful();
@@ -47,13 +47,13 @@ public class EventRecordsDAO {
 		}
 	}
 	
-	public int delete (List<TimeRecordingModel> modelList) {
+	public int delete (List<EventRecordModel> modelList) {
 		int count = 0;
 		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
 		try {
 			db.beginTransaction();
 			
-			for (TimeRecordingModel model : modelList) {
+			for (EventRecordModel model : modelList) {
 				StringBuilder sql = new StringBuilder(DELETE);
 				List<String> paraList = new ArrayList<String>();
 				
@@ -110,8 +110,8 @@ public class EventRecordsDAO {
 		return count;
 	}
 	
-	public List<TimeRecordingModel> query (TimeRecordingModel parameter) {
-		List<TimeRecordingModel> resultList = new ArrayList<TimeRecordingModel>(); 
+	public List<EventRecordModel> query (EventRecordModel parameter) {
+		List<EventRecordModel> resultList = new ArrayList<EventRecordModel>(); 
 		Cursor c = null;
 		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
 		
@@ -159,7 +159,7 @@ public class EventRecordsDAO {
 			}
 			
 			while (c.moveToNext()) {
-				TimeRecordingModel model = new TimeRecordingModel();
+				EventRecordModel model = new EventRecordModel();
 				model.setRecordId(c.getInt(c.getColumnIndex("_id")));
 				model.setEventName(c.getString(c.getColumnIndex("event_name")));
 				model.setEventCategoryName(c.getString(c.getColumnIndex("event_category_name")));
