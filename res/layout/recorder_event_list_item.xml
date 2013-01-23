@@ -9,31 +9,46 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:textColor="@drawable/recorder_event_text_white"
+		android:paddingTop="10dp"
+		android:paddingBottom="7dp"
+		android:paddingLeft="10dp"
+		android:paddingRight="10dp"
+        android:textColor="@drawable/my_recorder_text_gray_1"
         android:textSize="25sp" />
 
     <TextView
         android:id="@+id/list_event_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:gravity="bottom"
-        android:layout_toRightOf="@+id/list_event_name"
         android:layout_alignBottom="@+id/list_event_name"
-        android:textColor="@drawable/recorder_event_text_white"
-        android:textSize="20sp"/>
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/list_event_name"
+        android:gravity="bottom"
+        android:textColor="@drawable/my_recorder_text_gray_2"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/start_time_lab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/list_event_name"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="15dp"
+        android:text="@string/start_time_lab"
+        android:textColor="@drawable/pager_title_strip"
+        android:textSize="12sp"
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/list_event_start_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/list_event_name"
-        android:textColor="@drawable/recorder_event_text_blue"
-        android:textSize="10sp" />
+        android:layout_alignBottom="@+id/start_time_lab"
+        android:layout_toRightOf="@+id/start_time_lab"
+        android:textColor="@drawable/pager_title_strip"
+        android:textSize="12sp"
+        android:textStyle="italic" />
 
     <ImageView
         android:id="@+id/list_event_state_img"
@@ -41,6 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/list_event_start_time"
         android:layout_alignParentRight="true"
-        android:layout_margin="10dp"/>
-    
+        android:layout_margin="5dp"
+        android:textStyle="italic" />
+
 </RelativeLayout>

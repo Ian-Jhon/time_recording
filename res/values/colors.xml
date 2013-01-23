@@ -5,6 +5,13 @@
     <drawable name="recorder_event_text_blue">#28B7EB</drawable>
     <drawable name="recorder_event_text_white">#F2F2F2</drawable>
     <drawable name="recorder_event_chro">#D65963</drawable>
-    <drawable name="pager_title_strip">#33b5e5</drawable>
     <drawable name="text_color">#fff</drawable>
+    
+    
+    <drawable name="pager_title_strip">#33b5e5</drawable>
+    
+    <drawable name="my_recorder_text_gray_1">#393939</drawable>
+    <drawable name="my_recorder_text_gray_2">#717174</drawable>
+    <drawable name="my_recorder_main_bg">#F3F3EA</drawable>
+    
 </resources>

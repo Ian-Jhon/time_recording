@@ -2,7 +2,7 @@ package com.yvelabs.timerecording;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import android.content.DialogInterface;
@@ -12,6 +12,7 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.text.TextPaint;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import android.view.View.OnCreateContextMenuListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,6 +30,7 @@ import android.widget.TextView;
 import com.yvelabs.chronometer.Chronometer;
 import com.yvelabs.chronometer.utils.FontUtils;
 import com.yvelabs.timerecording.dao.EventRecordsDAO;
+import com.yvelabs.timerecording.utils.TypefaceUtils;
 
 public class Recorder extends Fragment {
 
@@ -37,6 +40,7 @@ public class Recorder extends Fragment {
 	private TextView eventName;
 	private TextView eventCategory;
 	private Chronometer eventChro;
+	private EditText eventSummary;
 	
 	private ImageButton resetBut;
 	private ImageButton startBut;
@@ -46,7 +50,7 @@ public class Recorder extends Fragment {
 	private ControlPanelHandler controlPanelHandler;
 	private RecorderEventListAdapter recorderEventListAdapter;
 	
-	private List<EventModel> eventModels;
+	private ArrayList<EventModel> eventModels;
 	private EventModel currentEvent;
 
 	public static Recorder newInstance(Map<String, Object> map) {
@@ -64,7 +68,8 @@ public class Recorder extends Fragment {
 		super.onCreate(savedInstanceState);
 		position = getArguments() != null ? getArguments().getInt("position") : -1;
 		if (savedInstanceState != null) {
-			// TODO 恢复页面
+			this.eventModels = savedInstanceState.getParcelableArrayList("EVENT_MODELS");
+			this.currentEvent = savedInstanceState.getParcelable("CURRENT_EVENT");
 		}
 	}
 
@@ -78,11 +83,23 @@ public class Recorder extends Fragment {
 		eventName = (TextView) view.findViewById(R.id.event_name);
 		eventCategory = (TextView) view.findViewById(R.id.event_category);
 		eventChro = (Chronometer) view.findViewById(R.id.event_chro);
+		eventSummary = (EditText) view.findViewById(R.id.event_summary);
 		resetBut = (ImageButton) view.findViewById(R.id.reset_but);
 		startBut = (ImageButton) view.findViewById(R.id.start_but);
 		pauseBut = (ImageButton) view.findViewById(R.id.pause_but);
 		stopBut = (ImageButton) view.findViewById(R.id.stop_but);
 		
+		TypefaceUtils.setTypeface(eventName, TypefaceUtils.RBNO2_LIGHT_A);
+		TypefaceUtils.setTypeface(eventCategory, TypefaceUtils.RBNO2_LIGHT_A);
+		TypefaceUtils.setTypeface(eventSummary, TypefaceUtils.RBNO2_LIGHT_A);
+		
+		eventName.getPaint().setFakeBoldText(true);
+		
+		eventName.setFocusable(true);
+		eventName.setFocusableInTouchMode(true);
+		eventName.requestFocus();
+
+		//init chronometer
 		eventChro.setPlayPauseAlphaAnimation(true);
 		eventChro.setFont(FontUtils.FONT_DUPLEX);
 		eventChro.reset();
@@ -135,10 +152,11 @@ public class Recorder extends Fragment {
 		stopBut.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
-				DialogFragment newFragment = MyAlertDialogFragment.newInstance(
-			            R.string.recorder_page_stop, android.R.drawable.ic_dialog_alert, null, new StopOkListener(), new NormalCancelListener());
-			    newFragment.show(getFragmentManager(), "dialog");
+				if (eventChro.duringTime() > 0) {
+					DialogFragment newFragment = MyAlertDialogFragment.newInstance(
+				            R.string.recorder_page_stop, android.R.drawable.ic_dialog_alert, null, new StopOkListener(), new NormalCancelListener());
+				    newFragment.show(getFragmentManager(), "dialog");
+				}
 			}
 		});
 		
@@ -168,42 +186,90 @@ public class Recorder extends Fragment {
 		return view;
 	}
 	
+	
 	@Override
 	public void onResume() {
 		super.onResume();
 		
-		eventModels = new ArrayList<EventModel>();
-		EventModel eventModel = new EventModel();
-		eventModel.setEventName("Eat");
-		eventModel.setEventCategoryName("rest");
-		eventModels.add(eventModel);
+		if (eventModels == null) {
+			eventModels = new ArrayList<EventModel>();
+			EventModel eventModel = new EventModel();
+			
+			eventModel = new EventModel();
+			eventModel.setEventName("Eat abs sdf jiewijfd");
+			eventModel.setEventCategoryName("rest");
+			eventModels.add(eventModel);
+			
+			eventModel = new EventModel();
+			eventModel.setEventName("Eatf dfewfweesdf");
+			eventModel.setEventCategoryName("rest");
+			eventModels.add(eventModel);
+			
+			eventModel = new EventModel();
+			eventModel.setEventName("Eat");
+			eventModel.setEventCategoryName("rest");
+			eventModels.add(eventModel);
+			
+			eventModel = new EventModel();
+			eventModel.setEventName("sleep");
+			eventModel.setEventCategoryName("rest");
+			eventModels.add(eventModel);
+			
+			eventModel = new EventModel();
+			eventModel.setEventName("go to work");
+			eventModel.setEventCategoryName("work");
+			eventModels.add(eventModel);
+			
+			eventModel = new EventModel();
+			eventModel.setEventName("study");
+			eventModel.setEventCategoryName("work");
+			eventModels.add(eventModel);
+			
+			eventModel = new EventModel();
+			eventModel.setEventName("work");
+			eventModel.setEventCategoryName("work");
+			eventModels.add(eventModel);
+			
+			currentEvent = eventModels.get(0);
+			
+		} 
 		
-		eventModel = new EventModel();
-		eventModel.setEventName("sleep");
-		eventModel.setEventCategoryName("rest");
-		eventModels.add(eventModel);
+		//init component
+		new Thread(new ControlPanleRunnable(currentEvent)).start();
 		
-		eventModel = new EventModel();
-		eventModel.setEventName("go to work");
-		eventModel.setEventCategoryName("work");
-		eventModels.add(eventModel);
-		
-		eventModel = new EventModel();
-		eventModel.setEventName("study");
-		eventModel.setEventCategoryName("work");
-		eventModels.add(eventModel);
-		
-		eventModel = new EventModel();
-		eventModel.setEventName("work");
-		eventModel.setEventCategoryName("work");
-		eventModels.add(eventModel);
-		
-		currentEvent = eventModels.get(0);
-		
+		//init listView
 		if (recorderEventListAdapter == null)
 			recorderEventListAdapter = new RecorderEventListAdapter(this.getActivity(), eventModels);
 		eventList.setAdapter(recorderEventListAdapter);
 	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putParcelableArrayList("EVENT_MODELS", eventModels);
+		outState.putParcelable("CURRENT_EVENT", currentEvent);
+	}
+	
+	public HashMap<String, Integer> getEventsStatus (ArrayList<EventModel> eventModels) {
+		HashMap<String, Integer> resultMap = new HashMap<String, Integer>();
+		resultMap.put(EventModel.STATE_START, -1);
+		resultMap.put(EventModel.STATE_PAUSE, -1);
+		resultMap.put(EventModel.STATE_STOP, -1);
+		if (eventModels == null || eventModels.size() <= 0) return resultMap;
+		
+		for (EventModel eventModel : eventModels) {
+			if (EventModel.STATE_START.equals(eventModel.getChro_state())) {
+				resultMap.put(EventModel.STATE_START, resultMap.get(EventModel.STATE_START) + 1);
+			} else if (EventModel.STATE_PAUSE.equals(eventModel.getChro_state())) {
+				resultMap.put(EventModel.STATE_PAUSE, resultMap.get(EventModel.STATE_PAUSE) + 1);
+			} else if (EventModel.STATE_STOP.equals(eventModel.getChro_state())) {
+				resultMap.put(EventModel.STATE_STOP, resultMap.get(EventModel.STATE_STOP) + 1);
+			}
+		}
+		
+		return resultMap;
+	}
+	
 	
 	class ControlPanleRunnable implements Runnable {
 		private EventModel newModel;
@@ -217,7 +283,7 @@ public class Recorder extends Fragment {
 			//载入新数据
 			Message msg = controlPanelHandler.obtainMessage();
 			Bundle date=new Bundle();
-			date.putSerializable("EVENT_MODEL", newModel);
+			date.putParcelable("EVENT_MODEL", newModel);
 			msg.setData(date);
 			msg.sendToTarget();
 		}
@@ -233,8 +299,9 @@ public class Recorder extends Fragment {
 			//更新 控制面板控件
 			Recorder.this.eventName.setText(eventModel.getEventName());
 			Recorder.this.eventCategory.setText(eventModel.getEventCategoryName());
-			Recorder.this.eventChro.reset();
 			
+			//init chro
+			Recorder.this.eventChro.reset();
 			if (EventModel.STATE_START.equals(eventModel.getChro_state())) {
 				Recorder.this.pauseBut.setVisibility(View.VISIBLE);
 				Recorder.this.startBut.setVisibility(View.GONE);
@@ -281,19 +348,21 @@ public class Recorder extends Fragment {
 			startBut.setVisibility(View.VISIBLE);
 			pauseBut.setVisibility(View.GONE);
 			
-			//TODO 保存数据进 t_event_reords
+			//保存数据进 t_event_reords
 			EventRecordModel eventRecordModel = new EventRecordModel();
 			eventRecordModel.setEventName(currentEvent.getEventName());
 			eventRecordModel.setEventCategoryName(currentEvent.getEventCategoryName());
 			eventRecordModel.setEventDate(new Date());
 			eventRecordModel.setUseingTime(eventChro.duringTime());
-			eventRecordModel.setSummary("test summary");
+			eventRecordModel.setSummary(eventSummary.getText().toString());
 			new EventRecordsDAO(Recorder.this.getActivity()).insert(eventRecordModel);
 			
 			//初始化 该事件 event model
 			currentEvent.setStartElapsedTime(0);
 			currentEvent.setChro_state(EventModel.STATE_STOP);
 			currentEvent.setStartTime(null);
+			
+			eventChro.reset();
 			
 			//刷新列表
 			recorderEventListAdapter.notifyDataSetChanged();
@@ -308,6 +377,3 @@ public class Recorder extends Fragment {
 	}
 	
 }
-
-
-

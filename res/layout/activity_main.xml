@@ -1,19 +1,39 @@
-<android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pager"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    android:orientation="vertical" >
 
-
-    <android.support.v4.view.PagerTitleStrip
-        android:id="@+id/pager_title_strip"
+	<android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+	    xmlns:tools="http://schemas.android.com/tools"
+	    android:id="@+id/pager"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    tools:context=".MainActivity" >
+	
+	    <android.support.v4.view.PagerTitleStrip
+	        android:id="@+id/pager_title_strip"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="top"
+	        android:background="@drawable/pager_title_strip"
+	        android:paddingBottom="4dp"
+	        android:paddingTop="4dp"
+	        android:textColor="@drawable/text_color" />
+	</android.support.v4.view.ViewPager>
+	
+	<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:background="@drawable/pager_title_strip"
-        android:paddingBottom="4dp"
-        android:paddingTop="4dp"
-        android:textColor="@drawable/text_color" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" >
 
-</android.support.v4.view.ViewPager>
+        <fragment
+            android:id="@+id/bottom_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            class="com.yvelabs.timerecording.BottomFragment" />
+    </FrameLayout>
+
+</RelativeLayout>

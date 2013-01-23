@@ -1,11 +1,13 @@
 package com.yvelabs.timerecording;
 
-import java.io.Serializable;
 import java.util.Date;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.yvelabs.timerecording.utils.DateUtils;
 
-public class EventModel implements Serializable {
+public class EventModel implements Parcelable {
 	
 	public static final String STATE_START = "START";
 	public static final String STATE_PAUSE = "PAUSE";
@@ -83,5 +85,44 @@ public class EventModel implements Serializable {
 		return "eventName :" + eventName + ", eventCategoryName :" + eventCategoryName + ", chro_state :" + chro_state
 				+ ", startElapsedTime :" + startElapsedTime + ", startTime :" + startTime;
 	}
+	
+	
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(eventId);
+		dest.writeString(eventName);
+		dest.writeString(eventCategoryName);
+		dest.writeInt(order);
+		dest.writeString(status);
+		dest.writeString(chro_state);
+		dest.writeLong(startTime == null ? 0 : startTime.getTime());
+		dest.writeLong(startElapsedTime);
+	}
+	
+	public static final Parcelable.Creator<EventModel> CREATOR = new Parcelable.Creator<EventModel>() {
 
+		@Override
+		public EventModel createFromParcel(Parcel source) {
+			EventModel eventModel = new EventModel();
+			eventModel.setEventId(source.readInt());
+			eventModel.setEventName(source.readString());
+			eventModel.setEventCategoryName(source.readString());
+			eventModel.setOrder(source.readInt());
+			eventModel.setStatus(source.readString());
+			eventModel.setChro_state(source.readString());
+			eventModel.setStartTime(new Date(source.readLong()));
+			eventModel.setStartElapsedTime(source.readLong());
+			
+			return eventModel;
+		}
+
+		@Override
+		public EventModel[] newArray(int size) {
+			return new EventModel[size];
+		} 
+	};
 }

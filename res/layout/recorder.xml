@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/recorder_main_bg" >
+    android:background="@drawable/my_recorder_main_bg" >
 
     <TextView
         android:id="@+id/event_name"
@@ -10,9 +10,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:gravity="bottom"
         android:singleLine="true"
-        android:textColor="@drawable/recorder_event_text_white"
-        android:textSize="25sp" />
+        android:textColor="@drawable/pager_title_strip"
+        android:textSize="43sp" />
 
     <TextView
         android:id="@+id/event_category"
@@ -21,9 +26,11 @@
         android:layout_alignBottom="@+id/event_name"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/event_name"
+        android:gravity="bottom"
+        android:paddingBottom="3dp"
         android:singleLine="true"
-        android:textColor="@drawable/recorder_event_text_white"
-        android:textSize="20sp" />
+        android:textColor="@drawable/my_recorder_text_gray_2"
+        android:textSize="30sp" />
 
     <com.yvelabs.chronometer.Chronometer
         android:id="@+id/event_chro"
@@ -31,25 +38,35 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/event_name"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="25dp"
         android:singleLine="true"
-        android:textColor="@drawable/recorder_event_text_blue"
-        android:textSize="40sp" />
+        android:textColor="@drawable/my_recorder_text_gray_1"
+        android:textSize="45sp"
+        android:paddingBottom="2dp"
+        android:paddingLeft="22dp" />
+
+    <EditText
+        android:id="@+id/event_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/event_chro"
+        android:singleLine="true"
+        android:textColor="@drawable/my_recorder_text_gray_2"
+        android:hint="@string/summary" />
 
     <ImageButton
         android:id="@+id/reset_but"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/event_chro"
+        android:layout_below="@+id/event_summary"
         android:background="@drawable/reset_but_selector" />
 
     <ImageButton
         android:id="@+id/pause_but"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/event_chro"
+        android:layout_below="@+id/event_summary"
         android:layout_centerHorizontal="true"
         android:background="@drawable/pause_but_selector"
         android:visibility="gone" />
@@ -58,7 +75,7 @@
         android:id="@+id/start_but"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/event_chro"
+        android:layout_below="@+id/event_summary"
         android:layout_centerHorizontal="true"
         android:background="@drawable/start_but_selector" />
 
@@ -67,17 +84,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/event_chro"
+        android:layout_below="@+id/event_summary"
         android:background="@drawable/stop_but_selector" />
 
     <ListView
         android:id="@+id/event_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/reset_but"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/recorder_list_bg" >
+        android:layout_below="@+id/reset_but" >
     </ListView>
 
 </RelativeLayout>

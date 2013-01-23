@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.yvelabs.timerecording.utils.DateUtils;
 import com.yvelabs.timerecording.utils.LogUtils;
+import com.yvelabs.timerecording.utils.TypefaceUtils;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -19,9 +20,10 @@ public class RecorderEventListAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
 	
 	static class ViewHolder {
-	    public TextView listEventName;
-	    public TextView listEventCagegory;
-	    private TextView listEventstartTime;
+		private TextView listEventName;
+	    private TextView listEventCagegory;
+	    private TextView listEventStartTimeLabel;
+	    private TextView listEventStartTime;
 	    private ImageView listEventStateImg;
 	  }
 	
@@ -58,29 +60,36 @@ public class RecorderEventListAdapter extends BaseAdapter {
 			ViewHolder viewHolder = new ViewHolder();
 			viewHolder.listEventName = (TextView) rowView.findViewById(R.id.list_event_name);
 			viewHolder.listEventCagegory = (TextView) rowView.findViewById(R.id.list_event_category);
-			viewHolder.listEventstartTime = (TextView) rowView.findViewById(R.id.list_event_start_time);
+			viewHolder.listEventStartTimeLabel = (TextView) rowView.findViewById(R.id.start_time_lab);
+			viewHolder.listEventStartTime = (TextView) rowView.findViewById(R.id.list_event_start_time);
 			viewHolder.listEventStateImg = (ImageView) rowView.findViewById(R.id.list_event_state_img);
+			
 			rowView.setTag(viewHolder);
 		}
 		
 		ViewHolder holder = (ViewHolder) rowView.getTag();
 		holder.listEventName.setText(eventModel.getEventName());
+		TypefaceUtils.setTypeface(holder.listEventName, TypefaceUtils.RBNO2_LIGHT_A);
 		holder.listEventCagegory.setText(eventModel.getEventCategoryName());
+		TypefaceUtils.setTypeface(holder.listEventCagegory, TypefaceUtils.RBNO2_LIGHT_A);
 		
 		if (eventModel.STATE_START.equals(eventModel.getChro_state())) {
-			holder.listEventstartTime.setVisibility(View.VISIBLE);
+			holder.listEventStartTimeLabel.setVisibility(View.VISIBLE);
+			holder.listEventStartTime.setVisibility(View.VISIBLE);
 			holder.listEventStateImg.setVisibility(View.VISIBLE);
 			
-			holder.listEventstartTime.setText(eventModel.getStartTime(eventModel.getStartTime(DateUtils.DEFAULT_TIME_PATTERN)));
+			holder.listEventStartTime.setText(eventModel.getStartTime(eventModel.getStartTime(DateUtils.DEFAULT_TIME_PATTERN)));
 			holder.listEventStateImg.setImageResource(R.drawable.start_state);
 		} else if (eventModel.STATE_PAUSE.equals(eventModel.getChro_state())) {
-			holder.listEventstartTime.setVisibility(View.VISIBLE);
+			holder.listEventStartTimeLabel.setVisibility(View.VISIBLE);
+			holder.listEventStartTime.setVisibility(View.VISIBLE);
 			holder.listEventStateImg.setVisibility(View.VISIBLE);
 			
-			holder.listEventstartTime.setText(eventModel.getStartTime(eventModel.getStartTime(DateUtils.DEFAULT_TIME_PATTERN)));
+			holder.listEventStartTime.setText(eventModel.getStartTime(eventModel.getStartTime(DateUtils.DEFAULT_TIME_PATTERN)));
 			holder.listEventStateImg.setImageResource(R.drawable.pause_state);
 		} else {
-			holder.listEventstartTime.setVisibility(View.GONE);
+			holder.listEventStartTimeLabel.setVisibility(View.GONE);
+			holder.listEventStartTime.setVisibility(View.GONE);
 			holder.listEventStateImg.setVisibility(View.GONE);
 		}
 		

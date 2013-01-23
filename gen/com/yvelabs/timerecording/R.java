@@ -12,49 +12,64 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
-        public static final int pager_title_strip=0x7f020014;
+        public static final int my_recorder_main_bg=0x7f02001e;
+        public static final int my_recorder_text_gray_1=0x7f02001c;
+        public static final int my_recorder_text_gray_2=0x7f02001d;
+        public static final int pager_title_strip=0x7f02001b;
         public static final int pause_but_selector=0x7f020001;
         public static final int pause_normal=0x7f020002;
         public static final int pause_press=0x7f020003;
         public static final int pause_state=0x7f020004;
-        public static final int recorder_event_chro=0x7f020013;
-        public static final int recorder_event_text_blue=0x7f020011;
-        public static final int recorder_event_text_white=0x7f020012;
-        public static final int recorder_list_bg=0x7f02000f;
-        public static final int recorder_main_bg=0x7f020010;
+        public static final int recorder_event_chro=0x7f020019;
+        public static final int recorder_event_text_blue=0x7f020017;
+        public static final int recorder_event_text_white=0x7f020018;
+        public static final int recorder_list_bg=0x7f020015;
+        public static final int recorder_main_bg=0x7f020016;
         public static final int reset_but_selector=0x7f020005;
         public static final int reset_normal=0x7f020006;
         public static final int reset_press=0x7f020007;
-        public static final int start_but_selector=0x7f020008;
-        public static final int start_normal=0x7f020009;
-        public static final int start_press=0x7f02000a;
-        public static final int start_state=0x7f02000b;
-        public static final int stop_but_selector=0x7f02000c;
-        public static final int stop_normal=0x7f02000d;
-        public static final int stop_press=0x7f02000e;
-        public static final int text_color=0x7f020015;
+        public static final int satellite_about=0x7f020008;
+        public static final int satellite_config=0x7f020009;
+        public static final int satellite_diary=0x7f02000a;
+        public static final int satellite_planet_menu=0x7f02000b;
+        public static final int satellite_recorder=0x7f02000c;
+        public static final int satellite_setting=0x7f02000d;
+        public static final int start_but_selector=0x7f02000e;
+        public static final int start_normal=0x7f02000f;
+        public static final int start_press=0x7f020010;
+        public static final int start_state=0x7f020011;
+        public static final int stop_but_selector=0x7f020012;
+        public static final int stop_normal=0x7f020013;
+        public static final int stop_press=0x7f020014;
+        public static final int text_color=0x7f02001a;
     }
     public static final class id {
-        public static final int event_category=0x7f070003;
-        public static final int event_chro=0x7f070004;
-        public static final int event_list=0x7f070009;
-        public static final int event_name=0x7f070002;
-        public static final int list_event_category=0x7f07000b;
-        public static final int list_event_name=0x7f07000a;
-        public static final int list_event_start_time=0x7f07000c;
-        public static final int list_event_state_img=0x7f07000d;
-        public static final int menu_settings=0x7f07000e;
+        public static final int bottom_fragment=0x7f070002;
+        public static final int event_category=0x7f070006;
+        public static final int event_chro=0x7f070007;
+        public static final int event_list=0x7f07000d;
+        public static final int event_name=0x7f070005;
+        public static final int event_summary=0x7f070008;
+        public static final int left_satellite=0x7f070003;
+        public static final int list_event_category=0x7f07000f;
+        public static final int list_event_name=0x7f07000e;
+        public static final int list_event_start_time=0x7f070011;
+        public static final int list_event_state_img=0x7f070012;
+        public static final int menu_settings=0x7f070013;
         public static final int pager=0x7f070000;
         public static final int pager_title_strip=0x7f070001;
-        public static final int pause_but=0x7f070006;
-        public static final int reset_but=0x7f070005;
-        public static final int start_but=0x7f070007;
-        public static final int stop_but=0x7f070008;
+        public static final int pause_but=0x7f07000a;
+        public static final int reset_but=0x7f070009;
+        public static final int right_satellite=0x7f070004;
+        public static final int start_but=0x7f07000b;
+        public static final int start_time_lab=0x7f070010;
+        public static final int stop_but=0x7f07000c;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int recorder=0x7f030001;
-        public static final int recorder_event_list_item=0x7f030002;
+        public static final int button_fragment=0x7f030001;
+        public static final int recorder=0x7f030002;
+        public static final int recorder_event_list_item=0x7f030003;
     }
     public static final class menu {
         public static final int activity_main=0x7f060000;
@@ -69,6 +84,8 @@ public final class R {
         public static final int my_recorder=0x7f040001;
         public static final int ok=0x7f040006;
         public static final int recorder_page_stop=0x7f040008;
+        public static final int start_time_lab=0x7f040009;
+        public static final int summary=0x7f04000a;
     }
     public static final class style {
         /** 
