@@ -51,7 +51,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/event_chro"
         android:singleLine="true"
-        android:textColor="@drawable/my_recorder_text_gray_2"
+        android:textColor="@drawable/my_recorder_text_gray_1"
         android:hint="@string/summary" />
 
     <ImageButton

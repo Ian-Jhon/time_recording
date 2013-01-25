@@ -53,7 +53,6 @@ public class RecorderEventListAdapter extends BaseAdapter {
 		
 		if (eventList == null || eventList.size() <= 0) return null;
 		EventModel eventModel = eventList.get(position);
-		LogUtils.d(this.getClass(), eventModel.toString());
 		
 		if (rowView == null) {
 			rowView = mInflater.inflate(R.layout.recorder_event_list_item, null);

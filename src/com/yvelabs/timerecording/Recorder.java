@@ -1,18 +1,25 @@
 package com.yvelabs.timerecording;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.text.TextPaint;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -30,6 +37,9 @@ import android.widget.TextView;
 import com.yvelabs.chronometer.Chronometer;
 import com.yvelabs.chronometer.utils.FontUtils;
 import com.yvelabs.timerecording.dao.EventRecordsDAO;
+import com.yvelabs.timerecording.utils.DateUtils;
+import com.yvelabs.timerecording.utils.LogUtils;
+import com.yvelabs.timerecording.utils.NotificationUtils;
 import com.yvelabs.timerecording.utils.TypefaceUtils;
 
 public class Recorder extends Fragment {
@@ -71,6 +81,13 @@ public class Recorder extends Fragment {
 			this.eventModels = savedInstanceState.getParcelableArrayList("EVENT_MODELS");
 			this.currentEvent = savedInstanceState.getParcelable("CURRENT_EVENT");
 		}
+		
+		if (getActivity().getIntent() != null && getActivity().getIntent().getExtras() != null) {
+			Bundle bundle = getActivity().getIntent().getExtras();
+			currentEvent = bundle.getParcelable("CURRENT_EVENT");
+			eventModels = bundle.getParcelableArrayList("EVENT_MODELS");
+		}
+		
 	}
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -110,7 +127,7 @@ public class Recorder extends Fragment {
 			@Override
 			public void onClick(View v) {
 				DialogFragment newFragment = MyAlertDialogFragment.newInstance(
-			            R.string.app_name, android.R.drawable.ic_dialog_alert, null, new ResetOkListener(), new NormalCancelListener());
+			            R.string.my_recorder_rest_alert, R.drawable.ic_my_alert, null, new ResetOkListener(), new NormalCancelListener());
 			    newFragment.show(getFragmentManager(), "dialog");
 			}
 		});
@@ -154,7 +171,7 @@ public class Recorder extends Fragment {
 			public void onClick(View v) {
 				if (eventChro.duringTime() > 0) {
 					DialogFragment newFragment = MyAlertDialogFragment.newInstance(
-				            R.string.recorder_page_stop, android.R.drawable.ic_dialog_alert, null, new StopOkListener(), new NormalCancelListener());
+				            R.string.recorder_page_stop, R.drawable.ic_my_alert, getEventMsg(currentEvent), new StopOkListener(), new NormalCancelListener());
 				    newFragment.show(getFragmentManager(), "dialog");
 				}
 			}
@@ -164,8 +181,9 @@ public class Recorder extends Fragment {
 		eventList.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				new Thread(new ControlPanleRunnable(eventModels.get(arg2))).start();
+				currentEvent.setSummary(eventSummary.getText().toString());
 				
+				new Thread(new ControlPanleRunnable(eventModels.get(arg2))).start();
 				currentEvent = eventModels.get(arg2);
 			}
 		});
@@ -241,6 +259,45 @@ public class Recorder extends Fragment {
 		if (recorderEventListAdapter == null)
 			recorderEventListAdapter = new RecorderEventListAdapter(this.getActivity(), eventModels);
 		eventList.setAdapter(recorderEventListAdapter);
+		
+		
+	}
+	
+	public Notification getMyRecorderNotification () {
+		int startTotle = getEventsStatus(eventModels).get(EventModel.STATE_START);
+		int pauseTotle = getEventsStatus(eventModels).get(EventModel.STATE_PAUSE);
+		
+		if (startTotle + pauseTotle > 0) {
+			Map<String, Object> extras = new HashMap<String, Object>();
+			extras.put("EVENT_MODELS", eventModels);
+			extras.put("CURRENT_EVENT", currentEvent);
+			
+			StringBuilder content = new StringBuilder();
+			if (startTotle > 0) {
+				if (startTotle == 1) {
+					content.append(startTotle + " ").append(getActivity().getResources().getString(R.string.event_is_timed)).append("\r\n");
+				} else {
+					content.append(startTotle + " ").append(getActivity().getResources().getString(R.string.events_are_timed)).append("\r\n");
+				}
+				
+			}
+			if (pauseTotle > 0) {
+				if (pauseTotle == 1) {
+					content.append(pauseTotle + " ").append(getActivity().getResources().getString(R.string.event_has_been_suspended)).append("\r\n");
+				} else {
+					content.append(pauseTotle + " ").append(getActivity().getResources().getString(R.string.events_have_been_suspended)).append("\r\n");
+				}
+				
+			}
+			
+			return new NotificationUtils().buildNotification(getActivity(),
+					RecordActivity.class, extras, R.drawable.ic_launcher,
+					getActivity().getResources().getString(R.string.app_name),
+					content.toString());
+		}
+		
+		return null;
+		
 	}
 	
 	@Override
@@ -268,6 +325,16 @@ public class Recorder extends Fragment {
 		}
 		
 		return resultMap;
+	}
+	
+	public String getEventMsg (EventModel eventModel) {
+		StringBuilder result = new StringBuilder();
+		result.append(getActivity().getResources().getString(R.string.event_name) + " : ").append(eventModel.getEventName()).append("\r\n");
+		result.append(getActivity().getResources().getString(R.string.event_category) + " : ").append(eventModel.getEventCategoryName()).append("\r\n");
+		result.append(getActivity().getResources().getString(R.string.event_date) + " : ").append(DateUtils.format(new Date(), DateUtils.DEFAULT_DATE_PATTERN)).append("\r\n");
+		result.append(getActivity().getResources().getString(R.string.using_time) + " : ").append(DateUtils.formatAdjust(eventChro.duringTime())).append("\r\n");
+		result.append(getActivity().getResources().getString(R.string.summary) + " : ").append(eventSummary.getText().toString()).append("\r\n");
+		return result.toString();
 	}
 	
 	
@@ -299,6 +366,7 @@ public class Recorder extends Fragment {
 			//更新 控制面板控件
 			Recorder.this.eventName.setText(eventModel.getEventName());
 			Recorder.this.eventCategory.setText(eventModel.getEventCategoryName());
+			Recorder.this.eventSummary.setText(eventModel.getSummary());
 			
 			//init chro
 			Recorder.this.eventChro.reset();
@@ -352,9 +420,14 @@ public class Recorder extends Fragment {
 			EventRecordModel eventRecordModel = new EventRecordModel();
 			eventRecordModel.setEventName(currentEvent.getEventName());
 			eventRecordModel.setEventCategoryName(currentEvent.getEventCategoryName());
-			eventRecordModel.setEventDate(new Date());
 			eventRecordModel.setUseingTime(eventChro.duringTime());
 			eventRecordModel.setSummary(eventSummary.getText().toString());
+			try {
+				eventRecordModel.setEventDate(DateUtils.getDateWithoutTime(new Date()));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
 			new EventRecordsDAO(Recorder.this.getActivity()).insert(eventRecordModel);
 			
 			//初始化 该事件 event model
@@ -375,5 +448,4 @@ public class Recorder extends Fragment {
 			
 		}
 	}
-	
 }

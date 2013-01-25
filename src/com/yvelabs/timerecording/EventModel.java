@@ -24,6 +24,7 @@ public class EventModel implements Parcelable {
 	private String chro_state = STATE_STOP;
 	private Date startTime; // 
 	private long startElapsedTime; //
+	private String summary;
 	
 	public String getEventName() {
 		return eventName;
@@ -42,9 +43,9 @@ public class EventModel implements Parcelable {
 	}
 	public String getStartTime (String pattern) {
 		if (pattern == null || pattern.length() <= 0)
-			return DateUtils.dateFormat(getStartTime());
+			return DateUtils.format(getStartTime());
 		else 
-			return DateUtils.dateFormat(getStartTime(), pattern);
+			return DateUtils.format(getStartTime(), pattern);
 	}
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
@@ -79,6 +80,12 @@ public class EventModel implements Parcelable {
 	public void setChro_state(String chro_state) {
 		this.chro_state = chro_state;
 	}
+	public String getSummary() {
+		return summary;
+	}
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
 	
 	@Override
 	public String toString() {
@@ -101,6 +108,7 @@ public class EventModel implements Parcelable {
 		dest.writeString(chro_state);
 		dest.writeLong(startTime == null ? 0 : startTime.getTime());
 		dest.writeLong(startElapsedTime);
+		dest.writeString(summary);
 	}
 	
 	public static final Parcelable.Creator<EventModel> CREATOR = new Parcelable.Creator<EventModel>() {
@@ -116,6 +124,7 @@ public class EventModel implements Parcelable {
 			eventModel.setChro_state(source.readString());
 			eventModel.setStartTime(new Date(source.readLong()));
 			eventModel.setStartElapsedTime(source.readLong());
+			eventModel.setSummary(source.readString());
 			
 			return eventModel;
 		}
@@ -125,4 +134,6 @@ public class EventModel implements Parcelable {
 			return new EventModel[size];
 		} 
 	};
+
+	
 }

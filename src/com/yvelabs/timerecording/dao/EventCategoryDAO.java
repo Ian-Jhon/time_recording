@@ -47,8 +47,6 @@ public class EventCategoryDAO {
 		List<EventCategoryModel> insertModels = new ArrayList<EventCategoryModel>();
 		insertModels.add(categoryModel);
 		
-		LogUtils.d(this.getClass(), categoryModel + "");
-		
 		insert(insertModels);
 	}
 	

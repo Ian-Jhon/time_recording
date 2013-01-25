@@ -4,8 +4,7 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.yvelabs.timerecording.utils.TypefaceUtils;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -20,28 +19,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.yvelabs.timerecording.utils.NotificationUtils;
+import com.yvelabs.timerecording.utils.TypefaceUtils;
+
 public class RecordActivity extends FragmentActivity {
+	
+	public static final int NOTIFICATION_ID_RECORDER_MYRECORDER = 111;
 
-	/**
-	 * The {@link android.support.v4.view.PagerAdapter} that will provide
-	 * fragments for each of the sections. We use a
-	 * {@link android.support.v4.app.FragmentPagerAdapter} derivative, which
-	 * will keep every loaded fragment in memory. If this becomes too memory
-	 * intensive, it may be best to switch to a
-	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-	 */
 	private SectionsPagerAdapter mSectionsPagerAdapter;
-
-	/**
-	 * The {@link ViewPager} that will host the section contents.
-	 */
 	private ViewPager mViewPager;
-
 	private PagerTitleStrip mPagerTitleStrip;
+	
+	private Recorder recorderFragment;
+	private Intent recorderServiceIntent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		recorderServiceIntent = new Intent(this, RecorderService.class);
+		
 		setContentView(R.layout.activity_main);
 
 		// Create the adapter that will return a fragment for each of the three
@@ -106,7 +103,8 @@ public class RecordActivity extends FragmentActivity {
 			if (position == 0) {
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("POSICTION", Integer.valueOf(position));
-				return Recorder.newInstance(map);
+				recorderFragment = Recorder.newInstance(map);
+				return recorderFragment;
 			} else {
 				Fragment fragment = new DummySectionFragment();
 				Bundle args = new Bundle();
@@ -161,6 +159,12 @@ public class RecordActivity extends FragmentActivity {
 					ARG_SECTION_NUMBER)));
 			return textView;
 		}
+	}
+	
+	@Override
+	protected void onDestroy() {
+		this.startService(recorderServiceIntent);	
+		super.onDestroy();
 	}
 
 }

@@ -12,36 +12,37 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
-        public static final int my_recorder_main_bg=0x7f02001e;
-        public static final int my_recorder_text_gray_1=0x7f02001c;
-        public static final int my_recorder_text_gray_2=0x7f02001d;
-        public static final int pager_title_strip=0x7f02001b;
-        public static final int pause_but_selector=0x7f020001;
-        public static final int pause_normal=0x7f020002;
-        public static final int pause_press=0x7f020003;
-        public static final int pause_state=0x7f020004;
-        public static final int recorder_event_chro=0x7f020019;
-        public static final int recorder_event_text_blue=0x7f020017;
-        public static final int recorder_event_text_white=0x7f020018;
-        public static final int recorder_list_bg=0x7f020015;
-        public static final int recorder_main_bg=0x7f020016;
-        public static final int reset_but_selector=0x7f020005;
-        public static final int reset_normal=0x7f020006;
-        public static final int reset_press=0x7f020007;
-        public static final int satellite_about=0x7f020008;
-        public static final int satellite_config=0x7f020009;
-        public static final int satellite_diary=0x7f02000a;
-        public static final int satellite_planet_menu=0x7f02000b;
-        public static final int satellite_recorder=0x7f02000c;
+        public static final int ic_my_alert=0x7f020001;
+        public static final int my_recorder_main_bg=0x7f02001f;
+        public static final int my_recorder_text_gray_1=0x7f02001d;
+        public static final int my_recorder_text_gray_2=0x7f02001e;
+        public static final int pager_title_strip=0x7f02001c;
+        public static final int pause_but_selector=0x7f020002;
+        public static final int pause_normal=0x7f020003;
+        public static final int pause_press=0x7f020004;
+        public static final int pause_state=0x7f020005;
+        public static final int recorder_event_chro=0x7f02001a;
+        public static final int recorder_event_text_blue=0x7f020018;
+        public static final int recorder_event_text_white=0x7f020019;
+        public static final int recorder_list_bg=0x7f020016;
+        public static final int recorder_main_bg=0x7f020017;
+        public static final int reset_but_selector=0x7f020006;
+        public static final int reset_normal=0x7f020007;
+        public static final int reset_press=0x7f020008;
+        public static final int satellite_diary=0x7f020009;
+        public static final int satellite_planet_menu=0x7f02000a;
+        public static final int satellite_recorder=0x7f02000b;
+        public static final int satellite_report=0x7f02000c;
         public static final int satellite_setting=0x7f02000d;
-        public static final int start_but_selector=0x7f02000e;
-        public static final int start_normal=0x7f02000f;
-        public static final int start_press=0x7f020010;
-        public static final int start_state=0x7f020011;
-        public static final int stop_but_selector=0x7f020012;
-        public static final int stop_normal=0x7f020013;
-        public static final int stop_press=0x7f020014;
-        public static final int text_color=0x7f02001a;
+        public static final int satellite_shutdown=0x7f02000e;
+        public static final int start_but_selector=0x7f02000f;
+        public static final int start_normal=0x7f020010;
+        public static final int start_press=0x7f020011;
+        public static final int start_state=0x7f020012;
+        public static final int stop_but_selector=0x7f020013;
+        public static final int stop_normal=0x7f020014;
+        public static final int stop_press=0x7f020015;
+        public static final int text_color=0x7f02001b;
     }
     public static final class id {
         public static final int bottom_fragment=0x7f070002;
@@ -78,14 +79,23 @@ public final class R {
         public static final int add_records=0x7f040002;
         public static final int app_name=0x7f040000;
         public static final int cancel=0x7f040007;
+        public static final int event_category=0x7f04000d;
+        public static final int event_date=0x7f04000e;
+        public static final int event_has_been_suspended=0x7f040013;
+        public static final int event_is_timed=0x7f040011;
+        public static final int event_name=0x7f04000c;
+        public static final int events_are_timed=0x7f040010;
+        public static final int events_have_been_suspended=0x7f040012;
         public static final int hello_world=0x7f040004;
         public static final int history=0x7f040003;
         public static final int menu_settings=0x7f040005;
         public static final int my_recorder=0x7f040001;
+        public static final int my_recorder_rest_alert=0x7f04000b;
         public static final int ok=0x7f040006;
         public static final int recorder_page_stop=0x7f040008;
         public static final int start_time_lab=0x7f040009;
         public static final int summary=0x7f04000a;
+        public static final int using_time=0x7f04000f;
     }
     public static final class style {
         /** 

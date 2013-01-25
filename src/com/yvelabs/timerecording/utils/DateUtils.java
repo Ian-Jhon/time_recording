@@ -1,5 +1,6 @@
 package com.yvelabs.timerecording.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,17 +14,8 @@ public class DateUtils {
 	
 	private static long timeZoneAdjust;
 	
-	public DateUtils() {
+	static {
 		setTimeZoneAdjust();
-	}
-	
-	public static String dateFormat (Date time, String pattern) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
-		return dateFormat.format(time);
-	}
-	
-	public static String dateFormat (Date time) {
-		return dateFormat(time, DEFAULT_TIME_PATTERN);
 	}
 	
 	public static void setTimeZoneAdjust() {
@@ -37,12 +29,29 @@ public class DateUtils {
 		return timeZoneAdjust;
 	}
 	
-	public String formatTime(long time, String pattern) {
+	public static String format (Date time, String pattern) {
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+		return sdf.format(time);
+	}
+	
+	public static String format (Date time) {
+		return format(time, DEFAULT_DATETIME_PATTERN);
+	}
+	
+	public static String formatAdjust(long time, String pattern) {
 		return new SimpleDateFormat(pattern).format(timeZoneAdjust + time);
 	}
 	
-	public String formatTime(long time) {
-		return formatTime(time, DEFAULT_TIME_PATTERN);
+	public static String formatAdjust(long time) {
+		return formatAdjust(time, DEFAULT_TIME_PATTERN);
+	}
+	
+	public static Date getDateWithoutTime(Date oriDate) throws ParseException {
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String dateStr = sdf.format(date);
+		
+		return sdf.parse(dateStr);
 	}
 	
 

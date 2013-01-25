@@ -43,13 +43,13 @@ public class BottomFragment extends Fragment {
 		try {
 			leftSatelliteMenu = (SatelliteMenu) v.findViewById(R.id.left_satellite);
 			List<SatelliteItemModel> leftRatllites = new ArrayList<SatelliteItemModel>();
-	        leftRatllites.add(new SatelliteItemModel(1, R.drawable.satellite_about));
+	        leftRatllites.add(new SatelliteItemModel(1, R.drawable.satellite_shutdown));
 	        leftRatllites.add(new SatelliteItemModel(2, R.drawable.satellite_setting));
-	        leftRatllites.add(new SatelliteItemModel(3, R.drawable.satellite_config));
-	        leftRatllites.add(new SatelliteItemModel(4, R.drawable.satellite_diary));
+	        leftRatllites.add(new SatelliteItemModel(3, R.drawable.satellite_diary));
+	        leftRatllites.add(new SatelliteItemModel(4, R.drawable.satellite_report));
 	        leftRatllites.add(new SatelliteItemModel(5, R.drawable.satellite_recorder));
 			
-			SettingPara settingPara = new SettingPara(0, 90, 250, R.drawable.satellite_planet_menu, leftRatllites);
+			SettingPara settingPara = new SettingPara(0, 90, 200, R.drawable.satellite_planet_menu, leftRatllites);
 			leftSatelliteMenu.setting(settingPara);
 			leftSatelliteMenu.setOnSatelliteClickedListener(new SatelliteMenu.OnSatelliteClickedListener() {
 				@Override
@@ -60,14 +60,12 @@ public class BottomFragment extends Fragment {
 			
 			rightSatelliteMenu = (SatelliteMenu) v.findViewById(R.id.right_satellite);
 			List<SatelliteItemModel> rightRatllites = new ArrayList<SatelliteItemModel>();
-			rightRatllites.add(new SatelliteItemModel(1, R.drawable.satellite_about));
+			rightRatllites.add(new SatelliteItemModel(1, R.drawable.satellite_shutdown));
 			rightRatllites.add(new SatelliteItemModel(2, R.drawable.satellite_setting));
-			rightRatllites.add(new SatelliteItemModel(3, R.drawable.satellite_config));
 			rightRatllites.add(new SatelliteItemModel(4, R.drawable.satellite_diary));
-			rightRatllites.add(new SatelliteItemModel(5, R.drawable.satellite_recorder));
 			rightRatllites.add(new SatelliteItemModel(6, R.drawable.satellite_recorder));
 //			rightRatllites.add(new SatelliteItemModel(7, R.drawable.satellite_3));
-			SettingPara rightSettingPara = new SettingPara(90, 180, 250, R.drawable.satellite_planet_menu, rightRatllites);
+			SettingPara rightSettingPara = new SettingPara(90, 180, 200, R.drawable.satellite_planet_menu, rightRatllites);
 			rightSatelliteMenu.setting(rightSettingPara);
 		} catch (Exception e) {
 			e.printStackTrace();
