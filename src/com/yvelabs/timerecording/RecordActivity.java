@@ -31,14 +31,11 @@ public class RecordActivity extends FragmentActivity {
 	private PagerTitleStrip mPagerTitleStrip;
 	
 	private Recorder recorderFragment;
-	private Intent recorderServiceIntent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		recorderServiceIntent = new Intent(this, RecorderService.class);
-		
+		new NotificationUtils().removeNotification(this, NOTIFICATION_ID_RECORDER_MYRECORDER);
 		setContentView(R.layout.activity_main);
 
 		// Create the adapter that will return a fragment for each of the three
@@ -163,7 +160,11 @@ public class RecordActivity extends FragmentActivity {
 	
 	@Override
 	protected void onDestroy() {
-		this.startService(recorderServiceIntent);	
+		new NotificationUtils().notifyNotification(this, this.getClass(), null,
+				R.drawable.ic_launcher,
+				getResources().getString(R.string.app_name),
+				recorderFragment.getEventsStatusMsg(),
+				NOTIFICATION_ID_RECORDER_MYRECORDER);
 		super.onDestroy();
 	}
 

@@ -27,6 +27,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		//t_event_records
 		StringBuilder eventRecordsTableSql = new StringBuilder();
 		eventRecordsTableSql.append("CREATE TABLE IF NOT EXISTS t_event_records ");
 		eventRecordsTableSql.append("(_id INTEGER PRIMARY KEY AUTOINCREMENT, ");
@@ -39,6 +40,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
 		eventRecordsTableSql.append(")");
 		db.execSQL(eventRecordsTableSql.toString());
 		
+		//t_event
 		StringBuilder eventTableSql = new StringBuilder();
 		eventTableSql.append("CREATE TABLE IF NOT EXISTS t_event");
 		eventTableSql.append("(_id INTEGER PRIMARY KEY AUTOINCREMENT, ");
@@ -49,6 +51,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
 		eventTableSql.append(")");
 		db.execSQL(eventTableSql.toString());
 		
+		//t_event_category
 		StringBuilder eventCategoryTableSql = new StringBuilder();
 		eventCategoryTableSql.append("CREATE TABLE IF NOT EXISTS t_event_category");
 		eventCategoryTableSql.append("(_id INTEGER PRIMARY KEY AUTOINCREMENT, ");
@@ -57,6 +60,20 @@ public class MyDBHelper extends SQLiteOpenHelper {
 		eventCategoryTableSql.append(")");
 		db.execSQL(eventCategoryTableSql.toString());
 		
+		//t_event_status
+		StringBuilder eventStatusTableSql = new StringBuilder();
+		eventStatusTableSql.append(" CREATE TABLE IF NOT EXISTS t_event_status ( ");
+		eventStatusTableSql.append("   _id INTEGER PRIMARY KEY AUTOINCREMENT , ");
+		eventStatusTableSql.append("   event_id INTEGER , ");
+		eventStatusTableSql.append("   event_name VARCHAR , ");
+		eventStatusTableSql.append("   even_category_name VARCHAR , ");
+		eventStatusTableSql.append("   chro_state VARCHAR , ");
+		eventStatusTableSql.append("   start_time INTEGER , ");
+		eventStatusTableSql.append("   start_elapsed_time INTEGER , ");
+		eventStatusTableSql.append("   summary VARCHAR,  ");
+		eventStatusTableSql.append("   create_on INTEGER ");
+		eventStatusTableSql.append(" ) ");
+		db.execSQL(eventStatusTableSql.toString());
 	}
 
 	@Override

@@ -91,8 +91,20 @@
         android:id="@+id/event_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/reset_but" >
+        android:layout_below="@+id/reset_but"
+        android:layout_above="@+id/status_tv" >
     </ListView>
+    
+    <TextView 
+        android:id="@+id/status_tv"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:gravity="center_horizontal|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:textStyle="bold"
+        android:textColor="@drawable/pager_title_strip"
+        android:paddingBottom="6dp"
+        />
 
 </RelativeLayout>

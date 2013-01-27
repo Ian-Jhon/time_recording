@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.yvelabs.satellitemenu.AbstractAnimation;
+import com.yvelabs.satellitemenu.DefaultAnimation2;
 import com.yvelabs.satellitemenu.SatelliteItemModel;
 import com.yvelabs.satellitemenu.SatelliteMenu;
 import com.yvelabs.satellitemenu.SettingPara;
@@ -50,6 +52,13 @@ public class BottomFragment extends Fragment {
 	        leftRatllites.add(new SatelliteItemModel(5, R.drawable.satellite_recorder));
 			
 			SettingPara settingPara = new SettingPara(0, 90, 200, R.drawable.satellite_planet_menu, leftRatllites);
+			//设置动画
+			DefaultAnimation2 anim = new DefaultAnimation2();
+			anim.setSatelliteStartOffsetMin(50);
+			anim.setSatelliteStartOffsetMax(150);
+			settingPara.setMenuAnimation(anim);
+			//增大宽高
+			settingPara.setCustomerRadiusAdjust(50);
 			leftSatelliteMenu.setting(settingPara);
 			leftSatelliteMenu.setOnSatelliteClickedListener(new SatelliteMenu.OnSatelliteClickedListener() {
 				@Override
@@ -66,6 +75,7 @@ public class BottomFragment extends Fragment {
 			rightRatllites.add(new SatelliteItemModel(6, R.drawable.satellite_recorder));
 //			rightRatllites.add(new SatelliteItemModel(7, R.drawable.satellite_3));
 			SettingPara rightSettingPara = new SettingPara(90, 180, 200, R.drawable.satellite_planet_menu, rightRatllites);
+			rightSettingPara.setCustomerRadiusAdjust(50);
 			rightSatelliteMenu.setting(rightSettingPara);
 		} catch (Exception e) {
 			e.printStackTrace();

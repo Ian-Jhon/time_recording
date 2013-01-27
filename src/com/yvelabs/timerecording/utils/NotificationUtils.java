@@ -24,20 +24,24 @@ public class NotificationUtils {
 		        .setContentTitle(title)
 		        .setContentText(ContentText);
 		Intent resultIntent = new Intent(context, returnClass);
-		Bundle bundle = new Bundle();
 		
-		for (Map.Entry<String, Object> entrySet: extras.entrySet()) {
-			if (entrySet.getValue() instanceof Parcelable) {
-				bundle.putParcelable(entrySet.getKey(), (Parcelable) entrySet.getValue());
-			} else if (entrySet.getValue() instanceof List) {
-				bundle.putParcelableArrayList(entrySet.getKey(), (ArrayList<? extends Parcelable>) entrySet.getValue());
-			} else if (entrySet.getValue() instanceof String) {
-				bundle.putString(entrySet.getKey(), (String) entrySet.getValue());
-			} else if (entrySet.getValue() instanceof Integer) {
-				bundle.putInt(entrySet.getKey(), (Integer) entrySet.getValue());
+		
+		if (extras != null) {
+			Bundle bundle = new Bundle();
+		
+			for (Map.Entry<String, Object> entrySet: extras.entrySet()) {
+				if (entrySet.getValue() instanceof Parcelable) {
+					bundle.putParcelable(entrySet.getKey(), (Parcelable) entrySet.getValue());
+				} else if (entrySet.getValue() instanceof List) {
+					bundle.putParcelableArrayList(entrySet.getKey(), (ArrayList<? extends Parcelable>) entrySet.getValue());
+				} else if (entrySet.getValue() instanceof String) {
+					bundle.putString(entrySet.getKey(), (String) entrySet.getValue());
+				} else if (entrySet.getValue() instanceof Integer) {
+					bundle.putInt(entrySet.getKey(), (Integer) entrySet.getValue());
+				}
 			}
+			resultIntent.putExtras(bundle);
 		}
-		resultIntent.putExtras(bundle);
 
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
 		stackBuilder.addParentStack(returnClass);
