@@ -8,6 +8,10 @@
 package com.yvelabs.timerecording;
 
 public final class R {
+    public static final class anim {
+        public static final int push_up_in=0x7f040000;
+        public static final int push_up_out=0x7f040001;
+    }
     public static final class attr {
     }
     public static final class drawable {
@@ -45,59 +49,65 @@ public final class R {
         public static final int text_color=0x7f02001b;
     }
     public static final class id {
-        public static final int bottom_fragment=0x7f070002;
-        public static final int event_category=0x7f070006;
-        public static final int event_chro=0x7f070007;
-        public static final int event_list=0x7f07000d;
-        public static final int event_name=0x7f070005;
-        public static final int event_summary=0x7f070008;
-        public static final int left_satellite=0x7f070003;
-        public static final int list_event_category=0x7f070010;
-        public static final int list_event_name=0x7f07000f;
-        public static final int list_event_start_time=0x7f070012;
-        public static final int list_event_state_img=0x7f070013;
-        public static final int menu_settings=0x7f070014;
-        public static final int pager=0x7f070000;
-        public static final int pager_title_strip=0x7f070001;
-        public static final int pause_but=0x7f07000a;
-        public static final int reset_but=0x7f070009;
-        public static final int right_satellite=0x7f070004;
-        public static final int start_but=0x7f07000b;
-        public static final int start_time_lab=0x7f070011;
-        public static final int status_tv=0x7f07000e;
-        public static final int stop_but=0x7f07000c;
+        public static final int bottom_fragment=0x7f080002;
+        public static final int config_pager=0x7f080005;
+        public static final int config_pager_title_strip=0x7f080006;
+        public static final int event_category=0x7f080008;
+        public static final int event_chro=0x7f080009;
+        public static final int event_list=0x7f08000f;
+        public static final int event_name=0x7f080007;
+        public static final int event_summary=0x7f08000a;
+        public static final int left_satellite=0x7f080003;
+        public static final int list_event_category=0x7f080012;
+        public static final int list_event_name=0x7f080011;
+        public static final int list_event_start_time=0x7f080014;
+        public static final int list_event_state_img=0x7f080015;
+        public static final int menu_settings=0x7f080016;
+        public static final int pager=0x7f080000;
+        public static final int pager_title_strip=0x7f080001;
+        public static final int pause_but=0x7f08000c;
+        public static final int reset_but=0x7f08000b;
+        public static final int right_satellite=0x7f080004;
+        public static final int start_but=0x7f08000d;
+        public static final int start_time_lab=0x7f080013;
+        public static final int status_tv=0x7f080010;
+        public static final int stop_but=0x7f08000e;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int button_fragment=0x7f030001;
-        public static final int recorder=0x7f030002;
-        public static final int recorder_event_list_item=0x7f030003;
+        public static final int config_activity=0x7f030002;
+        public static final int recorder=0x7f030003;
+        public static final int recorder_event_list_item=0x7f030004;
     }
     public static final class menu {
-        public static final int activity_main=0x7f060000;
+        public static final int activity_main=0x7f070000;
     }
     public static final class string {
-        public static final int add_records=0x7f040002;
-        public static final int app_name=0x7f040000;
-        public static final int cancel=0x7f040007;
-        public static final int event_category=0x7f04000d;
-        public static final int event_date=0x7f04000e;
-        public static final int event_has_been_suspended=0x7f040013;
-        public static final int event_is_timed=0x7f040011;
-        public static final int event_name=0x7f04000c;
-        public static final int events_are_timed=0x7f040010;
-        public static final int events_have_been_suspended=0x7f040012;
-        public static final int hello_world=0x7f040004;
-        public static final int history=0x7f040003;
-        public static final int menu_settings=0x7f040005;
-        public static final int my_recorder=0x7f040001;
-        public static final int my_recorder_rest_alert=0x7f04000b;
-        public static final int ok=0x7f040006;
-        public static final int please_select_the_event=0x7f040014;
-        public static final int recorder_page_stop=0x7f040008;
-        public static final int start_time_lab=0x7f040009;
-        public static final int summary=0x7f04000a;
-        public static final int using_time=0x7f04000f;
+        public static final int add_records=0x7f050002;
+        public static final int app_name=0x7f050000;
+        public static final int cancel=0x7f050007;
+        public static final int configure_the_categories=0x7f050015;
+        public static final int configure_the_events=0x7f050016;
+        public static final int event_category=0x7f05000d;
+        public static final int event_date=0x7f05000e;
+        public static final int event_has_been_suspended=0x7f050013;
+        public static final int event_is_timed=0x7f050011;
+        public static final int event_name=0x7f05000c;
+        public static final int events_are_timed=0x7f050010;
+        public static final int events_have_been_suspended=0x7f050012;
+        public static final int hello_world=0x7f050004;
+        public static final int history=0x7f050003;
+        public static final int menu_settings=0x7f050017;
+        public static final int my_recorder=0x7f050001;
+        public static final int my_recorder_rest_alert=0x7f05000b;
+        public static final int ok=0x7f050006;
+        public static final int please_select_the_event=0x7f050014;
+        public static final int recorder_page_stop=0x7f050008;
+        public static final int settings=0x7f050005;
+        public static final int start_time_lab=0x7f050009;
+        public static final int summary=0x7f05000a;
+        public static final int using_time=0x7f05000f;
     }
     public static final class style {
         /** 
@@ -121,10 +131,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f050000;
+        public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f050001;
+        public static final int AppTheme=0x7f060001;
     }
 }

@@ -21,7 +21,8 @@
     <string name="event_is_timed">个事件正在计时.</string>
     <string name="events_have_been_suspended">个事件暂停中.</string>
     <string name="event_has_been_suspended">个事件暂停中.</string>
-    
     <string name="please_select_the_event">请选择事件.</string>
-
+    
+	<string name="configure_the_categories">Categories</string>
+    <string name="configure_the_events">Events</string>
 </resources>

@@ -38,8 +38,6 @@ public class RecordActivity extends FragmentActivity {
 		new NotificationUtils().removeNotification(this, NOTIFICATION_ID_RECORDER_MYRECORDER);
 		setContentView(R.layout.activity_main);
 
-		// Create the adapter that will return a fragment for each of the three
-		// primary sections of the app.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
 				getSupportFragmentManager());
 
@@ -60,12 +58,10 @@ public class RecordActivity extends FragmentActivity {
 			 
 			 mPrevText.setAccessible(true); 
 			 TextView mPrevTextView = (TextView) mPrevText.get(mPagerTitleStrip);
-//			 TypefaceUtils.setTypeface(mPrevTextView, TypefaceUtils.RBNO2_LIGHT_A);
 			 mPrevTextView.setTextSize(12);
 			 
 			 mNextText.setAccessible(true); 
 			 TextView mNextTextView = (TextView) mNextText.get(mPagerTitleStrip);
-//			 TypefaceUtils.setTypeface(mNextTextView, TypefaceUtils.RBNO2_LIGHT_A);
 			 mNextTextView.setTextSize(12);
 			 
 		} catch (Exception e) {
@@ -131,15 +127,7 @@ public class RecordActivity extends FragmentActivity {
 		}
 	}
 
-	/**
-	 * A dummy fragment representing a section of the app, but that simply
-	 * displays dummy text.
-	 */
 	public static class DummySectionFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
 		public static final String ARG_SECTION_NUMBER = "section_number";
 
 		public DummySectionFragment() {
@@ -148,8 +136,6 @@ public class RecordActivity extends FragmentActivity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			// Create a new TextView and set its text to the fragment's section
-			// number argument value.
 			TextView textView = new TextView(getActivity());
 			textView.setGravity(Gravity.CENTER);
 			textView.setText(Integer.toString(getArguments().getInt(

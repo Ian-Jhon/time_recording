@@ -6,7 +6,7 @@
     <string name="add_records">Add records</string>
     <string name="history">History</string>
     <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
+    <string name="settings">Settings</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="recorder_page_stop">是否要将以下信息写入日记中</string>
@@ -21,7 +21,9 @@
     <string name="event_is_timed">event is timed.</string>
     <string name="events_have_been_suspended">events have been suspended.</string>
     <string name="event_has_been_suspended">event has been suspended.</string>
-    
     <string name="please_select_the_event">Please select the event.</string>
+    
+    <string name="configure_the_categories">Categories</string>
+    <string name="configure_the_events">Events</string>
 
 </resources>
