@@ -328,7 +328,6 @@ public class Recorder extends Fragment {
 				resultMap.put(EventModel.STATE_STOP, resultMap.get(EventModel.STATE_STOP) + 1);
 			}
 			
-			LogUtils.d(this.getClass(), "getEventsStatusMap: " + eventModel);
 		}
 		
 		return resultMap;
@@ -355,7 +354,6 @@ public class Recorder extends Fragment {
                 content.append(pauseTotle + " ").append(getActivity().getResources().getString(R.string.events_have_been_suspended)).append("\r\n" );
             }
         }
-        LogUtils.d(this.getClass(), "getEventsStatusMsg:" + content);
         
         return content.toString().trim();
 	}

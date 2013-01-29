@@ -13,16 +13,16 @@ import com.yvelabs.timerecording.utils.MyDBHelper;
 
 public class EventCategoryDAO {
 	
-	private static final String EVENT_CAGETORY_INSERT = " insert into t_event_category (event_category, status) values (?, ?) ";
+	private static final String EVENT_CAGETORY_INSERT = " insert into t_event_category (event_category_name, status) values (?, ?) ";
 	private static final String EVENT_CATEGORY_SELECT_ID = " select last_insert_rowid() from t_event_category ";
 	private static final String EVENT_CATEGORY_DELETE = " delete from t_event_category where 1 = 1 ";
-	private static final String EVENT_CATEGORY_SELECT = " select _id, event_category, status from t_event_category where 1 = 1 ";
+	private static final String EVENT_CATEGORY_SELECT = " select _id, event_category_name, status from t_event_category where 1 = 1 ";
 	//	private static final String EVENT_RECORDS_SELECT = "select _id, event_name, event_category, event_date, useing_time, summary, create_time from t_event_records where 1 = 1";
 
 	
 	private Context context;
 	
-	public EventCategoryDAO () {
+	public EventCategoryDAO (Context context) {
 		this.context = context;
 	}
 
@@ -163,8 +163,8 @@ public class EventCategoryDAO {
 				paraList.add(String.valueOf(parameter.getEventCategoryId()));
 			}
 			if (parameter.getEventCategoryName() != null && parameter.getEventCategoryName().length() > 0) {
-				sql.append(" and event_category = ? ");
-				paraList.add(parameter.getEventCategoryName());
+				sql.append(" and lower(event_category_name) = ? ");
+				paraList.add(parameter.getEventCategoryName().toLowerCase());
 			}
 			if (parameter.getStatus() != null && parameter.getStatus().length() > 0) {
 				sql.append(" and status = ? ");
@@ -187,7 +187,7 @@ public class EventCategoryDAO {
 			while (c.moveToNext()) {
 				eventCategory = new EventCategoryModel();
 				eventCategory.setEventCategoryId(c.getInt(c.getColumnIndex("_id")));
-				eventCategory.setEventCategoryName(c.getString(c.getColumnIndex("event_category")));
+				eventCategory.setEventCategoryName(c.getString(c.getColumnIndex("event_category_name")));
 				eventCategory.setStatus(c.getString(c.getColumnIndex("status")));
 				
 				eventCategorys.add(eventCategory);

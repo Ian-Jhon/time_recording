@@ -10,8 +10,10 @@
     
     <drawable name="pager_title_strip">#33b5e5</drawable>
     
+    <drawable name="my_recorder_text_gray_0">#333333</drawable>
     <drawable name="my_recorder_text_gray_1">#393939</drawable>
     <drawable name="my_recorder_text_gray_2">#717174</drawable>
     <drawable name="my_recorder_main_bg">#F3F3EA</drawable>
+    <drawable name="warn_text">#D65963</drawable>
     
 </resources>

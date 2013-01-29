@@ -25,5 +25,11 @@
     
     <string name="configure_the_categories">Categories</string>
     <string name="configure_the_events">Events</string>
+    <string name="enter_the_category_name">Enter the category name.</string>
+    <string name="please_enter_the_category_name">Please enter the category name.</string>
+    <string name="disable">Disable</string>
+    <string name="enable">Enable</string>
+    <string name="add_category">Add category</string>
+    <string name="already_exists">already exists</string>
 
 </resources>

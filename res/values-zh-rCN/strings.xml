@@ -25,4 +25,11 @@
     
 	<string name="configure_the_categories">Categories</string>
     <string name="configure_the_events">Events</string>
+    <string name="enter_the_category_name">请录入大类名称.</string>
+    <string name="please_enter_the_category_name">请录入大类名称.</string>
+    <string name="disable">停用</string>
+    <string name="enable">可用</string>
+    <string name="add_category">添加大类</string>
+    <string name="already_exists">已存在</string>
+    
 </resources>

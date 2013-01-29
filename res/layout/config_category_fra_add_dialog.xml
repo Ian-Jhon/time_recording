@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/my_recorder_main_bg" >
+
+    <ImageView
+        android:id="@+id/config_category_add_dialog_add_title_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        android:background="@drawable/ic_add_normal" />
+
+    <TextView
+        android:id="@+id/config_category_add_dialog_add_title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/config_category_add_dialog_add_title_icon"
+        android:layout_marginBottom="18dp"
+        android:layout_toRightOf="@+id/config_category_add_dialog_add_title_icon"
+        android:text="@string/add_category"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/config_category_add_dialog_dividing_line"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/config_category_add_dialog_add_title_icon"
+        android:layout_marginBottom="3dp"
+        android:background="@drawable/pager_title_strip" />
+
+    <TextView
+        android:id="@+id/config_category_add_dialog_warn"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/config_category_add_dialog_dividing_line"
+        android:textColor="@drawable/warn_text"
+        android:text="　" />
+
+    <EditText
+        android:id="@+id/config_category_add_dialog_category_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/config_category_add_dialog_warn"
+        android:hint="@string/enter_the_category_name" />
+
+    <Spinner
+        android:id="@+id/config_category_add_dialog_state_sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/config_category_add_dialog_category_name" />
+
+    <ImageButton
+        android:id="@+id/config_category_add_dialog_save_but"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/config_category_add_dialog_state_sp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/save_but_selector" />
+
+</RelativeLayout>

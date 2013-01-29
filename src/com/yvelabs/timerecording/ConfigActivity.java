@@ -1,7 +1,10 @@
 package com.yvelabs.timerecording;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
+import com.yvelabs.timerecording.utils.LogUtils;
 import com.yvelabs.timerecording.utils.TypefaceUtils;
 
 import android.os.Bundle;
@@ -22,6 +25,8 @@ public class ConfigActivity extends FragmentActivity {
 	private SectionsPagerAdapter mSectionsPagerAdapter;
 	private ViewPager mViewPager;
 	private PagerTitleStrip mPagerTitleStrip;
+	
+	private ConfigCategoryFragment categoryFragment;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -63,14 +68,18 @@ public class ConfigActivity extends FragmentActivity {
 		@Override
 		public Fragment getItem(int position) {
 			
-			/*if (position == 1) {
-				return 
-			} else {*/
-			Fragment fragment = new DummySectionFragment();
-			Bundle args = new Bundle();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-			fragment.setArguments(args);
-			return fragment;
+			if (position == 1) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("POSICTION", Integer.valueOf(position));
+				categoryFragment = ConfigCategoryFragment.newInstance(map);
+				return categoryFragment;
+			} else {
+				Fragment fragment = new DummySectionFragment();
+				Bundle args = new Bundle();
+				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
+				fragment.setArguments(args);
+				return fragment;
+			}
 		}
 
 		@Override
@@ -91,6 +100,10 @@ public class ConfigActivity extends FragmentActivity {
 			return null;
 		}
 		
+	}
+	
+	public void refreshCategoryList () {
+		categoryFragment.refreshList();
 	}
 	
 	public static class DummySectionFragment extends Fragment {

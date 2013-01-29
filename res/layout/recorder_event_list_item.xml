@@ -13,7 +13,7 @@
 		android:paddingBottom="7dp"
 		android:paddingLeft="10dp"
 		android:paddingRight="10dp"
-        android:textColor="@drawable/my_recorder_text_gray_1"
+        android:textColor="@drawable/my_recorder_text_gray_0"
         android:textSize="25sp" />
 
     <TextView
