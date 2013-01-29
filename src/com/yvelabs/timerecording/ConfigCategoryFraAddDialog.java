@@ -29,10 +29,8 @@ public class ConfigCategoryFraAddDialog extends DialogFragment {
 	
 	static ConfigCategoryFraAddDialog newInstance() {
 		ConfigCategoryFraAddDialog f = new ConfigCategoryFraAddDialog();
-
 		Bundle args = new Bundle();
 		f.setArguments(args);
-
 		return f;
 	}
 	

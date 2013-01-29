@@ -1,6 +1,9 @@
 package com.yvelabs.timerecording;
 
-public class EventCategoryModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class EventCategoryModel implements Parcelable {
 	
 	private int eventCategoryId = -1;
 	private String eventCategoryName;
@@ -33,4 +36,34 @@ public class EventCategoryModel {
 		str.append(", status" + status);
 		return str.toString();
 	}
+	
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(eventCategoryId);
+		dest.writeString(eventCategoryName);
+		dest.writeString(status);
+	}
+	
+	public static final Parcelable.Creator<EventCategoryModel> CREATOR = new Parcelable.Creator<EventCategoryModel>() {
+
+		@Override
+		public EventCategoryModel createFromParcel(Parcel source) {
+			EventCategoryModel model = new EventCategoryModel();
+			model.setEventCategoryId(source.readInt());
+			model.setEventCategoryName(source.readString());
+			model.setStatus(source.readString());
+			return model;
+		}
+
+		@Override
+		public EventCategoryModel[] newArray(int size) {
+			return new EventCategoryModel[size];
+		}
+		
+	};
+	
 }

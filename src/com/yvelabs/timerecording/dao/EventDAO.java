@@ -14,6 +14,7 @@ public class EventDAO {
 	private static final String INSERT = " insert into t_event (event_name, event_category_name, status, event_order)values(?, ?, ?, ?) ";
 	private static final String DELETE = " delete from t_event where 1 = 1 ";
 	private static final String SELECT = " select _id, event_name, event_category_name, status, event_order from t_event where 1 = 1 ";
+	private static final String UPDATE_BY_CATEGORYNAME = "update t_event set event_category_name = ? where event_category_name = ?";
 	
 	private Context context;
 	
@@ -98,6 +99,10 @@ public class EventDAO {
 		}
 	}
 	
+	public void updateByCategoryName (SQLiteDatabase db, EventModel oldModel, EventModel newModel) {
+		db.execSQL(UPDATE_BY_CATEGORYNAME, new Object[]{newModel.getEventCategoryName(), oldModel.getEventCategoryName()});
+	}
+	
 	public List<EventModel> query (EventModel parameter) {
 		List<EventModel> resultList = new ArrayList<EventModel>();
 		Cursor c = null;
@@ -145,6 +150,7 @@ public class EventDAO {
 				eventModel.setEventCategoryName(c.getString(c.getColumnIndex("event_category_name")));
 				eventModel.setStatus(c.getString(c.getColumnIndex("status")));
 				eventModel.setOrder(c.getInt(c.getColumnIndex("event_order")));
+				resultList.add(eventModel);
 			}
 		} finally {
 			if (c != null) c.close();

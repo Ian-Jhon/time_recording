@@ -8,7 +8,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.yvelabs.timerecording.EventCategoryModel;
-import com.yvelabs.timerecording.utils.LogUtils;
+import com.yvelabs.timerecording.EventModel;
+import com.yvelabs.timerecording.EventRecordModel;
 import com.yvelabs.timerecording.utils.MyDBHelper;
 
 public class EventCategoryDAO {
@@ -17,7 +18,8 @@ public class EventCategoryDAO {
 	private static final String EVENT_CATEGORY_SELECT_ID = " select last_insert_rowid() from t_event_category ";
 	private static final String EVENT_CATEGORY_DELETE = " delete from t_event_category where 1 = 1 ";
 	private static final String EVENT_CATEGORY_SELECT = " select _id, event_category_name, status from t_event_category where 1 = 1 ";
-	//	private static final String EVENT_RECORDS_SELECT = "select _id, event_name, event_category, event_date, useing_time, summary, create_time from t_event_records where 1 = 1";
+	private static final String EVENT_CATEGORY_UPDATE_BY_CATEGORYNAME = "update t_event_category set event_category_name = ? where event_category_name = ?";
+	private static final String UPDATE_STATUS_BY_ID = "update t_event_category set status = ? where _id = ?";
 
 	
 	private Context context;
@@ -97,6 +99,12 @@ public class EventCategoryDAO {
 		}
 	}
 	
+	public void delete (EventCategoryModel categoryModel) {
+		List<EventCategoryModel> categoryModels = new ArrayList<EventCategoryModel>();
+		categoryModels.add(categoryModel);
+		delete(categoryModels);
+	}
+	
 	/**
 	 * É¾³ý
 	 * @param categoryModels
@@ -134,6 +142,57 @@ public class EventCategoryDAO {
 				
 			}
 			
+			db.setTransactionSuccessful();
+		} finally {
+			if (db != null) {
+				db.endTransaction();
+				db.close();
+			}
+		}
+	}
+	
+	public void updateAllTableByCategoryName (EventCategoryModel oldModel, EventCategoryModel newModel) {
+		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
+		try {
+			db.beginTransaction();
+			//t_event_category
+			updateByCategoryName(db, oldModel, newModel);
+			
+			//t_event
+			EventModel oldEventModel = new EventModel();
+			oldEventModel.setEventCategoryName(oldModel.getEventCategoryName());
+			EventModel newEventModle = new EventModel();
+			newEventModle.setEventCategoryName(newModel.getEventCategoryName());
+			new EventDAO(context).updateByCategoryName(db, oldEventModel, newEventModle);
+			
+			//t_event_records
+			EventRecordModel oldRecordModel = new EventRecordModel();
+			oldRecordModel.setEventCategoryName(oldModel.getEventCategoryName());
+			EventRecordModel newRecordModel = new EventRecordModel();
+			newRecordModel.setEventCategoryName(newModel.getEventCategoryName());
+			new EventRecordsDAO(context).updateByCategoryName(db, oldRecordModel, newRecordModel);
+			
+			//t_event_status
+			new EventStatusDAO(context).updateByCategoryName(db, oldEventModel, newEventModle);
+			
+			db.setTransactionSuccessful();
+		} finally {
+			if (db != null) {
+				db.endTransaction();
+				db.close();
+			}
+		}
+	}
+	
+	public void updateByCategoryName (SQLiteDatabase db, EventCategoryModel oldModel, EventCategoryModel newModel) {
+		db.execSQL(EVENT_CATEGORY_UPDATE_BY_CATEGORYNAME, new Object[]{newModel.getEventCategoryName(), oldModel.getEventCategoryName()});
+	}
+	
+	public void updateStatusById (EventCategoryModel parameter) {
+		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
+		try {
+			db.beginTransaction();
+			db.execSQL(UPDATE_STATUS_BY_ID, new Object[] {parameter.getStatus(), parameter.getEventCategoryId()});
 			db.setTransactionSuccessful();
 		} finally {
 			if (db != null) {

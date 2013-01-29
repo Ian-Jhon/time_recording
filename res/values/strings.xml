@@ -22,7 +22,7 @@
     <string name="events_have_been_suspended">events have been suspended.</string>
     <string name="event_has_been_suspended">event has been suspended.</string>
     <string name="please_select_the_event">Please select the event.</string>
-    
+     
     <string name="configure_the_categories">Categories</string>
     <string name="configure_the_events">Events</string>
     <string name="enter_the_category_name">Enter the category name.</string>
@@ -31,5 +31,10 @@
     <string name="enable">Enable</string>
     <string name="add_category">Add category</string>
     <string name="already_exists">already exists</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="has_been_used_in_the_event">Has been used in the event</string>
+    <string name="edit_category">Edit category</string>
+    <string name="no_changes">No changes.</string>
 
 </resources>

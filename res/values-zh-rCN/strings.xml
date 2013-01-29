@@ -6,7 +6,7 @@
     <string name="add_records">Add records</string>
     <string name="history">History</string>
     <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
+    <string name="settings">Settings</string>
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
     <string name="recorder_page_stop">是否要将以下信息写入日记中?</string>
@@ -22,7 +22,7 @@
     <string name="events_have_been_suspended">个事件暂停中.</string>
     <string name="event_has_been_suspended">个事件暂停中.</string>
     <string name="please_select_the_event">请选择事件.</string>
-    
+     
 	<string name="configure_the_categories">Categories</string>
     <string name="configure_the_events">Events</string>
     <string name="enter_the_category_name">请录入大类名称.</string>
@@ -31,5 +31,10 @@
     <string name="enable">可用</string>
     <string name="add_category">添加大类</string>
     <string name="already_exists">已存在</string>
+    <string name="delete">删除</string>
+    <string name="edit">编辑</string>
+    <string name="has_been_used_in_the_event">在事件中已使用.</string>
+    <string name="edit_category">编辑大类</string>
+    <string name="no_changes">没有任何修改.</string>
     
 </resources>

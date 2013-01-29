@@ -16,6 +16,7 @@ public class EventRecordsDAO {
 	private static final String INSERT = " insert into t_event_records(event_name, event_category_name, event_date, useing_time, summary, create_time) values(?, ?, ?, ?, ?, ?) ";
 	private static final String DELETE = " delete from t_event_records where 1 = 1 ";
 	private static final String SELECT = " select _id, event_name, event_category_name, event_date, useing_time, summary, create_time from t_event_records where 1 = 1 ";
+	private static final String UPDATE_BY_CATEGORYNAME = "update t_event set event_category_name = ? where event_category_name = ?";
 
 	private Context context;
 
@@ -108,6 +109,10 @@ public class EventRecordsDAO {
 		}
 		
 		return count;
+	}
+	
+	public void updateByCategoryName (SQLiteDatabase db, EventRecordModel oldModel, EventRecordModel newModel) {
+		db.execSQL(UPDATE_BY_CATEGORYNAME, new Object[]{newModel.getEventCategoryName(), oldModel.getEventCategoryName()});
 	}
 	
 	public List<EventRecordModel> query (EventRecordModel parameter) {

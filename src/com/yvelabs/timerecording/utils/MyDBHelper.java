@@ -66,7 +66,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
 		eventStatusTableSql.append("   _id INTEGER PRIMARY KEY AUTOINCREMENT , ");
 		eventStatusTableSql.append("   event_id INTEGER , ");
 		eventStatusTableSql.append("   event_name VARCHAR , ");
-		eventStatusTableSql.append("   even_category_name VARCHAR , ");
+		eventStatusTableSql.append("   event_category_name VARCHAR , ");
 		eventStatusTableSql.append("   chro_state VARCHAR , ");
 		eventStatusTableSql.append("   start_time INTEGER , ");
 		eventStatusTableSql.append("   start_elapsed_time INTEGER , ");

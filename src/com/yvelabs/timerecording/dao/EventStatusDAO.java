@@ -13,9 +13,10 @@ import com.yvelabs.timerecording.utils.LogUtils;
 import com.yvelabs.timerecording.utils.MyDBHelper;
 
 public class EventStatusDAO {
-	private static final String INSERT = " insert into t_event_status (event_id, event_name, even_category_name, chro_state, start_time, start_elapsed_time, summary, create_on) values (?,?,?,?,?,?,?,?) ";
+	private static final String INSERT = " insert into t_event_status (event_id, event_name, event_category_name, chro_state, start_time, start_elapsed_time, summary, create_on) values (?,?,?,?,?,?,?,?) ";
 	private static final String DELETE = " delete from t_event_status where 1 = 1 ";
-	private static final String SELECT_ALL = " select _id, event_id, event_name, even_category_name, chro_state, start_time, start_elapsed_time, summary, create_on from t_event_status order by create_on";
+	private static final String SELECT_ALL = " select _id, event_id, event_name, event_category_name, chro_state, start_time, start_elapsed_time, summary, create_on from t_event_status order by create_on";
+	private static final String UPDATE_BY_CATEGORYNAME = "update t_event_status set event_category_name = ? where event_category_name = ?";
 	
 	private Context context;
 
@@ -83,8 +84,12 @@ public class EventStatusDAO {
 	public void deleteByEvent (EventModel model, SQLiteDatabase db) {
 		StringBuilder deleteSql = new StringBuilder(DELETE);
 		deleteSql.append(" and event_name = ? ");
-		deleteSql.append(" and even_category_name = ? ");
+		deleteSql.append(" and event_category_name = ? ");
 		db.execSQL(deleteSql.toString(), new Object[] { model.getEventName(), model.getEventCategoryName() });
+	}
+	
+	public void updateByCategoryName (SQLiteDatabase db, EventModel oldModel, EventModel newModel) {
+		db.execSQL(UPDATE_BY_CATEGORYNAME, new Object[]{newModel.getEventCategoryName(), oldModel.getEventCategoryName()});
 	}
 	
 	public List<EventModel> selectAll () {
@@ -97,7 +102,7 @@ public class EventStatusDAO {
 			eventModel = new EventModel();
 			eventModel.setEventId(c.getInt(c.getColumnIndex("event_id")));
 			eventModel.setEventName(c.getString(c.getColumnIndex("event_name")));
-			eventModel.setEventCategoryName(c.getString(c.getColumnIndex("even_category_name")));
+			eventModel.setEventCategoryName(c.getString(c.getColumnIndex("event_category_name")));
 			eventModel.setChro_state(c.getString(c.getColumnIndex("chro_state")));
 			eventModel.setStartTime(new Date(c.getLong(c.getColumnIndex("start_time"))));
 			eventModel.setStartElapsedTime(c.getLong(c.getColumnIndex("start_elapsed_time")));
