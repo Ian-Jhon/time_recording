@@ -36,5 +36,6 @@
     <string name="has_been_used_in_the_event">Has been used in the event</string>
     <string name="edit_category">Edit category</string>
     <string name="no_changes">No changes.</string>
+    <string name="this_information_will_not_be_saved">This information will not be saved.</string>
 
 </resources>

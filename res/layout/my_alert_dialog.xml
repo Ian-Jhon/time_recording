@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/my_alert_dialog_title_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        android:background="@drawable/ic_my_alert" />
+
+    <TextView
+        android:id="@+id/my_alert_dialog_title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/my_alert_dialog_title_icon"
+        android:layout_marginBottom="18dp"
+        android:layout_toRightOf="@+id/my_alert_dialog_title_icon"
+        android:text="@string/edit_category"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/my_alert_dialog_dividing_line"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/my_alert_dialog_title_icon"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/pager_title_strip" />
+
+    <TextView
+        android:id="@+id/my_alert_dialog_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/my_alert_dialog_dividing_line"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="15dp" />
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/my_alert_dialog_button_layout"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/my_alert_dialog_message" >
+
+        <ImageView
+            android:id="@+id/my_alert_dialog_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/cancel_but_selector" />
+        
+         <ImageView
+            android:id="@+id/my_alert_dialog_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ok_but_selector" />
+    </RelativeLayout>
+
+</RelativeLayout>

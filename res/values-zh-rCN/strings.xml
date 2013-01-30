@@ -36,5 +36,5 @@
     <string name="has_been_used_in_the_event">在事件中已使用.</string>
     <string name="edit_category">编辑大类</string>
     <string name="no_changes">没有任何修改.</string>
-    
+    <string name="this_information_will_not_be_saved">该信息将不会被保存.</string>
 </resources>

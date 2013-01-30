@@ -191,7 +191,7 @@ public class Recorder extends Fragment {
 			@Override
 			public void onClick(View v) {
 				DialogFragment newFragment = MyAlertDialogFragment.newInstance(
-			            R.string.my_recorder_rest_alert, R.drawable.ic_my_alert, null, new ResetOkListener(), new NormalCancelListener());
+			            R.string.my_recorder_rest_alert, R.drawable.ic_my_alert, getString(R.string.this_information_will_not_be_saved), new ResetOkListener(), null);
 			    newFragment.show(getFragmentManager(), "dialog");
 			}
 		});
@@ -253,7 +253,7 @@ public class Recorder extends Fragment {
 					}
 					
 					DialogFragment newFragment = MyAlertDialogFragment.newInstance(
-				            R.string.recorder_page_stop, R.drawable.ic_my_alert, getEventMsg(currentEvent), new StopOkListener(), new NormalCancelListener());
+				            R.string.recorder_page_stop, R.drawable.ic_my_alert, getEventMsg(currentEvent), new StopOkListener(), null);
 				    newFragment.show(getFragmentManager(), "dialog");
 				}
 			}
@@ -439,9 +439,10 @@ public class Recorder extends Fragment {
 
 	}
 	
-	class ResetOkListener implements DialogInterface.OnClickListener {
+	class ResetOkListener implements MyAlertDialogFragment.OKOnClickListener {
+
 		@Override
-		public void onClick(DialogInterface dialog, int which) {
+		public void onClick(View v) {
 			//
 			startBut.setVisibility(View.VISIBLE);
 			pauseBut.setVisibility(View.GONE);
@@ -460,12 +461,13 @@ public class Recorder extends Fragment {
 			
 			//更新状态信息
 			updateStatusTv ();
+			
 		}
 	}
 	
-	class StopOkListener implements DialogInterface.OnClickListener {
+	class StopOkListener implements MyAlertDialogFragment.OKOnClickListener {
 		@Override
-		public void onClick(DialogInterface dialog, int which) {
+		public void onClick(View v) {
 			//
 			eventChro.stop();
 			startBut.setVisibility(View.VISIBLE);
@@ -500,12 +502,6 @@ public class Recorder extends Fragment {
 			
 			//更新状态信息
 			updateStatusTv ();
-		}
-	}
-	
-	class NormalCancelListener implements DialogInterface.OnClickListener {
-		@Override
-		public void onClick(DialogInterface dialog, int which) {
 			
 		}
 	}
