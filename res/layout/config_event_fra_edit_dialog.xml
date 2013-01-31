@@ -2,83 +2,84 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
+    
     <ImageView
-        android:id="@+id/config_event_add_dialog_add_title_icon"
+        android:id="@+id/config_event_edit_dialog_edit_title_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_margin="5dp"
-        android:background="@drawable/ic_add_normal" />
+        android:background="@drawable/ic_edit_normal" />
 
     <TextView
-        android:id="@+id/config_event_add_dialog_add_title_text"
+        android:id="@+id/config_event_edit_dialog_edit_title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/config_event_add_dialog_add_title_icon"
+        android:layout_alignBottom="@+id/config_event_edit_dialog_edit_title_icon"
         android:layout_marginBottom="18dp"
-        android:layout_toRightOf="@+id/config_event_add_dialog_add_title_icon"
-        android:text="@string/add_event"
+        android:layout_toRightOf="@+id/config_event_edit_dialog_edit_title_icon"
+        android:text="@string/edit_event"
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/config_event_add_dialog_dividing_line"
+        android:id="@+id/config_event_edit_dialog_dividing_line"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/config_event_add_dialog_add_title_icon"
+        android:layout_below="@+id/config_event_edit_dialog_edit_title_icon"
         android:layout_marginBottom="3dp"
         android:background="@drawable/pager_title_strip" />
 
     <TextView
-        android:id="@+id/config_event_add_dialog_warning"
+        android:id="@+id/config_event_edit_dialog_warning"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/config_event_add_dialog_dividing_line"
         android:layout_marginLeft="10dp"
-        android:text="　"
-        android:textColor="@drawable/warn_text" />
-
+        android:layout_below="@+id/config_event_edit_dialog_dividing_line"
+        android:textColor="@drawable/warn_text"
+        android:text="　" />
+    
     <EditText
-        android:id="@+id/config_event_add_dialog_event_name"
+        android:id="@+id/config_event_edit_dialog_event_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/config_event_add_dialog_warning"
+        android:layout_below="@+id/config_event_edit_dialog_warning"
         android:layout_marginBottom="5dp"
         android:hint="@string/enter_the_event_name" />
-
+    
     <Spinner
-        android:id="@+id/config_event_add_dialog_category_sp"
+        android:id="@+id/config_event_edit_dialog_category_sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/config_event_add_dialog_event_name"
+        android:layout_below="@+id/config_event_edit_dialog_event_name"
         android:layout_marginBottom="5dp" />
-
+    
     <Spinner
-        android:id="@+id/config_event_add_dialog_order_sp"
+        android:id="@+id/config_event_edit_dialog_order_sp"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/config_event_add_dialog_category_sp"
+        android:layout_below="@+id/config_event_edit_dialog_category_sp"
         android:layout_marginBottom="5dp" />
-
+    
     <Spinner
-        android:id="@+id/config_event_add_dialog_status_sp"
+        android:id="@+id/config_event_edit_dialog_status_sp"
         android:layout_width="500dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/config_event_add_dialog_category_sp"
-        android:layout_toRightOf="@+id/config_event_add_dialog_order_sp" />
+        android:layout_below="@+id/config_event_edit_dialog_category_sp"
+        android:layout_toRightOf="@+id/config_event_edit_dialog_order_sp" />
     
     <ImageButton
-        android:id="@+id/config_event_add_dialog_save_but"
+        android:id="@+id/config_event_edit_dialog_save_but"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/config_event_add_dialog_order_sp"
+        android:layout_below="@+id/config_event_edit_dialog_order_sp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/save_but_selector" />
+    
 
 </RelativeLayout>

@@ -4,6 +4,14 @@
     android:layout_height="match_parent"
     android:background="@drawable/my_recorder_main_bg" >
     
+    <ListView
+        android:id="@+id/config_event_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/config_event_add_but" >
+    </ListView>
     
     <ImageButton
         android:id="@+id/config_event_add_but"

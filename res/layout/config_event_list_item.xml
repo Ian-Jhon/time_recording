@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/config_event_list_event_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:singleLine="true"
+        android:textColor="@drawable/my_recorder_text_gray_0"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/config_event_list_category_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/config_event_list_event_name"
+        android:layout_marginLeft="40dp"
+        android:singleLine="true"
+        android:textColor="@drawable/my_recorder_text_gray_0"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/config_event_list_order_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/config_event_list_event_name"
+        android:layout_toLeftOf="@+id/config_event_list_order"
+        android:singleLine="true"
+        android:text="@string/order"
+        android:textColor="@drawable/pager_title_strip"
+        android:textSize="11sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/config_event_list_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/config_event_list_event_name"
+        android:layout_toLeftOf="@+id/config_event_list_status"
+        android:singleLine="true"
+        android:textColor="@drawable/pager_title_strip"
+        android:textSize="11sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/config_event_list_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/config_event_list_event_name"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:singleLine="true"
+        android:textColor="@drawable/pager_title_strip"
+        android:textSize="11sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

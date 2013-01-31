@@ -47,4 +47,6 @@
     <string name="attention">注意</string>
     <string name="this_event_already_exists_in_the_category">此事件已存在, 所在大类为</string>
     <string name="please_enter_the_event">请输入事件名称.</string>
+    <string name="order">优先级</string>
+    <string name="edit_event">编辑事件</string> 
 </resources>

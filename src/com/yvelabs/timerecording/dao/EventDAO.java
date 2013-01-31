@@ -8,13 +8,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.yvelabs.timerecording.EventModel;
+import com.yvelabs.timerecording.utils.LogUtils;
 import com.yvelabs.timerecording.utils.MyDBHelper;
 
 public class EventDAO {
-	private static final String INSERT = " insert into t_event (event_name, event_category_name, status, event_order)values(?, ?, ?, ?) ";
+	private static final String INSERT = " insert into t_event (event_name, event_category_name, status, event_order) values (?, ?, ?, ?) ";
 	private static final String DELETE = " delete from t_event where 1 = 1 ";
 	private static final String SELECT = " select _id, event_name, event_category_name, status, event_order from t_event where 1 = 1 ";
-	private static final String UPDATE_BY_CATEGORYNAME = "update t_event set event_category_name = ? where event_category_name = ?";
+	private static final String UPDATE_BY_CATEGORYNAME = "update t_event set event_category_name = ? where lower(event_category_name) = ?";
 	
 	private Context context;
 	
@@ -44,6 +45,12 @@ public class EventDAO {
 		}
 	}
 	
+	public void delete (EventModel eventModel) {
+		List<EventModel> eventModels = new ArrayList<EventModel>();
+		eventModels.add(eventModel);
+		delete(eventModels);
+	}
+	
 	public int delete (List<EventModel> eventModels) {
 		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
 		int count = 0;
@@ -59,18 +66,18 @@ public class EventDAO {
 					paraList.add(String.valueOf(eventModel.getEventId()));
 				}
 				if (eventModel.getEventName() != null && eventModel.getEventName().length() > 0) {
-					sql.append(" and event_name = ? ");
-					paraList.add(eventModel.getEventName());
+					sql.append(" and lower(event_name) = ? ");
+					paraList.add(eventModel.getEventName().toLowerCase());
 				}
 				if (eventModel.getEventCategoryName() != null && eventModel.getEventCategoryName().length() > 0) {
-					sql.append(" and event_category_name = ? ");
-					paraList.add(eventModel.getEventCategoryName());
+					sql.append(" and lower(event_category_name) = ? ");
+					paraList.add(eventModel.getEventCategoryName().toLowerCase());
 				}
 				if (eventModel.getStatus() != null && eventModel.getStatus().length() > 0) {
 					sql.append(" and status = ? ");
 					paraList.add(eventModel.getStatus());
 				}
-				if (eventModel.getOrder() >= 0) {
+				if (eventModel.getOrder() > 0) {
 					sql.append(" and event_order = ? ");
 					paraList.add(String.valueOf(eventModel.getOrder()));
 				}
@@ -100,7 +107,7 @@ public class EventDAO {
 	}
 	
 	public void updateByCategoryName (SQLiteDatabase db, EventModel oldModel, EventModel newModel) {
-		db.execSQL(UPDATE_BY_CATEGORYNAME, new Object[]{newModel.getEventCategoryName(), oldModel.getEventCategoryName()});
+		db.execSQL(UPDATE_BY_CATEGORYNAME, new Object[]{newModel.getEventCategoryName(), oldModel.getEventCategoryName().toLowerCase()});
 	}
 	
 	public List<EventModel> query (EventModel parameter) {
@@ -116,18 +123,18 @@ public class EventDAO {
 				paraList.add(String.valueOf(parameter.getEventId()));
 			}
 			if (parameter.getEventName() != null && parameter.getEventName().length() > 0) {
-				sql.append(" and event_name = ? ");
-				paraList.add(parameter.getEventName());
+				sql.append(" and lower(event_name) = ? ");
+				paraList.add(parameter.getEventName().toLowerCase());
 			}
 			if (parameter.getEventCategoryName() != null && parameter.getEventCategoryName().length() > 0) {
-				sql.append(" and event_category_name = ? ");
-				paraList.add(parameter.getEventCategoryName());
+				sql.append(" and lower(event_category_name) = ? ");
+				paraList.add(parameter.getEventCategoryName().toLowerCase());
 			}
 			if (parameter.getStatus() != null && parameter.getStatus().length() > 0) {
 				sql.append(" and status = ? ");
 				paraList.add(parameter.getStatus());
 			}
-			if (parameter.getOrder() >= 0) {
+			if (parameter.getOrder() > 0) {
 				sql.append(" and event_order = ? ");
 				paraList.add(String.valueOf(parameter.getOrder()));
 			}
@@ -150,6 +157,7 @@ public class EventDAO {
 				eventModel.setEventCategoryName(c.getString(c.getColumnIndex("event_category_name")));
 				eventModel.setStatus(c.getString(c.getColumnIndex("status")));
 				eventModel.setOrder(c.getInt(c.getColumnIndex("event_order")));
+				
 				resultList.add(eventModel);
 			}
 		} finally {

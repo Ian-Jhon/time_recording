@@ -17,7 +17,7 @@ public class EventModel implements Parcelable {
 	private int eventId = -1;
 	private String eventName;
 	private String eventCategoryName;
-	private int order; //position
+	private int order = 0; //position
 	private String status;
 	
 	//recorder 页面需要的属性

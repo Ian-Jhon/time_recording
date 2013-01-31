@@ -4,21 +4,26 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.yvelabs.timerecording.ConfigEventFragment.DeleteListener;
 import com.yvelabs.timerecording.utils.LogUtils;
 import com.yvelabs.timerecording.utils.TypefaceUtils;
 
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class ConfigActivity extends FragmentActivity {
 	
@@ -112,6 +117,27 @@ public class ConfigActivity extends FragmentActivity {
 	
 	public void refreshEventList () {
 		eventFragment.refreshEventList();
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		int selectedPosition = ((AdapterContextMenuInfo) item.getMenuInfo()).position;// 获取点击了第几行
+
+		if (item.getItemId() == 1) {
+			//event edit
+			eventFragment.editEdit(selectedPosition);
+		} else if (item.getItemId() == 2) {
+			//event delete
+			eventFragment.deleteEvent(selectedPosition);
+		} else if (item.getItemId() == 3) {
+			// category edit
+			categoryFragment.editCategory(selectedPosition);
+		} else if (item.getItemId() == 4) {
+			//category delete
+			categoryFragment.deleteCategory(selectedPosition);
+		}
+		
+		return super.onContextItemSelected(item);
 	}
 	
 	public static class DummySectionFragment extends Fragment {

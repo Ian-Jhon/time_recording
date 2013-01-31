@@ -1,6 +1,5 @@
 package com.yvelabs.timerecording;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.yvelabs.timerecording.dao.EventCategoryDAO;
@@ -110,6 +109,7 @@ public class ConfigCategoryFraEditDialog extends DialogFragment {
 				}
 				
 				((ConfigActivity)getActivity()).refreshCategoryList();
+				((ConfigActivity)getActivity()).refreshEventList();
 				getDialog().dismiss();
 			}
 			

@@ -18,7 +18,7 @@ public class EventCategoryDAO {
 	private static final String EVENT_CATEGORY_SELECT_ID = " select last_insert_rowid() from t_event_category ";
 	private static final String EVENT_CATEGORY_DELETE = " delete from t_event_category where 1 = 1 ";
 	private static final String EVENT_CATEGORY_SELECT = " select _id, event_category_name, status from t_event_category where 1 = 1 ";
-	private static final String EVENT_CATEGORY_UPDATE_BY_CATEGORYNAME = "update t_event_category set event_category_name = ? where event_category_name = ?";
+	private static final String EVENT_CATEGORY_UPDATE_BY_CATEGORYNAME = "update t_event_category set event_category_name = ? where lower(event_category_name) = ?";
 	private static final String UPDATE_STATUS_BY_ID = "update t_event_category set status = ? where _id = ?";
 
 	
@@ -122,8 +122,8 @@ public class EventCategoryDAO {
 					paraList.add(String.valueOf(categoryModel.getEventCategoryId()));
 				}
 				if (categoryModel.getEventCategoryName() != null && categoryModel.getEventCategoryName().length() > 0) {
-					sql.append(" and event_category = ? ");
-					paraList.add(categoryModel.getEventCategoryName());
+					sql.append(" and lower(event_category_name) = ? ");
+					paraList.add(categoryModel.getEventCategoryName().toLowerCase());
 				}
 				if (categoryModel.getStatus() != null && categoryModel.getStatus().length() > 0) {
 					sql.append(" and status = ? ");
@@ -185,7 +185,7 @@ public class EventCategoryDAO {
 	}
 	
 	public void updateByCategoryName (SQLiteDatabase db, EventCategoryModel oldModel, EventCategoryModel newModel) {
-		db.execSQL(EVENT_CATEGORY_UPDATE_BY_CATEGORYNAME, new Object[]{newModel.getEventCategoryName(), oldModel.getEventCategoryName()});
+		db.execSQL(EVENT_CATEGORY_UPDATE_BY_CATEGORYNAME, new Object[]{newModel.getEventCategoryName(), oldModel.getEventCategoryName().toLowerCase()});
 	}
 	
 	public void updateStatusById (EventCategoryModel parameter) {

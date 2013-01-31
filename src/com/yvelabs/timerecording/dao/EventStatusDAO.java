@@ -16,7 +16,7 @@ public class EventStatusDAO {
 	private static final String INSERT = " insert into t_event_status (event_id, event_name, event_category_name, chro_state, start_time, start_elapsed_time, summary, create_on) values (?,?,?,?,?,?,?,?) ";
 	private static final String DELETE = " delete from t_event_status where 1 = 1 ";
 	private static final String SELECT_ALL = " select _id, event_id, event_name, event_category_name, chro_state, start_time, start_elapsed_time, summary, create_on from t_event_status order by create_on";
-	private static final String UPDATE_BY_CATEGORYNAME = "update t_event_status set event_category_name = ? where event_category_name = ?";
+	private static final String UPDATE_BY_CATEGORYNAME = "update t_event_status set event_category_name = ? where lower(event_category_name) = ?";
 	
 	private Context context;
 
@@ -83,13 +83,13 @@ public class EventStatusDAO {
 	
 	public void deleteByEvent (EventModel model, SQLiteDatabase db) {
 		StringBuilder deleteSql = new StringBuilder(DELETE);
-		deleteSql.append(" and event_name = ? ");
-		deleteSql.append(" and event_category_name = ? ");
-		db.execSQL(deleteSql.toString(), new Object[] { model.getEventName(), model.getEventCategoryName() });
+		deleteSql.append(" and lower(event_name) = ? ");
+		deleteSql.append(" and lower(event_category_name) = ? ");
+		db.execSQL(deleteSql.toString(), new Object[] { model.getEventName().toLowerCase(), model.getEventCategoryName().toLowerCase() });
 	}
 	
 	public void updateByCategoryName (SQLiteDatabase db, EventModel oldModel, EventModel newModel) {
-		db.execSQL(UPDATE_BY_CATEGORYNAME, new Object[]{newModel.getEventCategoryName(), oldModel.getEventCategoryName()});
+		db.execSQL(UPDATE_BY_CATEGORYNAME, new Object[]{newModel.getEventCategoryName(), oldModel.getEventCategoryName().toLowerCase()});
 	}
 	
 	public List<EventModel> selectAll () {

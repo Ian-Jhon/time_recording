@@ -63,6 +63,7 @@ public class ConfigCategoryFragment extends Fragment {
 			}
 		});
 		
+		// init configCategoryListAdapter
 		refreshList ();
 		categoryLv.setAdapter(configCategoryListAdapter);
 		
@@ -71,9 +72,9 @@ public class ConfigCategoryFragment extends Fragment {
 			public void onCreateContextMenu(ContextMenu menu, View v,
 					ContextMenuInfo menuInfo) {
 //				menu.setHeaderTitle("");
-                menu.setHeaderIcon(R.drawable. ic_launcher);
-				menu.add(0, 1, 1, R.string.edit);
-				menu.add(0, 2, 2, R.string.delete);
+//              menu.setHeaderIcon(R.drawable. ic_launcher);
+				menu.add(0, 3, 1, R.string.edit);
+				menu.add(0, 4, 2, R.string.delete);
 
 			}
 		});
@@ -81,27 +82,21 @@ public class ConfigCategoryFragment extends Fragment {
 		return view;
 	}
 	
-	@Override
-	public boolean onContextItemSelected(MenuItem item) {
-		int selectedPosition = ((AdapterContextMenuInfo) item.getMenuInfo()).position;// 获取点击了第几行
+	public void editCategory (int selectedPosition) {
 		EventCategoryModel selectedModel = (EventCategoryModel) categoryLv.getItemAtPosition(selectedPosition);
 		
-		if (item.getItemId() == 1) {
-			//edit
-			FragmentTransaction ft = getFragmentManager().beginTransaction();
-			ConfigCategoryFraEditDialog editDialog = ConfigCategoryFraEditDialog.newInstance(selectedModel);
-			editDialog.show(ft, "config_category_edit_dialog");
-			
-		} else if (item.getItemId() == 2) {
-			//delete confirm dialog
-			String deleteMsg = getString(R.string.do_you_want_to_delete) + " " + selectedModel.getEventCategoryName();
-			DialogFragment newFragment = MyAlertDialogFragment.newInstance(
-		            R.string.delete, R.drawable.ic_delete_normal, deleteMsg, new DeleteListener(selectedModel), null);
-		    newFragment.show(getFragmentManager(), "config_category_delete_dialog");
-		    
-		}
+		FragmentTransaction ft = getFragmentManager().beginTransaction();
+		ConfigCategoryFraEditDialog editDialog = ConfigCategoryFraEditDialog.newInstance(selectedModel);
+		editDialog.show(ft, "config_category_edit_dialog");
+	}
+	
+	public void deleteCategory (int selectedPosition) {
+		EventCategoryModel selectedModel = (EventCategoryModel) categoryLv.getItemAtPosition(selectedPosition);
 		
-		return super.onContextItemSelected(item);
+		String deleteMsg = getString(R.string.do_you_want_to_delete) + " " + selectedModel.getEventCategoryName();
+		DialogFragment newFragment = MyAlertDialogFragment.newInstance(
+	            R.string.delete, R.drawable.ic_delete_normal, deleteMsg, new DeleteListener(selectedModel), null);
+	    newFragment.show(getFragmentManager(), "config_category_delete_dialog");
 	}
 	
 	public void refreshList () {
@@ -137,9 +132,9 @@ public class ConfigCategoryFragment extends Fragment {
 				
 				refreshList ();
 			} else {
-				Toast.makeText(getActivity(), selectedModel.getEventCategoryName() + getString(R.string.has_been_used_in_the_event), Toast.LENGTH_SHORT ).show();
+				Toast.makeText(getActivity(), selectedModel.getEventCategoryName() + " " + getString(R.string.has_been_used_in_the_event), Toast.LENGTH_SHORT ).show();
 			}
 		}
 	}
-
+	
 }

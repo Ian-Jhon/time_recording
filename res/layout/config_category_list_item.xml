@@ -28,6 +28,7 @@
         android:layout_marginRight="15dp"
         android:singleLine="true"
         android:textColor="@drawable/pager_title_strip"
-        android:textSize="10sp" />
+        android:textSize="11sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
