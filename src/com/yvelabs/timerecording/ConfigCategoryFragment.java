@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.ContextMenu;
@@ -19,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.yvelabs.timerecording.Recorder.ResetOkListener;
 import com.yvelabs.timerecording.dao.EventCategoryDAO;
 import com.yvelabs.timerecording.dao.EventDAO;
 
@@ -91,6 +93,37 @@ public class ConfigCategoryFragment extends Fragment {
 			editDialog.show(ft, "config_category_edit_dialog");
 			
 		} else if (item.getItemId() == 2) {
+			//delete confirm dialog
+			String deleteMsg = getString(R.string.do_you_want_to_delete) + " " + selectedModel.getEventCategoryName();
+			DialogFragment newFragment = MyAlertDialogFragment.newInstance(
+		            R.string.delete, R.drawable.ic_delete_normal, deleteMsg, new DeleteListener(selectedModel), null);
+		    newFragment.show(getFragmentManager(), "config_category_delete_dialog");
+		    
+		}
+		
+		return super.onContextItemSelected(item);
+	}
+	
+	public void refreshList () {
+		categoryModelList.removeAll(categoryModelList);
+		categoryModelList.addAll(new EventCategoryDAO(getActivity()).query(new EventCategoryModel()));
+		
+		if (configCategoryListAdapter == null)
+			configCategoryListAdapter = new ConfigCategoryListAdapter(getActivity(), categoryModelList);
+		
+		configCategoryListAdapter.notifyDataSetChanged();
+	}
+	
+	
+	class DeleteListener implements MyAlertDialogFragment.OKOnClickListener {
+		
+		private EventCategoryModel selectedModel;
+		
+		public DeleteListener (EventCategoryModel selectedModel) {
+			this.selectedModel = selectedModel;
+		}
+		@Override
+		public void onClick(View view) {
 			//select
 			EventModel parameter = new EventModel();
 			parameter.setEventCategoryName(selectedModel.getEventCategoryName());
@@ -107,18 +140,6 @@ public class ConfigCategoryFragment extends Fragment {
 				Toast.makeText(getActivity(), selectedModel.getEventCategoryName() + getString(R.string.has_been_used_in_the_event), Toast.LENGTH_SHORT ).show();
 			}
 		}
-		
-		return super.onContextItemSelected(item);
-	}
-	
-	public void refreshList () {
-		categoryModelList.removeAll(categoryModelList);
-		categoryModelList.addAll(new EventCategoryDAO(getActivity()).query(new EventCategoryModel()));
-		
-		if (configCategoryListAdapter == null)
-			configCategoryListAdapter = new ConfigCategoryListAdapter(getActivity(), categoryModelList);
-		
-		configCategoryListAdapter.notifyDataSetChanged();
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.yvelabs.timerecording.dao.EventCategoryDAO;
 import com.yvelabs.timerecording.utils.MyKeyValuePair;
+import com.yvelabs.timerecording.utils.SpinnerUtils;
 import com.yvelabs.timerecording.utils.TypefaceUtils;
 
 import android.os.Bundle;
@@ -61,16 +62,7 @@ public class ConfigCategoryFraEditDialog extends DialogFragment {
 		categoryNameEt.setText(selectedModel.getEventCategoryName());
 		
 		//init state spinner
-		List<MyKeyValuePair> stateList = new ArrayList<MyKeyValuePair>();
-		MyKeyValuePair pair = new MyKeyValuePair();
-		pair.setKey(1);
-		pair.setValue(getString(R.string.enable));
-		stateList.add(pair);
-		
-		pair = new MyKeyValuePair();
-		pair.setKey(2);
-		pair.setValue(getString(R.string.disable));
-		stateList.add(pair);
+		List<MyKeyValuePair> stateList = new SpinnerUtils().statusSpinner(getActivity());
 		
 		ArrayAdapter<MyKeyValuePair> stateSppinerAdapter = new ArrayAdapter<MyKeyValuePair>(getActivity(), android.R.layout.simple_spinner_item, stateList); 
 		stateSp.setAdapter(stateSppinerAdapter);

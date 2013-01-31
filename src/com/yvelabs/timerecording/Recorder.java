@@ -191,8 +191,8 @@ public class Recorder extends Fragment {
 			@Override
 			public void onClick(View v) {
 				DialogFragment newFragment = MyAlertDialogFragment.newInstance(
-			            R.string.my_recorder_rest_alert, R.drawable.ic_my_alert, getString(R.string.this_information_will_not_be_saved), new ResetOkListener(), null);
-			    newFragment.show(getFragmentManager(), "dialog");
+			            R.string.clear, R.drawable.ic_cancel_normal, getString(R.string.this_information_will_not_be_saved), new ResetOkListener(), null);
+			    newFragment.show(getFragmentManager(), "record_myrecorder_reset_dialog");
 			}
 		});
 		
@@ -253,8 +253,8 @@ public class Recorder extends Fragment {
 					}
 					
 					DialogFragment newFragment = MyAlertDialogFragment.newInstance(
-				            R.string.recorder_page_stop, R.drawable.ic_my_alert, getEventMsg(currentEvent), new StopOkListener(), null);
-				    newFragment.show(getFragmentManager(), "dialog");
+				            R.string.save, R.drawable.ic_save_normal, getEventMsg(currentEvent), new StopOkListener(), null);
+				    newFragment.show(getFragmentManager(), "record_myrecorder_stop_dialog");
 				}
 			}
 		});
@@ -368,6 +368,7 @@ public class Recorder extends Fragment {
 	
 	public String getEventMsg (EventModel eventModel) {
 		StringBuilder result = new StringBuilder();
+		result.append(getString(R.string.recorder_page_stop)).append("\r\n");
 		result.append(getActivity().getResources().getString(R.string.event_name) + " : ").append(eventModel.getEventName()).append("\r\n");
 		result.append(getActivity().getResources().getString(R.string.event_category) + " : ").append(eventModel.getEventCategoryName()).append("\r\n");
 		result.append(getActivity().getResources().getString(R.string.event_date) + " : ").append(DateUtils.format(new Date(), DateUtils.DEFAULT_DATE_PATTERN)).append("\r\n");

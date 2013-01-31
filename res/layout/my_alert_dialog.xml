@@ -9,8 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_margin="5dp"
-        android:background="@drawable/ic_my_alert" />
+        android:layout_margin="5dp" />
 
     <TextView
         android:id="@+id/my_alert_dialog_title_text"
@@ -37,17 +36,26 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/my_alert_dialog_dividing_line"
+        android:layout_marginBottom="15dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="15dp" />
+        android:layout_marginRight="10dp" />
+
+    <ImageView
+        android:id="@+id/my_alert_dialog_cancel_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/my_alert_dialog_message"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/cancel_but_selector"
+        android:visibility="gone" />
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/my_alert_dialog_button_layout"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/my_alert_dialog_message" >
+        android:layout_below="@+id/my_alert_dialog_message"
+        android:layout_centerHorizontal="true" >
 
         <ImageView
             android:id="@+id/my_alert_dialog_cancel"
@@ -55,8 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:background="@drawable/cancel_but_selector" />
-        
-         <ImageView
+
+        <ImageView
             android:id="@+id/my_alert_dialog_ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

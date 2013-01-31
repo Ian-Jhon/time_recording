@@ -27,6 +27,7 @@ public class ConfigActivity extends FragmentActivity {
 	private PagerTitleStrip mPagerTitleStrip;
 	
 	private ConfigCategoryFragment categoryFragment;
+	private ConfigEventFragment eventFragment;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -67,10 +68,13 @@ public class ConfigActivity extends FragmentActivity {
 		}
 		@Override
 		public Fragment getItem(int position) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("POSICTION", Integer.valueOf(position));
 			
-			if (position == 1) {
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("POSICTION", Integer.valueOf(position));
+			if (position == 0) {
+				eventFragment = ConfigEventFragment.newInstance(map);
+				return eventFragment;
+			} else if (position == 1) {
 				categoryFragment = ConfigCategoryFragment.newInstance(map);
 				return categoryFragment;
 			} else {
@@ -104,6 +108,10 @@ public class ConfigActivity extends FragmentActivity {
 	
 	public void refreshCategoryList () {
 		categoryFragment.refreshList();
+	}
+	
+	public void refreshEventList () {
+		eventFragment.refreshEventList();
 	}
 	
 	public static class DummySectionFragment extends Fragment {

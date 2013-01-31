@@ -22,7 +22,6 @@
     <string name="events_have_been_suspended">events have been suspended.</string>
     <string name="event_has_been_suspended">event has been suspended.</string>
     <string name="please_select_the_event">Please select the event.</string>
-     
     <string name="configure_the_categories">Categories</string>
     <string name="configure_the_events">Events</string>
     <string name="enter_the_category_name">Enter the category name.</string>
@@ -37,5 +36,16 @@
     <string name="edit_category">Edit category</string>
     <string name="no_changes">No changes.</string>
     <string name="this_information_will_not_be_saved">This information will not be saved.</string>
+    <string name="do_you_want_to_delete">Do you want to delete</string>
+    <string name="save">Save</string>
+    <string name="clear">Clear</string>
+    <string name="add_event">Add event</string>
+    <string name="enter_the_event_name">Enter the event name</string>
+    <string name="please_add_categories">Please add categories</string>
+    <string name="or">or</string>
+    <string name="modify_the_categories_for_the_enable">Modify the categories for the enable</string>
+    <string name="attention">Attention</string>
+    <string name="this_event_already_exists_in_the_category">This event already exists in the category</string>
+    <string name="please_enter_the_event">Please enter the event.</string>
 
 </resources>

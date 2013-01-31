@@ -1,20 +1,18 @@
 package com.yvelabs.timerecording;
 
-import com.yvelabs.timerecording.utils.TypefaceUtils;
-
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.yvelabs.timerecording.utils.TypefaceUtils;
+
 public class MyAlertDialogFragment extends DialogFragment {
-	
+
 	private OKOnClickListener okOnClickListener;
 	private CancelOnClickListener cancelOnClickListener;
 
@@ -23,6 +21,8 @@ public class MyAlertDialogFragment extends DialogFragment {
 	private TextView message;
 	private ImageView okBut;
 	private ImageView cancelBut;
+	private ImageView cancelBut2;
+	private RelativeLayout buttonLayout;
 
 	public MyAlertDialogFragment(OKOnClickListener okListener,
 			CancelOnClickListener cancelListener) {
@@ -30,10 +30,11 @@ public class MyAlertDialogFragment extends DialogFragment {
 		this.cancelOnClickListener = cancelListener;
 	}
 
-	public static MyAlertDialogFragment newInstance(int title, int icon, String message,
-			OKOnClickListener okListener,
+	public static MyAlertDialogFragment newInstance(int title, int icon,
+			String message, OKOnClickListener okListener,
 			CancelOnClickListener cancelListener) {
-		MyAlertDialogFragment fragment = new MyAlertDialogFragment(okListener, cancelListener);
+		MyAlertDialogFragment fragment = new MyAlertDialogFragment(okListener,
+				cancelListener);
 		Bundle args = new Bundle();
 		args.putInt("title", title);
 		args.putInt("icon", icon);
@@ -41,13 +42,13 @@ public class MyAlertDialogFragment extends DialogFragment {
 		fragment.setArguments(args);
 		return fragment;
 	}
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setStyle(STYLE_NO_TITLE, 0);
 	}
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -57,8 +58,15 @@ public class MyAlertDialogFragment extends DialogFragment {
 		message = (TextView) view.findViewById(R.id.my_alert_dialog_message);
 		okBut = (ImageView) view.findViewById(R.id.my_alert_dialog_ok);
 		cancelBut = (ImageView) view.findViewById(R.id.my_alert_dialog_cancel);
+		cancelBut2 = (ImageView) view.findViewById(R.id.my_alert_dialog_cancel_2);
+		buttonLayout = (RelativeLayout) view.findViewById(R.id.my_alert_dialog_button_layout);
 		
 		new TypefaceUtils().setTypeface(titleText, TypefaceUtils.MOBY_MONOSPACE);
+		
+		if (cancelOnClickListener == null && okOnClickListener == null) {
+			buttonLayout.setVisibility(View.GONE);
+			cancelBut2.setVisibility(View.VISIBLE);
+		}
 		
 		if (getArguments().getInt("icon") > 0) {
 			titleIcon.setImageResource(getArguments().getInt("icon"));
@@ -89,15 +97,22 @@ public class MyAlertDialogFragment extends DialogFragment {
 			}
 		});
 		
+		cancelBut2.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				getDialog().dismiss();
+			}
+		});
+		
 		return view;
 	}
-	
+
 	interface OKOnClickListener {
-		public void onClick (View view); 
+		public void onClick(View view);
 	}
-	
+
 	interface CancelOnClickListener {
-		public void onClick (View view); 
+		public void onClick(View view);
 	}
 
 }

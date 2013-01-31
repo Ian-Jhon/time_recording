@@ -22,7 +22,6 @@
     <string name="events_have_been_suspended">个事件暂停中.</string>
     <string name="event_has_been_suspended">个事件暂停中.</string>
     <string name="please_select_the_event">请选择事件.</string>
-     
 	<string name="configure_the_categories">Categories</string>
     <string name="configure_the_events">Events</string>
     <string name="enter_the_category_name">请录入大类名称.</string>
@@ -37,4 +36,15 @@
     <string name="edit_category">编辑大类</string>
     <string name="no_changes">没有任何修改.</string>
     <string name="this_information_will_not_be_saved">该信息将不会被保存.</string>
+    <string name="do_you_want_to_delete">是否要删除</string>
+    <string name="save">保存</string>
+    <string name="clear">清除</string>
+    <string name="add_event">添加事件</string>
+    <string name="enter_the_event_name">输入事件名称</string>
+    <string name="please_add_categories">请添加大类</string>
+    <string name="or">或</string>
+    <string name="modify_the_categories_for_the_enable">修改大类为可用</string>
+    <string name="attention">注意</string>
+    <string name="this_event_already_exists_in_the_category">此事件已存在, 所在大类为</string>
+    <string name="please_enter_the_event">请输入事件名称.</string>
 </resources>
