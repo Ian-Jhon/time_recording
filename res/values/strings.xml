@@ -50,6 +50,6 @@
     <string name="order">Order</string>
     <string name="has_been_used_in_the_record">has been used in the record</string>
    	<string name="edit_event">Edit event</string> 
-   
+    <string name="please_enter_the_event_name">Please enter the event name</string>
 
 </resources>

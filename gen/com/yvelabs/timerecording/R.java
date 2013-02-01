@@ -202,6 +202,7 @@ public final class R {
         public static final int please_add_categories=0x7f050028;
         public static final int please_enter_the_category_name=0x7f050018;
         public static final int please_enter_the_event=0x7f05002d;
+        public static final int please_enter_the_event_name=0x7f050031;
         public static final int please_select_the_event=0x7f050014;
         public static final int recorder_page_stop=0x7f050008;
         public static final int save=0x7f050024;

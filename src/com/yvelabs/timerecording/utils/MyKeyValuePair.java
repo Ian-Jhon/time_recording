@@ -3,11 +3,20 @@ package com.yvelabs.timerecording.utils;
 public class MyKeyValuePair {
 	
 	private Object key;
-	private Object value;
+	private String value;
+	
+	public MyKeyValuePair() {
+		
+	}
+	
+	public MyKeyValuePair (Object key, String value) {
+		this.key = key;
+		this.value = value;
+	}
 	
 	@Override
 	public String toString() {
-		return value == null ? null : value.toString();
+		return value;
 	}
 
 	public Object getKey() {
@@ -18,11 +27,11 @@ public class MyKeyValuePair {
 		this.key = key;
 	}
 
-	public Object getValue() {
+	public String getValue() {
 		return value;
 	}
 
-	public void setValue(Object value) {
+	public void setValue(String value) {
 		this.value = value;
 	}
 

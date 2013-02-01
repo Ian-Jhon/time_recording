@@ -1,11 +1,6 @@
 package com.yvelabs.timerecording;
 import java.util.List;
 
-import com.yvelabs.timerecording.R;
-import com.yvelabs.timerecording.utils.MyKeyValuePair;
-import com.yvelabs.timerecording.utils.SpinnerUtils;
-import com.yvelabs.timerecording.utils.TypefaceUtils;
-
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -16,6 +11,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.yvelabs.timerecording.dao.EventDAO;
+import com.yvelabs.timerecording.utils.MyKeyValuePair;
+import com.yvelabs.timerecording.utils.SpinnerUtils;
+import com.yvelabs.timerecording.utils.TypefaceUtils;
 
 
 public class ConfigEventFraEditDialog extends DialogFragment {
@@ -60,23 +60,62 @@ public class ConfigEventFraEditDialog extends DialogFragment {
 		
 		new TypefaceUtils().setTypeface(titleText, TypefaceUtils.MOBY_MONOSPACE);
 		
+		eventName.setText(selectedModel.getEventName());
+		
 		List<MyKeyValuePair> categoryList = new SpinnerUtils().categorySpinner(getActivity());
 		ArrayAdapter<MyKeyValuePair> categorySppinerAdapter = new ArrayAdapter<MyKeyValuePair>(getActivity(), android.R.layout.simple_spinner_item, categoryList); 
 		categorySp.setAdapter(categorySppinerAdapter);
+		MyKeyValuePair categorySelectedPair = new MyKeyValuePair();
+		categorySelectedPair.setKey(selectedModel.getEventCategoryName());
+		categorySelectedPair.setValue(selectedModel.getEventCategoryName());
+		categorySp.setSelection(new SpinnerUtils().getSpinnerPosition(categorySp, categorySelectedPair));
 		
 		List<MyKeyValuePair> orderList = new SpinnerUtils().orderSpinner();
 		ArrayAdapter<MyKeyValuePair> orderSppinerAdapter = new ArrayAdapter<MyKeyValuePair>(getActivity(), android.R.layout.simple_spinner_item, orderList); 
 		orderSp.setAdapter(orderSppinerAdapter);
-		orderSp.setSelection(2);
+		MyKeyValuePair orderSelectedPair = new MyKeyValuePair();
+		orderSelectedPair.setKey(selectedModel.getOrder());
+		orderSelectedPair.setValue(selectedModel.getOrder() + "");
+		orderSp.setSelection(new SpinnerUtils().getSpinnerPosition(orderSp, orderSelectedPair));
 		
 		List<MyKeyValuePair> statusList = new SpinnerUtils().statusSpinner(getActivity());
 		ArrayAdapter<MyKeyValuePair> statusSppinerAdapter = new ArrayAdapter<MyKeyValuePair>(getActivity(), android.R.layout.simple_spinner_item, statusList); 
 		statusSp.setAdapter(statusSppinerAdapter);
+		MyKeyValuePair statusSelectedPair = new SpinnerUtils().generateStatusSpinner(getActivity(), selectedModel.getStatus());
+		statusSp.setSelection(new SpinnerUtils().getSpinnerPosition(statusSp, statusSelectedPair));
+		
 		
 		saveBut.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				MyKeyValuePair categoryPair = (MyKeyValuePair) categorySp.getSelectedItem();
+				MyKeyValuePair orderPair = (MyKeyValuePair) orderSp.getSelectedItem();
+				MyKeyValuePair statusPair = (MyKeyValuePair) statusSp.getSelectedItem();
+				int order = orderPair.getKey() == null ? 0 : Integer.parseInt(orderPair.getKey().toString());
 				
+				if (eventName.getText().toString().length() <= 0) {
+					warning.setText(getString(R.string.please_enter_the_event_name));
+					return;
+				}
+				
+				if (selectedModel.getEventCategoryName().toLowerCase().equals(categoryPair.getKey().toString().toLowerCase())
+						&& selectedModel.getEventName().toLowerCase().equals(eventName.getText().toString().toLowerCase())
+						&& selectedModel.getStatus().equals(statusPair.getKey().toString())
+						&& selectedModel.getOrder() == order) {
+					warning.setText(getString(R.string.no_changes));
+					return;
+				} else {
+					//update
+					EventModel newModel = new EventModel();
+					newModel.setEventName(eventName.getText().toString());
+					newModel.setEventCategoryName(categoryPair.getKey().toString());
+					newModel.setOrder(order);
+					newModel.setStatus(statusPair.getKey().toString());
+					new EventDAO(getActivity()).updateAllTable(selectedModel, newModel);
+				}
+				
+				((ConfigActivity)getActivity()).refreshEventList();
+				getDialog().dismiss();
 			}
 		});
 		

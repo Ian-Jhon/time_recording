@@ -106,8 +106,74 @@ public class EventDAO {
 		}
 	}
 	
-	public void updateByCategoryName (SQLiteDatabase db, EventModel oldModel, EventModel newModel) {
-		db.execSQL(UPDATE_BY_CATEGORYNAME, new Object[]{newModel.getEventCategoryName(), oldModel.getEventCategoryName().toLowerCase()});
+	public void updateByCategoryName (SQLiteDatabase db, EventModel parameterModel, EventModel newModel) {
+		db.execSQL(UPDATE_BY_CATEGORYNAME, new Object[]{newModel.getEventCategoryName(), parameterModel.getEventCategoryName().toLowerCase()});
+	}
+	
+	public void updateAllTable(EventModel parameterModel, EventModel newModel) {
+		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
+		try {
+			db.beginTransaction();
+			update(db, parameterModel, newModel);
+			
+			db.setTransactionSuccessful();
+		} finally {
+			if (db != null) {
+				db.endTransaction();
+				db.close();
+			}
+		}
+	}
+	
+	public void update (SQLiteDatabase db, EventModel parameterModel, EventModel newModel) {
+		StringBuilder sql = new StringBuilder(" update t_event set _id = _id ");
+		List<String> paraList = new ArrayList<String>();
+		
+		if (newModel.getEventName() != null && newModel.getEventName().length() > 0) {
+			sql.append(", event_name = ? ");
+			paraList.add(newModel.getEventName());
+		}
+		if (newModel.getEventCategoryName() != null && newModel.getEventCategoryName().length() > 0) {
+			sql.append(", event_category_name = ? ");
+			paraList.add(newModel.getEventCategoryName());
+		}
+		if (newModel.getStatus() != null && newModel.getStatus().length() > 0) {
+			sql.append(", status = ? ");
+			paraList.add(newModel.getStatus());
+		}
+		if (newModel.getOrder() > 0) {
+			sql.append(", event_order = ? ");
+			paraList.add(newModel.getOrder() + "");
+		}
+		
+		sql.append(" where 1 = 1 ");
+		
+		if (parameterModel.getEventName() != null && parameterModel.getEventName().length() > 0) {
+			sql.append(" and lower(event_name) = ? ");
+			paraList.add(parameterModel.getEventName().toLowerCase());
+		}
+		if (parameterModel.getEventCategoryName() != null && parameterModel.getEventCategoryName().length() > 0) {
+			sql.append(" and lower(event_category_name) = ? ");
+			paraList.add(parameterModel.getEventCategoryName().toLowerCase());
+		}
+		if (parameterModel.getStatus() != null && parameterModel.getStatus().length() > 0) {
+			sql.append(" and status = ? ");
+			paraList.add(parameterModel.getStatus());
+		}
+		if (parameterModel.getOrder() > 0) {
+			sql.append(" and event_order = ? ");
+			paraList.add(parameterModel.getOrder() + "");
+		}
+		
+		if (paraList.size() <= 0) {
+			db.execSQL(sql.toString(), null);
+		} else {
+			String [] paraArray = new String[paraList.size()];
+			for (int i = 0 ; i < paraArray.length ; i ++) {
+				paraArray[i] = paraList.get(i);
+			}
+			db.execSQL(sql.toString(), paraArray);
+		}
 	}
 	
 	public List<EventModel> query (EventModel parameter) {
