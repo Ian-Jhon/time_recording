@@ -163,17 +163,17 @@ public class EventCategoryDAO {
 			oldEventModel.setEventCategoryName(oldModel.getEventCategoryName());
 			EventModel newEventModle = new EventModel();
 			newEventModle.setEventCategoryName(newModel.getEventCategoryName());
-			new EventDAO(context).updateByCategoryName(db, oldEventModel, newEventModle);
+			new EventDAO(context).update(db, oldEventModel, newEventModle);
 			
 			//t_event_records
 			EventRecordModel oldRecordModel = new EventRecordModel();
 			oldRecordModel.setEventCategoryName(oldModel.getEventCategoryName());
 			EventRecordModel newRecordModel = new EventRecordModel();
 			newRecordModel.setEventCategoryName(newModel.getEventCategoryName());
-			new EventRecordsDAO(context).updateByCategoryName(db, oldRecordModel, newRecordModel);
+			new EventRecordsDAO(context).update(db, oldRecordModel, newRecordModel);
 			
 			//t_event_status
-			new EventStatusDAO(context).updateByCategoryName(db, oldEventModel, newEventModle);
+			new EventStatusDAO(context).update(db, oldEventModel, newEventModle);
 			
 			db.setTransactionSuccessful();
 		} finally {

@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.yvelabs.timerecording.utils.LogUtils;
 import com.yvelabs.timerecording.utils.NotificationUtils;
 import com.yvelabs.timerecording.utils.TypefaceUtils;
 

@@ -111,7 +111,14 @@ public class ConfigEventFraEditDialog extends DialogFragment {
 					newModel.setEventCategoryName(categoryPair.getKey().toString());
 					newModel.setOrder(order);
 					newModel.setStatus(statusPair.getKey().toString());
-					new EventDAO(getActivity()).updateAllTable(selectedModel, newModel);
+					new EventDAO(getActivity()).update(selectedModel, newModel);
+					
+					//update other table
+					if (!selectedModel.getEventCategoryName().toLowerCase().equals(categoryPair.getKey().toString().toLowerCase())
+							|| !selectedModel.getEventName().toLowerCase().equals(eventName.getText().toString().toLowerCase())) {
+						new EventDAO(getActivity()).updateAllTable(selectedModel, newModel);
+					}
+					
 				}
 				
 				((ConfigActivity)getActivity()).refreshEventList();

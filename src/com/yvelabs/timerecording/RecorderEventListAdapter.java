@@ -77,14 +77,14 @@ public class RecorderEventListAdapter extends BaseAdapter {
 			holder.listEventStartTime.setVisibility(View.VISIBLE);
 			holder.listEventStateImg.setVisibility(View.VISIBLE);
 			
-			holder.listEventStartTime.setText(eventModel.getStartTime(eventModel.getStartTime(DateUtils.DEFAULT_TIME_PATTERN)));
+			holder.listEventStartTime.setText(eventModel.getStartTime(eventModel.getStartTime(DateUtils.DEFAULT_DATETIME_PATTERN)));
 			holder.listEventStateImg.setImageResource(R.drawable.start_state);
 		} else if (eventModel.STATE_PAUSE.equals(eventModel.getChro_state())) {
 			holder.listEventStartTimeLabel.setVisibility(View.VISIBLE);
 			holder.listEventStartTime.setVisibility(View.VISIBLE);
 			holder.listEventStateImg.setVisibility(View.VISIBLE);
 			
-			holder.listEventStartTime.setText(eventModel.getStartTime(eventModel.getStartTime(DateUtils.DEFAULT_TIME_PATTERN)));
+			holder.listEventStartTime.setText(eventModel.getStartTime(eventModel.getStartTime(DateUtils.DEFAULT_DATETIME_PATTERN)));
 			holder.listEventStateImg.setImageResource(R.drawable.pause_state);
 		} else {
 			holder.listEventStartTimeLabel.setVisibility(View.GONE);

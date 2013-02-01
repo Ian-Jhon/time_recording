@@ -31,6 +31,7 @@ import android.widget.Toast;
 
 import com.yvelabs.chronometer.Chronometer;
 import com.yvelabs.chronometer.utils.FontUtils;
+import com.yvelabs.timerecording.dao.EventDAO;
 import com.yvelabs.timerecording.dao.EventRecordsDAO;
 import com.yvelabs.timerecording.dao.EventStatusDAO;
 import com.yvelabs.timerecording.utils.DateUtils;
@@ -56,7 +57,7 @@ public class Recorder extends Fragment {
 	private ControlPanelHandler controlPanelHandler;
 	private RecorderEventListAdapter recorderEventListAdapter;
 	
-	private ArrayList<EventModel> eventModels = new ArrayList<EventModel>();
+	private List<EventModel> eventModels = new ArrayList<EventModel>();
 	private EventModel currentEvent = new EventModel();
 	private EventStatusDAO eventStatusDAO;
 	
@@ -79,84 +80,10 @@ public class Recorder extends Fragment {
 		position = getArguments() != null ? getArguments().getInt("position") : -1;
 		controlPanelHandler = new ControlPanelHandler();
 		statusTvHandle = new StatusTvHandler();
-		
-		
-		/*if (savedInstanceState != null) {
-			this.eventModels = savedInstanceState.getParcelableArrayList("EVENT_MODELS");
-			this.currentEvent = savedInstanceState.getParcelable("CURRENT_EVENT");
-		}*/
-		
-		
-		if (eventModels.size() <= 0) {
-			eventModels = new ArrayList<EventModel>();
-			EventModel eventModel = new EventModel();
-			
-			eventModel = new EventModel();
-			eventModel.setEventName("Eat abs sdf jiewijfd");
-			eventModel.setEventCategoryName("rest");
-			eventModels.add(eventModel);
-			
-			eventModel = new EventModel();
-			eventModel.setEventName("Eatf dfewfweesdf");
-			eventModel.setEventCategoryName("rest");
-			eventModels.add(eventModel);
-			
-			eventModel = new EventModel();
-			eventModel.setEventName("Eat");
-			eventModel.setEventCategoryName("rest");
-			eventModels.add(eventModel);
-			
-			eventModel = new EventModel();
-			eventModel.setEventName("sleep");
-			eventModel.setEventCategoryName("rest");
-			eventModels.add(eventModel);
-			
-			eventModel = new EventModel();
-			eventModel.setEventName("go to work");
-			eventModel.setEventCategoryName("work");
-			eventModels.add(eventModel);
-			
-			eventModel = new EventModel();
-			eventModel.setEventName("study");
-			eventModel.setEventCategoryName("work");
-			eventModels.add(eventModel);
-			
-			eventModel = new EventModel();
-			eventModel.setEventName("work");
-			eventModel.setEventCategoryName("work");
-			eventModels.add(eventModel);
-			
-			if (eventModels.size() > 0) 
-				currentEvent = eventModels.get(0);
-		} 
-		
-		List<EventModel> runningModleList = eventStatusDAO.selectAll();
-		
-		boolean currentSelected = true;
-		if (runningModleList != null && runningModleList.size() > 0) {
-			for (EventModel runningModel : runningModleList) {
-				for (EventModel eventModel : eventModels) {
-					if (eventModel.getEventName().equals(runningModel.getEventName())
-							&& eventModel.getEventCategoryName().equals(runningModel.getEventCategoryName())) {
-						eventModel.setChro_state(runningModel.getChro_state());
-						eventModel.setStartTime(runningModel.getStartTime());
-						eventModel.setStartElapsedTime(runningModel.getStartElapsedTime());
-						eventModel.setSummary(runningModel.getSummary());
-						
-						if (currentSelected == true) {
-							currentEvent = eventModel;
-							currentSelected = false;
-						}
-					}
-				}
-			}
-		}
-		
 	}
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
 		View view = inflater.inflate(R.layout.recorder, null);
 		this.view = view;
 		eventList = (ListView) view.findViewById(R.id.event_list);
@@ -205,8 +132,11 @@ public class Recorder extends Fragment {
 				eventChro.start();
 				
 				currentEvent.setStartElapsedTime(SystemClock.elapsedRealtime() - eventChro.duringTime());
+				if (EventModel.STATE_STOP.equals(currentEvent.getChro_state())) {
+					currentEvent.setStartTime(new Date());
+				}
 				currentEvent.setChro_state(EventModel.STATE_START);
-				currentEvent.setStartTime(new Date());
+				
 				
 				//当前事件写入状态表
 				eventStatusDAO.deleteNInert(currentEvent);
@@ -289,6 +219,36 @@ public class Recorder extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		//select t_event
+		EventModel parameterEvent = new EventModel();
+		parameterEvent.setStatus("1");
+		eventModels.removeAll(eventModels);
+		eventModels.addAll(new EventDAO(getActivity()).query(parameterEvent));
+		
+		if (eventModels.size() > 0) 
+			currentEvent = eventModels.get(0);
+
+		//select t_event_status
+		List<EventModel> runningModleList = eventStatusDAO.selectAll();
+		boolean currentSelected = true;
+		if (runningModleList != null && runningModleList.size() > 0) {
+			for (EventModel eventModel : eventModels) {
+				for (EventModel runningModel : runningModleList) {
+					if (eventModel.getEventName().equals(runningModel.getEventName())
+							&& eventModel.getEventCategoryName().equals(runningModel.getEventCategoryName())) {
+						eventModel.setChro_state(runningModel.getChro_state());
+						eventModel.setStartTime(runningModel.getStartTime());
+						eventModel.setStartElapsedTime(runningModel.getStartElapsedTime());
+						eventModel.setSummary(runningModel.getSummary());
+						
+						if (currentSelected == true) {
+							currentEvent = eventModel;
+							currentSelected = false;
+						}
+					}
+				}
+			}
+		}
 		
 		//init component
 		if (eventModels.size() > 0)
@@ -303,16 +263,7 @@ public class Recorder extends Fragment {
 		
 	}
 	
-	
-	/*@Override
-	public void onSaveInstanceState(Bundle outState) {
-		LogUtils.d(this.getClass(), "onSaveInstanceState");
-		super.onSaveInstanceState(outState);
-		outState.putParcelableArrayList("EVENT_MODELS", eventModels);
-		outState.putParcelable("CURRENT_EVENT", currentEvent);
-	}*/
-	
-	public HashMap<String, Integer> getEventsStatusMap (ArrayList<EventModel> eventModels) {
+	public HashMap<String, Integer> getEventsStatusMap (List<EventModel> eventModels) {
 		HashMap<String, Integer> resultMap = new HashMap<String, Integer>();
 		resultMap.put(EventModel.STATE_START, 0);
 		resultMap.put(EventModel.STATE_PAUSE, 0);

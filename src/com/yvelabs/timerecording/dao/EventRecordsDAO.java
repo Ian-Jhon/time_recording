@@ -16,7 +16,7 @@ public class EventRecordsDAO {
 	private static final String INSERT = " insert into t_event_records(event_name, event_category_name, event_date, useing_time, summary, create_time) values(?, ?, ?, ?, ?, ?) ";
 	private static final String DELETE = " delete from t_event_records where 1 = 1 ";
 	private static final String SELECT = " select _id, event_name, event_category_name, event_date, useing_time, summary, create_time from t_event_records where 1 = 1 ";
-	private static final String UPDATE_BY_CATEGORYNAME = "update t_event set event_category_name = ? where lower(event_category_name) = ?";
+	private static final String UPDATE_BY_CATEGORYNAME = "update t_event_records set event_category_name = ? where lower(event_category_name) = ?";
 
 	private Context context;
 
@@ -113,6 +113,40 @@ public class EventRecordsDAO {
 	
 	public void updateByCategoryName (SQLiteDatabase db, EventRecordModel oldModel, EventRecordModel newModel) {
 		db.execSQL(UPDATE_BY_CATEGORYNAME, new Object[]{newModel.getEventCategoryName(), oldModel.getEventCategoryName().toLowerCase()});
+	}
+	
+	public void update (SQLiteDatabase db, EventRecordModel parameterModel, EventRecordModel newModel) {
+		StringBuilder sql = new StringBuilder(" update t_event_records set _id = _id ");
+		
+		List<String> paraList = new ArrayList<String>();
+		if (newModel.getEventName() != null && newModel.getEventName().length() > 0) {
+			sql.append(" , event_name = ? ");
+			paraList.add( newModel.getEventName());
+		}
+		if (newModel.getEventCategoryName() != null && newModel.getEventCategoryName().length() > 0) {
+			sql.append(" , event_category_name = ? ");
+			paraList.add(newModel.getEventCategoryName());
+		}
+		sql.append(" where 1 = 1 ");
+		
+		if (parameterModel.getEventName() != null && parameterModel.getEventName().length() > 0) {
+			sql.append(" and lower(event_name) = ? ");
+			paraList.add(parameterModel.getEventName().toLowerCase());
+		}
+		if (parameterModel.getEventCategoryName() != null && parameterModel.getEventName().length() > 0) {
+			sql.append(" and lower(event_category_name) = ? ");
+			paraList.add(parameterModel.getEventCategoryName().toLowerCase());
+		}
+		
+		if (paraList.size() <= 0) {
+			db.execSQL(sql.toString(), null);
+		} else {
+			String [] paraArray = new String[paraList.size()];
+			for (int i = 0 ; i < paraArray.length ; i ++) {
+				paraArray[i] = paraList.get(i);
+			}
+			db.execSQL(sql.toString(), paraArray);
+		}
 	}
 	
 	public List<EventRecordModel> query (EventRecordModel parameter) {

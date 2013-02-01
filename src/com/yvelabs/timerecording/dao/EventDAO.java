@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.yvelabs.timerecording.EventModel;
+import com.yvelabs.timerecording.EventRecordModel;
 import com.yvelabs.timerecording.utils.LogUtils;
 import com.yvelabs.timerecording.utils.MyDBHelper;
 
@@ -114,8 +115,39 @@ public class EventDAO {
 		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
 		try {
 			db.beginTransaction();
-			update(db, parameterModel, newModel);
 			
+			//t_event_records
+			EventRecordModel parameterRecordModel = new EventRecordModel();
+			parameterRecordModel.setEventCategoryName(parameterModel.getEventCategoryName());
+			parameterRecordModel.setEventName(parameterModel.getEventName());
+			EventRecordModel newRecordModel = new EventRecordModel();
+			newRecordModel.setEventCategoryName(newModel.getEventCategoryName());
+			newRecordModel.setEventName(newModel.getEventCategoryName());
+			new EventRecordsDAO(context).update(db, parameterRecordModel, newRecordModel);
+			
+			//t_event_status
+			EventModel parameterEventModel = new EventModel();
+			parameterEventModel.setEventName(parameterModel.getEventName());
+			parameterEventModel.setEventCategoryName(parameterModel.getEventCategoryName());
+			EventModel newEventModel = new EventModel();
+			newEventModel.setEventCategoryName(newModel.getEventCategoryName());
+			newEventModel.setEventName(newModel.getEventName());
+			new EventStatusDAO(context).update(db, parameterEventModel, newEventModel);
+			
+			db.setTransactionSuccessful();
+		} finally {
+			if (db != null) {
+				db.endTransaction();
+				db.close();
+			}
+		}
+	}
+	
+	public void update (EventModel parameterModel, EventModel newModel) {
+		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
+		try {
+			db.beginTransaction();
+			update(db, parameterModel, newModel);
 			db.setTransactionSuccessful();
 		} finally {
 			if (db != null) {
@@ -204,6 +236,8 @@ public class EventDAO {
 				sql.append(" and event_order = ? ");
 				paraList.add(String.valueOf(parameter.getOrder()));
 			}
+			
+			sql.append(" ORDER BY event_order ");
 			
 			if (paraList.size() <= 0) {
 				c = db.rawQuery(sql.toString(), null);

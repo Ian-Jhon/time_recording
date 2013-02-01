@@ -92,6 +92,40 @@ public class EventStatusDAO {
 		db.execSQL(UPDATE_BY_CATEGORYNAME, new Object[]{newModel.getEventCategoryName(), oldModel.getEventCategoryName().toLowerCase()});
 	}
 	
+	public void update (SQLiteDatabase db, EventModel parameterModel, EventModel newModel) {
+		StringBuilder sql = new StringBuilder(" update t_event_status set _id = _id ");
+		List<String> paraList = new ArrayList<String>();
+		
+		if (newModel.getEventName() != null && newModel.getEventName().length() > 0) {
+			sql.append(" , event_name = ? ");
+			paraList.add( newModel.getEventName());
+		}
+		if (newModel.getEventCategoryName() != null && newModel.getEventCategoryName().length() > 0) {
+			sql.append(" , event_category_name = ? ");
+			paraList.add(newModel.getEventCategoryName());
+		}
+		sql.append(" where 1 = 1 ");
+		
+		if (parameterModel.getEventName() != null && parameterModel.getEventName().length() > 0) {
+			sql.append(" and lower(event_name) = ? ");
+			paraList.add(parameterModel.getEventName().toLowerCase());
+		}
+		if (parameterModel.getEventCategoryName() != null && parameterModel.getEventName().length() > 0) {
+			sql.append(" and lower(event_category_name) = ? ");
+			paraList.add(parameterModel.getEventCategoryName().toLowerCase());
+		}
+		
+		if (paraList.size() <= 0) {
+			db.execSQL(sql.toString(), null);
+		} else {
+			String [] paraArray = new String[paraList.size()];
+			for (int i = 0 ; i < paraArray.length ; i ++) {
+				paraArray[i] = paraList.get(i);
+			}
+			db.execSQL(sql.toString(), paraArray);
+		}
+	}
+	
 	public List<EventModel> selectAll () {
 		List<EventModel> resultList = new ArrayList<EventModel>();
 		EventModel eventModel = null;
