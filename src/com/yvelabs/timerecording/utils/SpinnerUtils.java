@@ -7,10 +7,32 @@ import android.content.Context;
 import android.widget.Spinner;
 
 import com.yvelabs.timerecording.EventCategoryModel;
+import com.yvelabs.timerecording.EventModel;
 import com.yvelabs.timerecording.R;
 import com.yvelabs.timerecording.dao.EventCategoryDAO;
+import com.yvelabs.timerecording.dao.EventDAO;
 
 public class SpinnerUtils {
+	
+	public List<MyKeyValuePair> eventSpinner (Context context, String categoryName) {
+		EventModel parameter = new EventModel();
+		parameter.setStatus("1");
+		if (categoryName != null && categoryName.length() > 0) {
+			parameter.setEventCategoryName(categoryName);
+		}
+		List<EventModel> eventList = new EventDAO(context).query(parameter);
+		
+		List<MyKeyValuePair> list = new ArrayList<MyKeyValuePair>();
+		MyKeyValuePair pair = null;
+		
+		for (EventModel eventModel : eventList) {
+			pair = new MyKeyValuePair();
+			pair.setKey(eventModel.getEventName());
+			pair.setValue(eventModel.getEventName());
+			list.add(pair);
+		}
+		return list;
+	}
 	
 	public List<MyKeyValuePair> categorySpinner (Context context) {
 		EventCategoryModel para = new EventCategoryModel();
@@ -29,6 +51,8 @@ public class SpinnerUtils {
 		
 		return list;
 	}
+	
+	
 	
 	public int getSpinnerPosition (Spinner spinner, MyKeyValuePair pair) {
 		for (int i = 0 ; i <spinner.getCount() ; i ++ ) {

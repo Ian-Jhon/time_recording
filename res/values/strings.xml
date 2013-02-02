@@ -15,7 +15,7 @@
     <string name="my_recorder_rest_alert">是否清除当前计时信息?</string>
     <string name="event_name">Event name</string>
     <string name="event_category">Event category</string>
-    <string name="event_date">Event Date</string>
+    <string name="event_date">Event date</string>
     <string name="using_time">Using time</string>
     <string name="events_are_timed">events are timed.</string>
     <string name="event_is_timed">event is timed.</string>
@@ -51,5 +51,8 @@
     <string name="has_been_used_in_the_record">has been used in the record</string>
    	<string name="edit_event">Edit event</string> 
     <string name="please_enter_the_event_name">Please enter the event name</string>
+    <string name="search">Search</string>
+    <string name="event">Event</string>
+    <string name="category">Category</string>
 
 </resources>

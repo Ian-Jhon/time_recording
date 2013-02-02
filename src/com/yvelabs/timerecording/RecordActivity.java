@@ -15,9 +15,11 @@ import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import com.yvelabs.timerecording.utils.LogUtils;
 import com.yvelabs.timerecording.utils.NotificationUtils;
@@ -32,6 +34,7 @@ public class RecordActivity extends FragmentActivity {
 	private PagerTitleStrip mPagerTitleStrip;
 	
 	private Recorder recorderFragment;
+	private RecordHistoryFragment recordHistoryFragment;  
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,12 +74,6 @@ public class RecordActivity extends FragmentActivity {
 
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
-	}
 
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -93,13 +90,16 @@ public class RecordActivity extends FragmentActivity {
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
-
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("POSICTION", Integer.valueOf(position));
+			
 			if (position == 0) {
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("POSICTION", Integer.valueOf(position));
 				recorderFragment = Recorder.newInstance(map);
 				return recorderFragment;
-			} else {
+			} else if (position == 2) {
+				recordHistoryFragment = RecordHistoryFragment.newInstance(map);
+				return recordHistoryFragment;
+			}else {
 				Fragment fragment = new DummySectionFragment();
 				Bundle args = new Bundle();
 				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
@@ -126,6 +126,20 @@ public class RecordActivity extends FragmentActivity {
 			}
 			return null;
 		}
+	}
+	
+	public void refreshHistoryList (EventRecordModel parameter) {
+		recordHistoryFragment.refreshHistoryList(parameter);
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		int selectedPosition = ((AdapterContextMenuInfo) item.getMenuInfo()).position;// 获取点击了第几行
+		
+		if (item.getItemId() == 301) {
+			recordHistoryFragment.deleteSelectedRecord(selectedPosition);
+		}
+		return super.onContextItemSelected(item);
 	}
 
 	public static class DummySectionFragment extends Fragment {

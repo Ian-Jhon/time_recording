@@ -9,8 +9,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import com.yvelabs.satellitemenu.DefaultAnimation;
 import com.yvelabs.satellitemenu.DefaultAnimation2;
 import com.yvelabs.satellitemenu.SatelliteItemModel;
 import com.yvelabs.satellitemenu.SatelliteMenu;
@@ -49,14 +49,11 @@ public class BottomFragment extends Fragment {
 	        leftRatllites.add(new SatelliteItemModel(1, R.drawable.satellite_shutdown));
 	        leftRatllites.add(new SatelliteItemModel(2, R.drawable.satellite_setting));
 	        leftRatllites.add(new SatelliteItemModel(3, R.drawable.satellite_diary));
-//	        leftRatllites.add(new SatelliteItemModel(4, R.drawable.satellite_report));
-	        leftRatllites.add(new SatelliteItemModel(5, R.drawable.satellite_recorder));
+	        leftRatllites.add(new SatelliteItemModel(4, R.drawable.satellite_recorder));
 			
 			SettingPara settingPara = new SettingPara(0, 90, 200, R.drawable.satellite_planet_menu, leftRatllites);
 			//设置动画
-			DefaultAnimation2 anim = new DefaultAnimation2();
-			anim.setSatelliteStartOffsetMin(50);
-			anim.setSatelliteStartOffsetMax(150);
+			DefaultAnimation anim = new DefaultAnimation();
 			settingPara.setMenuAnimation(anim);
 			//增大宽高
 			settingPara.setCustomerRadiusAdjust(50);
@@ -66,7 +63,16 @@ public class BottomFragment extends Fragment {
 			leftSatelliteMenu.setOnSatelliteClickedListener(new SatelliteMenu.OnSatelliteClickedListener() {
 				@Override
 				public void onClick(View v) {
-					Toast.makeText(v.getContext(), "left satelite id:" + ((SatelliteItemModel)v.getTag()).getId(), Toast.LENGTH_SHORT ).show();
+					int satelliteId = ((SatelliteItemModel)v.getTag()).getId();
+					if (satelliteId == 4) {
+						Intent intent = new Intent(getActivity(), RecordActivity.class);
+						getActivity().startActivity(intent);
+						getActivity().overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+					} else if (satelliteId == 2) {
+						Intent intent = new Intent(getActivity(), ConfigActivity.class);
+						getActivity().startActivity(intent);
+						getActivity().overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+					}
 				}
 			});
 			
@@ -86,7 +92,7 @@ public class BottomFragment extends Fragment {
 			
 			//设置动画
 			DefaultAnimation2 rightAnimation = new DefaultAnimation2();
-			rightAnimation.setSatelliteStartOffsetMin(50);
+			rightAnimation.setSatelliteStartOffsetMin(0);
 			rightAnimation.setSatelliteStartOffsetMax(150);
 			rightSettingPara.setMenuAnimation(rightAnimation);
 			

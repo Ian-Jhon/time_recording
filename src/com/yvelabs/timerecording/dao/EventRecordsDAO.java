@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.yvelabs.timerecording.EventRecordModel;
+import com.yvelabs.timerecording.utils.LogUtils;
 import com.yvelabs.timerecording.utils.MyDBHelper;
 
 public class EventRecordsDAO {
@@ -46,6 +47,12 @@ public class EventRecordsDAO {
 				db.close();
 			}
 		}
+	}
+	
+	public void delete (EventRecordModel recordModel) {
+		List<EventRecordModel> modelList = new ArrayList<EventRecordModel>();
+		modelList.add(recordModel);
+		delete(modelList);
 	}
 	
 	public int delete (List<EventRecordModel> modelList) {
@@ -165,10 +172,12 @@ public class EventRecordsDAO {
 			if (parameter.getEventName() != null && parameter.getEventName().length() > 0) {
 				sql.append(" and lower(event_name) = ? ");
 				paraList.add(parameter.getEventName().toLowerCase());
+				LogUtils.d(this.getClass(), "getEventName:" + parameter.getEventName().toLowerCase());
 			}
 			if (parameter.getEventCategoryName() != null && parameter.getEventCategoryName().length() > 0) {
 				sql.append(" and lower(event_category_name) = ? ");	
 				paraList.add(parameter.getEventCategoryName().toLowerCase());
+				LogUtils.d(this.getClass(), "getEventCategoryName:" + parameter.getEventCategoryName().toLowerCase());
 			}
 			if (parameter.getStartEventDate() != null) {
 				sql.append(" and event_date > ? ");
@@ -186,6 +195,10 @@ public class EventRecordsDAO {
 				sql.append(" and create_time < ? ");
 				paraList.add(parameter.getEndCreateTime().getTime() + "");
 			}
+			
+			sql.append(" order by create_time desc ");
+			
+			LogUtils.d(this.getClass(), "sql:" + sql);
 			
 			if (paraList.size() <= 0) {
 				c = db.rawQuery(sql.toString(), null);

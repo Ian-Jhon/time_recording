@@ -50,4 +50,7 @@
     <string name="order">优先级</string>
     <string name="edit_event">编辑事件</string> 
     <string name="please_enter_the_event_name">请录入事件名称</string>
+    <string name="search">查询</string>
+    <string name="event">事件</string>
+    <string name="category">大类</string>
 </resources>
