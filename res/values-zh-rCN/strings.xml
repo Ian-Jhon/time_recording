@@ -53,4 +53,6 @@
     <string name="search">查询</string>
     <string name="event">事件</string>
     <string name="category">大类</string>
+    <string name="to">至</string>
+    <string name="timer_can_not_exceed_24_hours">计时器不能超出24小时</string>
 </resources>

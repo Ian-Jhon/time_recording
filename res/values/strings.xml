@@ -54,5 +54,6 @@
     <string name="search">Search</string>
     <string name="event">Event</string>
     <string name="category">Category</string>
-
+    <string name="to">to</string>
+    <string name="timer_can_not_exceed_24_hours">Timer can not exceed 24 hours</string>
 </resources>

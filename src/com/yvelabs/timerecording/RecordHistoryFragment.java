@@ -26,7 +26,7 @@ public class RecordHistoryFragment extends Fragment {
 	private ImageButton initBut;
 	
 	private RecordHistoryListAdapter recordHistoryListAdapter;
-	
+	private EventRecordModel parameter = new EventRecordModel();
 	private List<EventRecordModel> eventRecordModels = new ArrayList<EventRecordModel>();
 
 	public static RecordHistoryFragment newInstance(Map<String, Object> map) {
@@ -59,7 +59,7 @@ public class RecordHistoryFragment extends Fragment {
 		initBut.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				refreshHistoryList ();
+				refreshHistoryList (new EventRecordModel());
 			}
 		});
 		
@@ -93,10 +93,11 @@ public class RecordHistoryFragment extends Fragment {
 	}
 	
 	public void refreshHistoryList () {
-		refreshHistoryList(new EventRecordModel());
+		refreshHistoryList(parameter);
 	}
 	
 	public void refreshHistoryList (EventRecordModel parameter) {
+		this.parameter = parameter;
 		eventRecordModels.removeAll(eventRecordModels);
 		eventRecordModels.addAll(new EventRecordsDAO(getActivity()).query(parameter));
 		

@@ -7,11 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
@@ -35,7 +33,6 @@ import com.yvelabs.timerecording.dao.EventDAO;
 import com.yvelabs.timerecording.dao.EventRecordsDAO;
 import com.yvelabs.timerecording.dao.EventStatusDAO;
 import com.yvelabs.timerecording.utils.DateUtils;
-import com.yvelabs.timerecording.utils.LogUtils;
 import com.yvelabs.timerecording.utils.TypefaceUtils;
 
 public class Recorder extends Fragment {
@@ -108,6 +105,15 @@ public class Recorder extends Fragment {
 		eventName.requestFocus();
 
 		//init chronometer
+		eventChro.setOnChronometerTickListener(new com.yvelabs.chronometer.Chronometer.OnChronometerTickListener() {
+			@Override
+			public void onChronometerTick(Chronometer chro) {
+				//24 hours = 86400000l - 5000l
+				if (chro.duringTime() >= 86395000l) {
+					chro.pause();
+				}
+			}
+		});
 		eventChro.setPlayPauseAlphaAnimation(true);
 		eventChro.setFont(FontUtils.FONT_DUPLEX);
 		eventChro.reset();
@@ -127,25 +133,33 @@ public class Recorder extends Fragment {
 		startBut.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startBut.setVisibility(View.GONE);
-				pauseBut.setVisibility(View.VISIBLE);
-				eventChro.start();
-				
-				currentEvent.setStartElapsedTime(SystemClock.elapsedRealtime() - eventChro.duringTime());
-				if (EventModel.STATE_STOP.equals(currentEvent.getChro_state())) {
-					currentEvent.setStartTime(new Date());
+				//24 hours = 86400000l - 5000l
+				if (eventChro.duringTime() >= 86395000l) {
+					eventChro.pause();
+					DialogFragment newFragment = MyAlertDialogFragment.newInstance(
+				            R.string.clear, R.drawable.ic_my_alert, getString(R.string.timer_can_not_exceed_24_hours), null, null);
+				    newFragment.show(getFragmentManager(), "record_myrecorder_morethen24_alert_dialog");
+					
+				} else {
+					startBut.setVisibility(View.GONE);
+					pauseBut.setVisibility(View.VISIBLE);
+					eventChro.start();
+					
+					currentEvent.setStartElapsedTime(System.currentTimeMillis() - eventChro.duringTime());
+					if (EventModel.STATE_STOP.equals(currentEvent.getChro_state())) {
+						currentEvent.setStartTime(new Date());
+					}
+					currentEvent.setChro_state(EventModel.STATE_START);
+					
+					//当前事件写入状态表
+					eventStatusDAO.deleteNInert(currentEvent);
+					
+					//刷新列表
+					recorderEventListAdapter.notifyDataSetChanged();
+					
+					//更新状态信息
+					updateStatusTv ();
 				}
-				currentEvent.setChro_state(EventModel.STATE_START);
-				
-				
-				//当前事件写入状态表
-				eventStatusDAO.deleteNInert(currentEvent);
-				
-				//刷新列表
-				recorderEventListAdapter.notifyDataSetChanged();
-				
-				//更新状态信息
-				updateStatusTv ();
 			}
 		});
 		
@@ -365,7 +379,7 @@ public class Recorder extends Fragment {
 				Recorder.this.pauseBut.setVisibility(View.VISIBLE);
 				Recorder.this.startBut.setVisibility(View.GONE);
 
-				Recorder.this.eventChro.setStartingTime(SystemClock.elapsedRealtime() - eventModel.getStartElapsedTime());
+				Recorder.this.eventChro.setStartingTime(System.currentTimeMillis() - eventModel.getStartElapsedTime());
 				Recorder.this.eventChro.start();
 			} else if (EventModel.STATE_PAUSE.equals(eventModel.getChro_state())) {
 				Recorder.this.pauseBut.setVisibility(View.GONE);

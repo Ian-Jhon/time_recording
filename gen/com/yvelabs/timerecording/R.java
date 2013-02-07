@@ -122,16 +122,16 @@ public final class R {
         public static final int config_event_list_status=0x7f080031;
         public static final int config_pager=0x7f080005;
         public static final int config_pager_title_strip=0x7f080006;
-        public static final int event_category=0x7f08004d;
-        public static final int event_chro=0x7f08004e;
-        public static final int event_list=0x7f080054;
-        public static final int event_name=0x7f08004c;
-        public static final int event_summary=0x7f08004f;
+        public static final int event_category=0x7f080050;
+        public static final int event_chro=0x7f080051;
+        public static final int event_list=0x7f080057;
+        public static final int event_name=0x7f08004f;
+        public static final int event_summary=0x7f080052;
         public static final int left_satellite=0x7f080003;
-        public static final int list_event_category=0x7f080057;
-        public static final int list_event_name=0x7f080056;
-        public static final int list_event_start_time=0x7f080059;
-        public static final int list_event_state_img=0x7f08005a;
+        public static final int list_event_category=0x7f08005a;
+        public static final int list_event_name=0x7f080059;
+        public static final int list_event_start_time=0x7f08005c;
+        public static final int list_event_state_img=0x7f08005d;
         public static final int my_alert_dialog_button_layout=0x7f080037;
         public static final int my_alert_dialog_cancel=0x7f080038;
         public static final int my_alert_dialog_cancel_2=0x7f080036;
@@ -142,8 +142,8 @@ public final class R {
         public static final int my_alert_dialog_title_text=0x7f080033;
         public static final int pager=0x7f080000;
         public static final int pager_title_strip=0x7f080001;
-        public static final int pause_but=0x7f080051;
-        public static final int record_history_list=0x7f080049;
+        public static final int pause_but=0x7f080054;
+        public static final int record_history_list=0x7f08004c;
         public static final int record_history_list_event_category_name=0x7f08003b;
         public static final int record_history_list_event_date=0x7f08003d;
         public static final int record_history_list_event_date_label=0x7f08003c;
@@ -154,20 +154,23 @@ public final class R {
         public static final int record_history_search_dialog_dividing_line=0x7f080043;
         public static final int record_history_search_dialog_event_category_name=0x7f080045;
         public static final int record_history_search_dialog_event_category_name_label=0x7f080044;
+        public static final int record_history_search_dialog_event_date_from=0x7f080048;
+        public static final int record_history_search_dialog_event_date_to=0x7f08004a;
+        public static final int record_history_search_dialog_event_date_to_label=0x7f080049;
         public static final int record_history_search_dialog_event_name=0x7f080047;
         public static final int record_history_search_dialog_event_name_label=0x7f080046;
-        public static final int record_history_search_dialog_search_but=0x7f080048;
+        public static final int record_history_search_dialog_search_but=0x7f08004b;
         public static final int record_history_search_dialog_title_icon=0x7f080041;
         public static final int record_history_search_dialog_title_text=0x7f080042;
-        public static final int record_histroy_init_but=0x7f08004b;
-        public static final int record_histroy_search_but=0x7f08004a;
-        public static final int reset_but=0x7f080050;
+        public static final int record_histroy_init_but=0x7f08004e;
+        public static final int record_histroy_search_but=0x7f08004d;
+        public static final int reset_but=0x7f080053;
         public static final int right_satellite=0x7f080004;
-        public static final int settings=0x7f08005b;
-        public static final int start_but=0x7f080052;
-        public static final int start_time_lab=0x7f080058;
-        public static final int status_tv=0x7f080055;
-        public static final int stop_but=0x7f080053;
+        public static final int settings=0x7f08005e;
+        public static final int start_but=0x7f080055;
+        public static final int start_time_lab=0x7f08005b;
+        public static final int status_tv=0x7f080058;
+        public static final int stop_but=0x7f080056;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -244,6 +247,8 @@ public final class R {
         public static final int summary=0x7f05000a;
         public static final int this_event_already_exists_in_the_category=0x7f05002c;
         public static final int this_information_will_not_be_saved=0x7f050022;
+        public static final int timer_can_not_exceed_24_hours=0x7f050036;
+        public static final int to=0x7f050035;
         public static final int using_time=0x7f05000f;
     }
     public static final class style {

@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
+import android.text.format.Time;
+
 public class DateUtils {
 	
 	public static final String DEFAULT_TIME_PATTERN = "HH:mm:ss";
@@ -52,6 +54,10 @@ public class DateUtils {
 		String dateStr = sdf.format(date);
 		
 		return sdf.parse(dateStr);
+	}
+	
+	public static long getCurrentTime () {
+		return System.currentTimeMillis();
 	}
 	
 

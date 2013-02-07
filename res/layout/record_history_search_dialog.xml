@@ -31,8 +31,9 @@
         android:layout_below="@+id/record_history_search_dialog_title_icon"
         android:layout_marginBottom="5dp"
         android:background="@drawable/pager_title_strip" />
-    
-<!--   category   -->
+
+    <!-- category -->
+
     <TextView
         android:id="@+id/record_history_search_dialog_event_category_name_label"
         android:layout_width="wrap_content"
@@ -53,8 +54,9 @@
         android:layout_below="@+id/record_history_search_dialog_dividing_line"
         android:layout_marginBottom="5dp"
         android:layout_toRightOf="@+id/record_history_search_dialog_event_category_name_label" />
-    
-<!--   event   -->
+
+    <!-- event -->
+
     <TextView
         android:id="@+id/record_history_search_dialog_event_name_label"
         android:layout_width="wrap_content"
@@ -73,13 +75,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/record_history_search_dialog_event_category_name"
+        android:layout_marginBottom="5dp"
         android:layout_toRightOf="@+id/record_history_search_dialog_event_name_label" />
+
+    <!-- event date -->
+
+    <EditText
+        android:id="@+id/record_history_search_dialog_event_date_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/record_history_search_dialog_event_name_label"
+        android:layout_marginLeft="15dp"
+        android:hint="@string/event_date" />
+
+    <TextView
+        android:id="@+id/record_history_search_dialog_event_date_to_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/record_history_search_dialog_event_date_from"
+        android:layout_toRightOf="@+id/record_history_search_dialog_event_date_from"
+        android:text="@string/to" />
+
+    <EditText
+        android:id="@+id/record_history_search_dialog_event_date_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/record_history_search_dialog_event_date_from"
+        android:layout_toRightOf="@+id/record_history_search_dialog_event_date_to_label"
+        android:hint="@string/event_date" />
 
     <ImageButton
         android:id="@+id/record_history_search_dialog_search_but"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/record_history_search_dialog_event_name"
+        android:layout_below="@+id/record_history_search_dialog_event_date_to"
         android:layout_centerHorizontal="true"
         android:background="@drawable/search_but_selector" />
 
