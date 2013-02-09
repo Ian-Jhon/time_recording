@@ -72,6 +72,10 @@ public class BottomFragment extends Fragment {
 						Intent intent = new Intent(getActivity(), ConfigActivity.class);
 						getActivity().startActivity(intent);
 						getActivity().overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+					} else if (satelliteId == 3) {
+						Intent intent = new Intent(getActivity(), DiaryActivity.class);
+						getActivity().startActivity(intent);
+						getActivity().overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
 					}
 				}
 			});
@@ -109,6 +113,10 @@ public class BottomFragment extends Fragment {
 						getActivity().overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
 					} else if (satelliteId == 3) {
 						Intent intent = new Intent(getActivity(), ConfigActivity.class);
+						getActivity().startActivity(intent);
+						getActivity().overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+					} else if (satelliteId == 2) {
+						Intent intent = new Intent(getActivity(), DiaryActivity.class);
 						getActivity().startActivity(intent);
 						getActivity().overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
 					}

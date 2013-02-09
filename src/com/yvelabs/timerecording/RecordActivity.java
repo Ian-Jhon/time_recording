@@ -99,13 +99,11 @@ public class RecordActivity extends FragmentActivity {
 			} else if (position == 2) {
 				recordHistoryFragment = RecordHistoryFragment.newInstance(map);
 				return recordHistoryFragment;
-			}else {
-				Fragment fragment = new DummySectionFragment();
-				Bundle args = new Bundle();
-				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-				fragment.setArguments(args);
-				return fragment;
+			} else if (position == 1) {
+				return RecordAddRecordFragment.newInstance(map);
 			}
+			
+			return null;
 		}
 
 		@Override

@@ -4,7 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.yvelabs.timerecording.EventCategoryModel;
 import com.yvelabs.timerecording.EventModel;
@@ -124,5 +130,95 @@ public class SpinnerUtils {
 		return pair;
 		
 	}
-
+	
+	public class MySpinnerAdapter2 extends ArrayAdapter<MyKeyValuePair> {
+		private Context context;
+		private List<MyKeyValuePair> pairList;
+		private LayoutInflater inflater;
+		
+		public MySpinnerAdapter2 (Context context, List<MyKeyValuePair> pairList) {
+			super(context, android.R.layout.simple_spinner_item, pairList);
+			
+			this.context = context;
+			this.pairList = pairList;
+			this.inflater = LayoutInflater.from(context);
+		}
+		
+		@Override
+		public View getDropDownView(int position, View convertView,
+				ViewGroup parent) {
+			if (convertView == null) {  
+	            convertView = inflater.inflate(android.R.layout.simple_spinner_item, parent, false);  
+	        }
+			
+			TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
+            tv.setText(pairList.get(position).getValue());
+            tv.setTextSize(15);
+            tv.setPadding(5, 7, 5, 7);
+            tv.setBackground(context.getResources().getDrawable(R.drawable.my_recorder_main_bg));
+            
+			return convertView;
+		}
+		
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			if (convertView == null) {  
+	            convertView = inflater.inflate(android.R.layout.simple_spinner_item, parent, false);  
+	        }
+			
+			TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
+			tv.setText(pairList.get(position).getValue());
+			tv.setTextSize(17);
+	        
+			return convertView;
+		}
+		
+	}
+	
+	public class MySpinnerAdapter extends ArrayAdapter<MyKeyValuePair> {
+		
+		private Context context;
+		private List<MyKeyValuePair> pairList;
+		private LayoutInflater inflater;
+		
+		public MySpinnerAdapter (Context context, List<MyKeyValuePair> pairList) {
+			super(context, android.R.layout.simple_spinner_item, pairList);
+			
+			this.context = context;
+			this.pairList = pairList;
+			this.inflater = LayoutInflater.from(context);
+		}
+		
+		@Override
+		public View getDropDownView(int position, View convertView,
+				ViewGroup parent) {
+			if (convertView == null) {  
+	            convertView = inflater.inflate(android.R.layout.simple_spinner_item, parent, false);  
+	        }
+			
+			TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
+            tv.setText(pairList.get(position).getValue());
+            tv.setTextSize(20);
+            tv.setPadding(10, 13, 10, 13);
+            tv.setBackground(context.getResources().getDrawable(R.drawable.my_recorder_main_bg));
+            TypefaceUtils.setTypeface(tv, TypefaceUtils.RBNO2_LIGHT_A);
+            
+			return convertView;
+		}
+		
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			if (convertView == null) {  
+	            convertView = inflater.inflate(android.R.layout.simple_spinner_item, parent, false);  
+	        }
+			
+			TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
+			tv.setText(pairList.get(position).getValue());
+			tv.setTextSize(25);
+			TypefaceUtils.setTypeface(tv, TypefaceUtils.RBNO2_LIGHT_A);
+	        
+			return convertView;
+		}
+		
+	}
 }

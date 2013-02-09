@@ -27,6 +27,12 @@
             android:name="com.yvelabs.timerecording.ConfigActivity"
             android:launchMode="singleInstance" >
         </activity>
+        
+        <activity
+            android:name="com.yvelabs.timerecording.DiaryActivity"
+            android:launchMode="singleInstance" >
+        </activity>
+        
     </application>
 
 </manifest>

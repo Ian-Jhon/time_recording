@@ -105,6 +105,9 @@ public class Recorder extends Fragment {
 		eventName.requestFocus();
 
 		//init chronometer
+		eventChro.setPlayPauseAlphaAnimation(true);
+		eventChro.setFont(FontUtils.FONT_DUPLEX);
+		eventChro.reset();
 		eventChro.setOnChronometerTickListener(new com.yvelabs.chronometer.Chronometer.OnChronometerTickListener() {
 			@Override
 			public void onChronometerTick(Chronometer chro) {
@@ -114,10 +117,6 @@ public class Recorder extends Fragment {
 				}
 			}
 		});
-		eventChro.setPlayPauseAlphaAnimation(true);
-		eventChro.setFont(FontUtils.FONT_DUPLEX);
-		eventChro.reset();
-		
 		
 		//chronometer reset
 		resetBut.setOnClickListener(new OnClickListener() {
@@ -137,7 +136,7 @@ public class Recorder extends Fragment {
 				if (eventChro.duringTime() >= 86395000l) {
 					eventChro.pause();
 					DialogFragment newFragment = MyAlertDialogFragment.newInstance(
-				            R.string.clear, R.drawable.ic_my_alert, getString(R.string.timer_can_not_exceed_24_hours), null, null);
+				            R.string.attention, R.drawable.ic_my_alert, getString(R.string.timer_can_not_exceed_24_hours), null, null);
 				    newFragment.show(getFragmentManager(), "record_myrecorder_morethen24_alert_dialog");
 					
 				} else {

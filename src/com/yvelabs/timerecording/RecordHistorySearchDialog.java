@@ -68,12 +68,15 @@ public class RecordHistorySearchDialog extends DialogFragment {
 			@Override
 			public void onClick(View v) {
 				Calendar c = Calendar.getInstance();
+				
 				Dialog dialog = new DatePickerDialog(getActivity(),
 						new DatePickerDialog.OnDateSetListener() {
 							public void onDateSet(DatePicker dp, int year, int month, int dayOfMonth) {
 								startEventDateTv.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
 								
-								startEventDate = new Date(year - 1900, month - 1, dayOfMonth);
+								Calendar resultCalender = Calendar.getInstance();
+								resultCalender.set(year, month + 1, dayOfMonth);
+								startEventDate = resultCalender.getTime();
 							}
 						}, 
 						c.get(Calendar.YEAR), // 传入年份
@@ -93,8 +96,10 @@ public class RecordHistorySearchDialog extends DialogFragment {
 				Dialog dialog = new DatePickerDialog(getActivity(),
 						new DatePickerDialog.OnDateSetListener() {
 							public void onDateSet(DatePicker dp, int year, int month, int dayOfMonth) {
-								startEventDateTv.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
-								endEventDate = new Date(year - 1900, month - 1, dayOfMonth);
+								endeventDateTv.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+								Calendar resultCalender = Calendar.getInstance();
+								resultCalender.set(year, month + 1, dayOfMonth);
+								endEventDate = resultCalender.getTime();
 							}
 						}, 
 						c.get(Calendar.YEAR), // 传入年份

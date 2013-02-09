@@ -172,20 +172,20 @@ public class EventRecordsDAO {
 			if (parameter.getEventName() != null && parameter.getEventName().length() > 0) {
 				sql.append(" and lower(event_name) = ? ");
 				paraList.add(parameter.getEventName().toLowerCase());
-				LogUtils.d(this.getClass(), "getEventName:" + parameter.getEventName().toLowerCase());
 			}
 			if (parameter.getEventCategoryName() != null && parameter.getEventCategoryName().length() > 0) {
 				sql.append(" and lower(event_category_name) = ? ");	
 				paraList.add(parameter.getEventCategoryName().toLowerCase());
-				LogUtils.d(this.getClass(), "getEventCategoryName:" + parameter.getEventCategoryName().toLowerCase());
 			}
 			if (parameter.getStartEventDate() != null) {
 				sql.append(" and event_date > ? ");
 				paraList.add(parameter.getStartEventDate().getTime() + "");
+				LogUtils.d(getClass(), "parameter.getStartEventDate().getTime():" + parameter.getStartEventDate().getTime());
 			}
 			if (parameter.getEndEventDate() != null) {
 				sql.append(" and event_date < ? ");
 				paraList.add(parameter.getEndEventDate().getTime() + "");
+				LogUtils.d(getClass(), "parameter.getEndEventDate().getTime():" + parameter.getEndEventDate().getTime());
 			}
 			if (parameter.getStartCreateTime() != null) {
 				sql.append(" and create_time > ? ");

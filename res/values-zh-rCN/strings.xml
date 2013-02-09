@@ -55,4 +55,5 @@
     <string name="category">大类</string>
     <string name="to">至</string>
     <string name="timer_can_not_exceed_24_hours">计时器不能超出24小时</string>
+    <string name="diary">日记</string>
 </resources>

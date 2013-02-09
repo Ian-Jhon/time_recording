@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/my_recorder_main_bg"
+    android:scrollbars="vertical" >
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp" >
+
+        <TextView
+            android:id="@+id/record_add_record_event_category_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:paddingBottom="5dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:text="@string/event_category"
+            android:textColor="@drawable/pager_title_strip"
+            android:textSize="30sp" />
+
+        <Spinner
+            android:id="@+id/record_add_record_event_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/record_add_record_event_category_label"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/record_add_record_event_category_label" />
+
+        <TextView
+            android:id="@+id/record_add_record_event_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/record_add_record_event_category_label"
+            android:paddingBottom="5dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:text="@string/event"
+            android:textColor="@drawable/pager_title_strip"
+            android:textSize="30sp" />
+
+        <Spinner
+            android:id="@+id/record_add_record_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/record_add_record_event_label"
+            android:layout_below="@+id/record_add_record_event_category"
+            android:layout_toRightOf="@+id/record_add_record_event_label" />
+
+        <TextView
+            android:id="@+id/record_add_record_event_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/record_add_record_event_label"
+            android:paddingBottom="90dp"
+            android:paddingTop="90dp"
+            android:text="@string/event_date"
+            android:textColor="@drawable/pager_title_strip"
+            android:textSize="30sp" />
+
+        <DatePicker
+            android:id="@+id/record_add_record_event_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/record_add_record_event"
+            android:layout_toRightOf="@+id/record_add_record_event_date_label"
+            android:calendarViewShown="false" />
+
+        <TextView
+            android:id="@+id/record_add_record_using_time_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/record_add_record_event_date_label"
+            android:paddingBottom="90dp"
+            android:paddingTop="90dp"
+            android:text="@string/using_time"
+            android:textColor="@drawable/pager_title_strip"
+            android:textSize="30sp" />
+
+        <TimePicker
+            android:id="@+id/record_add_record_using_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/record_add_record_event_date"
+            android:layout_toRightOf="@+id/record_add_record_using_time_label" />
+
+        <EditText
+            android:id="@+id/record_add_record_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/record_add_record_using_time"
+            android:hint="@string/summary"
+            android:layout_marginBottom="10dp" />
+
+        <ImageButton
+            android:id="@+id/record_add_record_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/record_add_record_summary"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/save_but_selector" />
+    </RelativeLayout>
+
+</ScrollView>
