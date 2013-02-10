@@ -148,9 +148,7 @@ public class RecordAddRecordFragment extends Fragment {
 		eventDateDp.init(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), new OnDateChangedListener() {
 			@Override
 			public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				Calendar resultCalender = Calendar.getInstance();
-				resultCalender.set(year, monthOfYear, dayOfMonth);
-				eventDate = resultCalender.getTime();
+				eventDate = DateUtils.getDateByYMD(year, monthOfYear, dayOfMonth);
 			}
 		});
 

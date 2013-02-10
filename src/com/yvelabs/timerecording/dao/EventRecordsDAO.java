@@ -3,6 +3,7 @@ package com.yvelabs.timerecording.dao;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -154,6 +155,59 @@ public class EventRecordsDAO {
 			}
 			db.execSQL(sql.toString(), paraArray);
 		}
+	}
+	
+	public List<EventRecordModel> query4Diary () {
+		List<EventRecordModel> resultList = new ArrayList<EventRecordModel>(); 
+		Cursor c = null;
+		SQLiteDatabase db = new MyDBHelper(context).getWritableDatabase();
+		
+		try {
+			StringBuilder sql = new StringBuilder(SELECT);
+			sql.append(" order by event_date desc, create_time desc ");
+			
+			c = db.rawQuery(sql.toString(), null);
+			
+			while (c.moveToNext()) {
+				EventRecordModel model = new EventRecordModel();
+				model.setRecordId(c.getInt(c.getColumnIndex("_id")));
+				model.setEventName(c.getString(c.getColumnIndex("event_name")));
+				model.setEventCategoryName(c.getString(c.getColumnIndex("event_category_name")));
+				model.setEventDate(new Date(c.getLong(c.getColumnIndex("event_date"))));
+				model.setUseingTime(c.getLong(c.getColumnIndex("useing_time")));
+				model.setSummary(c.getString(c.getColumnIndex("summary")));
+				model.setCreateTime(new Date(c.getLong(c.getColumnIndex("create_time"))));
+				
+				resultList.add(model);
+			}
+			
+		} finally {
+			if (c != null) c.close();
+			if (db != null)	db.close();
+		}
+		
+		return resultList;
+	}
+	
+	public List<List<EventRecordModel>> getDiaryList () {
+		List<List<EventRecordModel>> resultList = new ArrayList<List<EventRecordModel>>();
+		List<EventRecordModel> originalList = query4Diary();
+		
+		List<EventRecordModel> subList = null;
+		Date tempEventDate = new Date();
+		for (EventRecordModel model : originalList) {
+			
+			if (model.getEventDate().compareTo(tempEventDate) != 0) {
+				if (subList != null)
+					resultList.add(subList);
+				subList = new ArrayList<EventRecordModel>();
+				tempEventDate = model.getEventDate();
+			} 
+
+			subList.add(model);
+		}
+		
+		return resultList;
 	}
 	
 	public List<EventRecordModel> query (EventRecordModel parameter) {

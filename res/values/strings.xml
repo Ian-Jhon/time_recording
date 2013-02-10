@@ -57,4 +57,5 @@
     <string name="to">to</string>
     <string name="timer_can_not_exceed_24_hours">Timer can not exceed 24 hours</string>
     <string name="diary">Diary</string>
+    <string name="total_using_time">Total using time</string>
 </resources>

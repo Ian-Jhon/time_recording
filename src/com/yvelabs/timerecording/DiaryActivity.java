@@ -2,8 +2,11 @@ package com.yvelabs.timerecording;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.yvelabs.timerecording.dao.EventRecordsDAO;
+import com.yvelabs.timerecording.utils.LogUtils;
 import com.yvelabs.timerecording.utils.TypefaceUtils;
 
 import android.os.Bundle;
@@ -70,11 +73,7 @@ public class DiaryActivity extends FragmentActivity {
 			map.put("POSICTION", Integer.valueOf(position));
 			
 			if (position == 0) {
-				Fragment fragment = new DummySectionFragment();
-				Bundle args = new Bundle();
-				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-				fragment.setArguments(args);
-				return fragment;
+				return DiaryListFragment.newInstance(map);
 			}
 			
 			return null;

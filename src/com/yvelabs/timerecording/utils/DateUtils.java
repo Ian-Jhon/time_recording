@@ -6,8 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-import android.text.format.Time;
-
 public class DateUtils {
 	
 	public static final String DEFAULT_TIME_PATTERN = "HH:mm:ss";
@@ -58,6 +56,41 @@ public class DateUtils {
 	
 	public static long getCurrentTime () {
 		return System.currentTimeMillis();
+	}
+	
+	public static Date getDateByYMD (int year, int month, int day) {
+		return  new Date(year - 1900, month, day);
+	}
+	
+	public static String getTime (long milliSecond) {
+		StringBuilder time = new StringBuilder();
+		String hoursStr, minutesStr, secondsStr;
+		long sec = milliSecond / 1000;
+		
+		long hours = sec / 3600;
+		long minutes = (sec % 3600) / 60;
+		long seconds = (sec % 3600) % 60;
+		
+		if (hours < 10) {
+			hoursStr = "0" + String.valueOf(hours);
+		} else {
+			hoursStr = String.valueOf(hours);
+		}
+		
+		if (minutes < 10) {
+			minutesStr = "0" + String.valueOf(minutes);
+		} else {
+			minutesStr = String.valueOf(minutes);
+		}
+		
+		if (seconds < 10) {
+			secondsStr = "0" + String.valueOf(seconds);
+		} else {
+			secondsStr = String.valueOf(seconds);
+		}
+		
+		time.append(hoursStr).append(":").append(minutesStr).append(":").append(secondsStr);
+		return time.toString();
 	}
 	
 
