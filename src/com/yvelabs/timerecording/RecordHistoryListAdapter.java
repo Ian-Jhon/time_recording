@@ -68,10 +68,13 @@ public class RecordHistoryListAdapter extends BaseAdapter {
 		viewHolder.eventName.setText(recordModel.getEventName());
 		viewHolder.eventCategoryName.setText(recordModel.getEventCategoryName());
 		viewHolder.eventDate.setText(" : " + DateUtils.format(recordModel.getEventDate(), DateUtils.DEFAULT_DATE_PATTERN));
-		viewHolder.usingTime.setText(" : " + DateUtils.formatAdjust(recordModel.getUseingTime(), DateUtils.DEFAULT_TIME_PATTERN));
+		viewHolder.usingTime.setText(" : " + DateUtils.formatTime(recordModel.getUseingTime()));
 		if (recordModel.getSummary() != null && recordModel.getSummary().length() > 0) {
 			viewHolder.summary.setVisibility(View.VISIBLE);
 			viewHolder.summary.setText(recordModel.getSummary());
+		} else {
+			viewHolder.summary.setVisibility(View.GONE);
+			viewHolder.summary.setText("");
 		}
 		
 		TypefaceUtils.setTypeface(viewHolder.eventName, TypefaceUtils.RBNO2_LIGHT_A);

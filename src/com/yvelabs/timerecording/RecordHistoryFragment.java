@@ -43,8 +43,8 @@ public class RecordHistoryFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.record_histroy_fragment, null);
-		searchBut = (ImageButton) view.findViewById(R.id.record_histroy_search_but);
-		initBut = (ImageButton) view.findViewById(R.id.record_histroy_init_but);
+		searchBut = (ImageButton) view.findViewById(R.id.record_history_search_but);
+		initBut = (ImageButton) view.findViewById(R.id.record_history_init_but);
 		historyList = (ListView) view.findViewById(R.id.record_history_list);
 		
 		searchBut.setOnClickListener(new View.OnClickListener() {

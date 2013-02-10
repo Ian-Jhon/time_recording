@@ -33,6 +33,7 @@ import com.yvelabs.timerecording.dao.EventDAO;
 import com.yvelabs.timerecording.dao.EventRecordsDAO;
 import com.yvelabs.timerecording.dao.EventStatusDAO;
 import com.yvelabs.timerecording.utils.DateUtils;
+import com.yvelabs.timerecording.utils.LogUtils;
 import com.yvelabs.timerecording.utils.TypefaceUtils;
 
 public class Recorder extends Fragment {
@@ -335,7 +336,7 @@ public class Recorder extends Fragment {
 		result.append(getString(R.string.recorder_page_stop)).append("\r\n");
 		result.append(getActivity().getResources().getString(R.string.event_name) + " : ").append(eventModel.getEventName()).append("\r\n");
 		result.append(getActivity().getResources().getString(R.string.event_category) + " : ").append(eventModel.getEventCategoryName()).append("\r\n");
-		result.append(getActivity().getResources().getString(R.string.event_date) + " : ").append(DateUtils.format(new Date(), DateUtils.DEFAULT_DATE_PATTERN)).append("\r\n");
+		result.append(getActivity().getResources().getString(R.string.event_date) + " : ").append(DateUtils.format(eventModel.getStartTime(), DateUtils.DEFAULT_DATE_PATTERN)).append("\r\n");
 		result.append(getActivity().getResources().getString(R.string.using_time) + " : ").append(DateUtils.formatAdjust(eventChro.duringTime())).append("\r\n");
 		result.append(getActivity().getResources().getString(R.string.summary) + " : ").append(eventSummary.getText().toString()).append("\r\n");
 		return result.toString();
@@ -444,11 +445,7 @@ public class Recorder extends Fragment {
 			eventRecordModel.setEventCategoryName(currentEvent.getEventCategoryName());
 			eventRecordModel.setUseingTime(eventChro.duringTime());
 			eventRecordModel.setSummary(eventSummary.getText().toString());
-			try {
-				eventRecordModel.setEventDate(DateUtils.getDateWithoutTime(new Date()));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+			eventRecordModel.setEventDate(DateUtils.getDateByDateTime(currentEvent.getStartTime()));
 			
 			//–¥»Î record±Ì÷–
 			new EventRecordsDAO(Recorder.this.getActivity()).insert(eventRecordModel);

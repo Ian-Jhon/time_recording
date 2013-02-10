@@ -46,23 +46,30 @@ public class DateUtils {
 		return formatAdjust(time, DEFAULT_TIME_PATTERN);
 	}
 	
-	public static Date getDateWithoutTime(Date oriDate) throws ParseException {
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String dateStr = sdf.format(date);
-		
-		return sdf.parse(dateStr);
-	}
-	
 	public static long getCurrentTime () {
 		return System.currentTimeMillis();
 	}
 	
 	public static Date getDateByYMD (int year, int month, int day) {
-		return  new Date(year - 1900, month, day);
+		Calendar c = Calendar.getInstance();
+		c.clear();
+		c.set(year, month - 1, day);
+		return c.getTime();
 	}
 	
-	public static String getTime (long milliSecond) {
+	public static Date getDateByDateTime (Date date) {
+		Calendar c = Calendar.getInstance();
+		c.clear();
+		c.setTime(date);
+		
+		Calendar resultC = Calendar.getInstance();
+		resultC.clear();
+		resultC.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+		
+		return resultC.getTime();
+	}
+	
+	public static String formatTime (long milliSecond) {
 		StringBuilder time = new StringBuilder();
 		String hoursStr, minutesStr, secondsStr;
 		long sec = milliSecond / 1000;

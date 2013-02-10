@@ -85,7 +85,7 @@ public class DiaryListAdapter extends BaseAdapter {
 				for (EventRecordModel model : subList) {
 					contentStr.append("　　");
 					contentStr.append(model.getEventName()).append("　");
-					contentStr.append("<i>( ").append(DateUtils.getTime(model.getUseingTime())).append(" )</i>").append("<br>");
+					contentStr.append("<i>( ").append(DateUtils.formatTime(model.getUseingTime())).append(" )</i>").append("<br>");
 					if (model.getSummary() != null && model.getSummary().length() > 0) {
 						contentStr.append("　　　");
 						contentStr.append("<small>").append(model.getSummary()).append("</small><br>");
@@ -93,7 +93,7 @@ public class DiaryListAdapter extends BaseAdapter {
 					totalCategoryUsingTime = totalCategoryUsingTime + model.getUseingTime();
 				}
 				contentStr.append("<i><strong><font color='#717174'>").append(context.getString(R.string.total_using_time)).append(" ");
-				contentStr.append(DateUtils.getTime(totalCategoryUsingTime)).append("</font></strong></i><br>");
+				contentStr.append(DateUtils.formatTime(totalCategoryUsingTime)).append("</font></strong></i><br>");
 			}
 			
 		}
