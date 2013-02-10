@@ -207,6 +207,10 @@ public class EventRecordsDAO {
 			subList.add(model);
 		}
 		
+		if (subList != null && !resultList.contains(subList)) {
+			resultList.add(subList);
+		}
+		
 		return resultList;
 	}
 	

@@ -103,9 +103,9 @@ public class DiaryListAdapter extends BaseAdapter {
 	private List<List<EventRecordModel>> getCategoryList (List<EventRecordModel> modelList) {
 		List<List<EventRecordModel>> list = new ArrayList<List<EventRecordModel>>();
 		
-		boolean existCategoryFlag = false; //exist category
+		
 		for (EventRecordModel originalModel : modelList) {
-			
+			boolean existCategoryFlag = false; //exist category
 			for (List<EventRecordModel> subList : list) {
 				if (subList.size() > 0 && 
 						subList.get(0).getEventCategoryName().equals(originalModel.getEventCategoryName())) {
