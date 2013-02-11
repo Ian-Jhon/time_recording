@@ -337,7 +337,7 @@ public class Recorder extends Fragment {
 		result.append(getActivity().getResources().getString(R.string.event_name) + " : ").append(eventModel.getEventName()).append("\r\n");
 		result.append(getActivity().getResources().getString(R.string.event_category) + " : ").append(eventModel.getEventCategoryName()).append("\r\n");
 		result.append(getActivity().getResources().getString(R.string.event_date) + " : ").append(DateUtils.format(eventModel.getStartTime(), DateUtils.DEFAULT_DATE_PATTERN)).append("\r\n");
-		result.append(getActivity().getResources().getString(R.string.using_time) + " : ").append(DateUtils.formatAdjust(eventChro.duringTime())).append("\r\n");
+		result.append(getActivity().getResources().getString(R.string.using_time) + " : ").append(DateUtils.formatTime(eventChro.duringTime())).append("\r\n");
 		result.append(getActivity().getResources().getString(R.string.summary) + " : ").append(eventSummary.getText().toString()).append("\r\n");
 		return result.toString();
 	}

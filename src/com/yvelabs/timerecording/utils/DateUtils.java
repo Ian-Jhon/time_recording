@@ -53,7 +53,7 @@ public class DateUtils {
 	public static Date getDateByYMD (int year, int month, int day) {
 		Calendar c = Calendar.getInstance();
 		c.clear();
-		c.set(year, month - 1, day);
+		c.set(year, month, day);
 		return c.getTime();
 	}
 	

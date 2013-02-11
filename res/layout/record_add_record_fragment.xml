@@ -13,6 +13,7 @@
         android:paddingRight="15dp"
         android:paddingTop="15dp" >
 
+        <!-- category -->
         <TextView
             android:id="@+id/record_add_record_event_category_label"
             android:layout_width="wrap_content"
@@ -34,6 +35,7 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/record_add_record_event_category_label" />
 
+        <!-- event -->
         <TextView
             android:id="@+id/record_add_record_event_label"
             android:layout_width="wrap_content"
@@ -54,13 +56,35 @@
             android:layout_alignBottom="@+id/record_add_record_event_label"
             android:layout_below="@+id/record_add_record_event_category"
             android:layout_toRightOf="@+id/record_add_record_event_label" />
+        
+        <!-- using time -->
+        <TextView
+            android:id="@+id/record_add_record_using_time_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/record_add_record_event_label"
+            android:paddingBottom="5dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:text="@string/using_time"
+            android:textColor="@drawable/pager_title_strip"
+            android:textSize="30sp" />
 
+        <com.yvelabs.timeedit.TimeEdit
+            android:id="@+id/record_add_record_using_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/record_add_record_event"
+            android:layout_toRightOf="@+id/record_add_record_using_time_label" />
+
+        <!-- event date -->
         <TextView
             android:id="@+id/record_add_record_event_date_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/record_add_record_event_label"
+            android:layout_below="@+id/record_add_record_using_time_label"
             android:paddingBottom="90dp"
             android:paddingTop="90dp"
             android:text="@string/event_date"
@@ -71,37 +95,18 @@
             android:id="@+id/record_add_record_event_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/record_add_record_event"
+            android:layout_below="@+id/record_add_record_using_time"
             android:layout_toRightOf="@+id/record_add_record_event_date_label"
             android:calendarViewShown="false" />
-
-        <TextView
-            android:id="@+id/record_add_record_using_time_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/record_add_record_event_date_label"
-            android:paddingBottom="90dp"
-            android:paddingTop="90dp"
-            android:text="@string/using_time"
-            android:textColor="@drawable/pager_title_strip"
-            android:textSize="30sp" />
-
-        <TimePicker
-            android:id="@+id/record_add_record_using_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/record_add_record_event_date"
-            android:layout_toRightOf="@+id/record_add_record_using_time_label" />
 
         <EditText
             android:id="@+id/record_add_record_summary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/record_add_record_using_time"
-            android:hint="@string/summary"
-            android:layout_marginBottom="10dp" />
+            android:layout_below="@+id/record_add_record_event_date"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/summary" />
 
         <ImageButton
             android:id="@+id/record_add_record_save"

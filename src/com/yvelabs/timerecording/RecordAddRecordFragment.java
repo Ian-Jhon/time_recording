@@ -1,5 +1,6 @@
 package com.yvelabs.timerecording;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
 
+import com.yvelabs.timeedit.TimeEdit;
 import com.yvelabs.timerecording.dao.EventRecordsDAO;
 import com.yvelabs.timerecording.utils.DateUtils;
 import com.yvelabs.timerecording.utils.MyKeyValuePair;
@@ -38,15 +40,16 @@ public class RecordAddRecordFragment extends Fragment {
 	private TextView eventDateLabelTv;
 	private DatePicker eventDateDp;
 	private TextView usingTimeLabelTv;
-	private TimePicker usingTimeTp;
 	private EditText summaryEv;
 	private ImageButton saveIb;
+	private TimeEdit usingTimeTE;
 	
 	private ArrayAdapter<MyKeyValuePair> eventSppinerAdapter;
-	private List<MyKeyValuePair> eventSpinnerList;
+	private List<MyKeyValuePair> eventSpinnerList = new ArrayList<MyKeyValuePair>();
+	private ArrayAdapter<MyKeyValuePair> categorySppinerAdapter;
+	private List<MyKeyValuePair> categoryList = new ArrayList<MyKeyValuePair>();
 	
 	private EventRecordModel saveModel;
-	private long usingTime;
 	private Date eventDate;
 
 	public static RecordAddRecordFragment newInstance(Map<String, Object> map) {
@@ -64,8 +67,7 @@ public class RecordAddRecordFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Calendar c = Calendar.getInstance();
-		eventDate = new Date(c.get(Calendar.YEAR) - 1900, c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+		eventDate = DateUtils.getDateByDateTime(new Date());
 	}
 
 	@Override
@@ -79,11 +81,13 @@ public class RecordAddRecordFragment extends Fragment {
 		eventDateLabelTv = (TextView) view.findViewById(R.id.record_add_record_event_date_label);
 		eventDateDp = (DatePicker) view.findViewById(R.id.record_add_record_event_date);
 		usingTimeLabelTv = (TextView) view.findViewById(R.id.record_add_record_using_time_label);
-		usingTimeTp = (TimePicker) view.findViewById(R.id.record_add_record_using_time);
+		usingTimeTE = (TimeEdit) view.findViewById(R.id.record_add_record_using_time);
 		summaryEv = (EditText) view.findViewById(R.id.record_add_record_summary);
 		saveIb = (ImageButton) view.findViewById(R.id.record_add_record_save);
 		
-		usingTimeTp.setIs24HourView(true);
+		categoryLabelTv.setFocusable(true);
+		categoryLabelTv.setFocusableInTouchMode(true);
+		categoryLabelTv.requestFocus();
 		
 		// set typeface
 		TypefaceUtils.setTypeface(categoryLabelTv, TypefaceUtils.RBNO2_LIGHT_A);
@@ -92,14 +96,9 @@ public class RecordAddRecordFragment extends Fragment {
 		TypefaceUtils.setTypeface(usingTimeLabelTv, TypefaceUtils.RBNO2_LIGHT_A);
 		
 		// init event and category spinner
-		List<MyKeyValuePair> categoryList = new SpinnerUtils().categorySpinner(getActivity());
-		ArrayAdapter<MyKeyValuePair> categorySppinerAdapter = new SpinnerUtils().new MySpinnerAdapter(getActivity(), categoryList); 
-		categorySp.setAdapter(categorySppinerAdapter);
-		MyKeyValuePair categoryPair = (MyKeyValuePair) categorySp.getSelectedItem();
-		
-		eventSpinnerList = new SpinnerUtils().eventSpinner(getActivity(), categoryPair == null ? null : categoryPair.getKey().toString());
-		eventSppinerAdapter =  new SpinnerUtils().new MySpinnerAdapter(getActivity(), eventSpinnerList);
+		refreshEventNCategorySp ();
 		eventSp.setAdapter(eventSppinerAdapter);
+		categorySp.setAdapter(categorySppinerAdapter);
 		
 		categorySp.setOnItemSelectedListener(new OnItemSelectedListener() {
 			@Override
@@ -125,22 +124,12 @@ public class RecordAddRecordFragment extends Fragment {
 				saveModel.setEventName(eventPair.getKey().toString());
 				saveModel.setEventCategoryName(categoryPair.getKey().toString());
 				saveModel.setEventDate(eventDate);
-				saveModel.setUseingTime(usingTime);
+				saveModel.setUseingTime(usingTimeTE.getTime());
 				saveModel.setSummary(summaryEv.getText().toString());
 				
 				DialogFragment newFragment = MyAlertDialogFragment.newInstance(
 			            R.string.save, R.drawable.ic_save_normal, getEventMsg(saveModel), new SaveButListener(saveModel), null);
 			    newFragment.show(getFragmentManager(), "record_add_record_save_dialog");
-			}
-		});
-		
-		usingTimeTp.setCurrentHour(0);
-		usingTimeTp.setCurrentMinute(0);
-		
-		usingTimeTp.setOnTimeChangedListener(new OnTimeChangedListener() {
-			@Override
-			public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-				usingTime = hourOfDay * 60 * 60 * 1000 + minute * 60 * 1000;
 			}
 		});
 		
@@ -159,6 +148,24 @@ public class RecordAddRecordFragment extends Fragment {
 	public void onResume() {
 		super.onResume();
 		// refresh event and category
+		refreshEventNCategorySp ();
+	}
+	
+	private void refreshEventNCategorySp () {
+		//refresh category
+		categoryList.removeAll(categoryList);
+		categoryList.addAll(new SpinnerUtils().categorySpinner(getActivity()));
+		if (categorySppinerAdapter == null) 
+			categorySppinerAdapter = new SpinnerUtils().new MySpinnerAdapter(getActivity(), categoryList); 
+		categorySppinerAdapter.notifyDataSetChanged();
+		MyKeyValuePair categoryPair = (MyKeyValuePair) categorySp.getSelectedItem();
+		
+		//refresh event
+		eventSpinnerList.removeAll(eventSpinnerList);
+		eventSpinnerList.addAll(new SpinnerUtils().eventSpinner(getActivity(), categoryPair == null ? null : categoryPair.getKey().toString()));
+		if (eventSppinerAdapter == null) 
+			eventSppinerAdapter = new SpinnerUtils().new MySpinnerAdapter(getActivity(), eventSpinnerList);
+		eventSppinerAdapter.notifyDataSetChanged();
 		
 	}
 	
@@ -168,7 +175,7 @@ public class RecordAddRecordFragment extends Fragment {
 		result.append(getActivity().getResources().getString(R.string.event_name) + " : ").append(eventRecordModel.getEventName()).append("\r\n");
 		result.append(getActivity().getResources().getString(R.string.event_category) + " : ").append(eventRecordModel.getEventCategoryName()).append("\r\n");
 		result.append(getActivity().getResources().getString(R.string.event_date) + " : ").append(DateUtils.format(eventDate, DateUtils.DEFAULT_DATE_PATTERN)).append("\r\n");
-		result.append(getActivity().getResources().getString(R.string.using_time) + " : ").append(DateUtils.formatAdjust(usingTime)).append("\r\n");
+		result.append(getActivity().getResources().getString(R.string.using_time) + " : ").append(DateUtils.formatTime(usingTimeTE.getTime())).append("\r\n");
 		result.append(getActivity().getResources().getString(R.string.summary) + " : ").append(summaryEv.getText().toString()).append("\r\n");
 		return result.toString();
 	}

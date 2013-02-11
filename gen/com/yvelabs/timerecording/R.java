@@ -151,13 +151,13 @@ public final class R {
         public static final int record_add_record_event=0x7f080042;
         public static final int record_add_record_event_category=0x7f080040;
         public static final int record_add_record_event_category_label=0x7f08003f;
-        public static final int record_add_record_event_date=0x7f080044;
-        public static final int record_add_record_event_date_label=0x7f080043;
+        public static final int record_add_record_event_date=0x7f080046;
+        public static final int record_add_record_event_date_label=0x7f080045;
         public static final int record_add_record_event_label=0x7f080041;
         public static final int record_add_record_save=0x7f080048;
         public static final int record_add_record_summary=0x7f080047;
-        public static final int record_add_record_using_time=0x7f080046;
-        public static final int record_add_record_using_time_label=0x7f080045;
+        public static final int record_add_record_using_time=0x7f080044;
+        public static final int record_add_record_using_time_label=0x7f080043;
         public static final int record_history_but_layout=0x7f08005c;
         public static final int record_history_init_but=0x7f08005d;
         public static final int record_history_list=0x7f08005b;

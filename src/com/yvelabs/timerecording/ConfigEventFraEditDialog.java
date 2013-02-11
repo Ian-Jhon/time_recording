@@ -16,6 +16,7 @@ import com.yvelabs.timerecording.dao.EventDAO;
 import com.yvelabs.timerecording.utils.MyKeyValuePair;
 import com.yvelabs.timerecording.utils.SpinnerUtils;
 import com.yvelabs.timerecording.utils.TypefaceUtils;
+import com.yvelabs.timerecording.utils.SpinnerUtils.MySpinnerAdapter2;
 
 
 public class ConfigEventFraEditDialog extends DialogFragment {
@@ -63,7 +64,7 @@ public class ConfigEventFraEditDialog extends DialogFragment {
 		eventName.setText(selectedModel.getEventName());
 		
 		List<MyKeyValuePair> categoryList = new SpinnerUtils().categorySpinner(getActivity());
-		ArrayAdapter<MyKeyValuePair> categorySppinerAdapter = new ArrayAdapter<MyKeyValuePair>(getActivity(), android.R.layout.simple_spinner_item, categoryList); 
+		ArrayAdapter<MyKeyValuePair> categorySppinerAdapter = new SpinnerUtils().new MySpinnerAdapter2(getActivity(), categoryList); 
 		categorySp.setAdapter(categorySppinerAdapter);
 		MyKeyValuePair categorySelectedPair = new MyKeyValuePair();
 		categorySelectedPair.setKey(selectedModel.getEventCategoryName());
@@ -71,7 +72,7 @@ public class ConfigEventFraEditDialog extends DialogFragment {
 		categorySp.setSelection(new SpinnerUtils().getSpinnerPosition(categorySp, categorySelectedPair));
 		
 		List<MyKeyValuePair> orderList = new SpinnerUtils().orderSpinner();
-		ArrayAdapter<MyKeyValuePair> orderSppinerAdapter = new ArrayAdapter<MyKeyValuePair>(getActivity(), android.R.layout.simple_spinner_item, orderList); 
+		ArrayAdapter<MyKeyValuePair> orderSppinerAdapter = new SpinnerUtils().new MySpinnerAdapter2(getActivity(), orderList); 
 		orderSp.setAdapter(orderSppinerAdapter);
 		MyKeyValuePair orderSelectedPair = new MyKeyValuePair();
 		orderSelectedPair.setKey(selectedModel.getOrder());
@@ -79,7 +80,7 @@ public class ConfigEventFraEditDialog extends DialogFragment {
 		orderSp.setSelection(new SpinnerUtils().getSpinnerPosition(orderSp, orderSelectedPair));
 		
 		List<MyKeyValuePair> statusList = new SpinnerUtils().statusSpinner(getActivity());
-		ArrayAdapter<MyKeyValuePair> statusSppinerAdapter = new ArrayAdapter<MyKeyValuePair>(getActivity(), android.R.layout.simple_spinner_item, statusList); 
+		ArrayAdapter<MyKeyValuePair> statusSppinerAdapter = new SpinnerUtils().new MySpinnerAdapter2(getActivity(), statusList); 
 		statusSp.setAdapter(statusSppinerAdapter);
 		MyKeyValuePair statusSelectedPair = new SpinnerUtils().generateStatusSpinner(getActivity(), selectedModel.getStatus());
 		statusSp.setSelection(new SpinnerUtils().getSpinnerPosition(statusSp, statusSelectedPair));

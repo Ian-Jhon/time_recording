@@ -19,9 +19,12 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.yvelabs.timerecording.utils.DateUtils;
+import com.yvelabs.timerecording.utils.LogUtils;
 import com.yvelabs.timerecording.utils.MyKeyValuePair;
 import com.yvelabs.timerecording.utils.SpinnerUtils;
 import com.yvelabs.timerecording.utils.TypefaceUtils;
+import com.yvelabs.timerecording.utils.SpinnerUtils.MySpinnerAdapter2;
 
 public class RecordHistorySearchDialog extends DialogFragment {
 	
@@ -74,9 +77,7 @@ public class RecordHistorySearchDialog extends DialogFragment {
 							public void onDateSet(DatePicker dp, int year, int month, int dayOfMonth) {
 								startEventDateTv.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
 								
-								Calendar resultCalender = Calendar.getInstance();
-								resultCalender.set(year, month + 1, dayOfMonth);
-								startEventDate = resultCalender.getTime();
+								startEventDate = DateUtils.getDateByYMD(year, month, dayOfMonth);
 							}
 						}, 
 						c.get(Calendar.YEAR), // 传入年份
@@ -97,9 +98,7 @@ public class RecordHistorySearchDialog extends DialogFragment {
 						new DatePickerDialog.OnDateSetListener() {
 							public void onDateSet(DatePicker dp, int year, int month, int dayOfMonth) {
 								endeventDateTv.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
-								Calendar resultCalender = Calendar.getInstance();
-								resultCalender.set(year, month + 1, dayOfMonth);
-								endEventDate = resultCalender.getTime();
+								endEventDate = DateUtils.getDateByYMD(year, month, dayOfMonth);
 							}
 						}, 
 						c.get(Calendar.YEAR), // 传入年份
@@ -115,12 +114,12 @@ public class RecordHistorySearchDialog extends DialogFragment {
 		new TypefaceUtils().setTypeface(titleTextTv, TypefaceUtils.MOBY_MONOSPACE);
 		
 		List<MyKeyValuePair> categoryList = new SpinnerUtils().categorySpinner(getActivity());
-		ArrayAdapter<MyKeyValuePair> categorySppinerAdapter = new ArrayAdapter<MyKeyValuePair>(getActivity(), android.R.layout.simple_spinner_item, categoryList); 
+		ArrayAdapter<MyKeyValuePair> categorySppinerAdapter = new SpinnerUtils().new MySpinnerAdapter2(getActivity(), categoryList); 
 		eventCategoryNameSp.setAdapter(categorySppinerAdapter);
 		MyKeyValuePair categoryPair = (MyKeyValuePair) eventCategoryNameSp.getSelectedItem();
 		
 		eventSpinnerList = new SpinnerUtils().eventSpinner(getActivity(), categoryPair == null ? null : categoryPair.getKey().toString());
-		eventSppinerAdapter = new ArrayAdapter<MyKeyValuePair>(getActivity(), android.R.layout.simple_spinner_item, eventSpinnerList);
+		eventSppinerAdapter = new SpinnerUtils().new MySpinnerAdapter2(getActivity(), eventSpinnerList);
 		eventNameSp.setAdapter(eventSppinerAdapter);
 		
 		eventCategoryNameSp.setOnItemSelectedListener(new OnItemSelectedListener() {

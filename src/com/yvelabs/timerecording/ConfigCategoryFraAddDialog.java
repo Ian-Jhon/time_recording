@@ -1,6 +1,5 @@
 package com.yvelabs.timerecording;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.yvelabs.timerecording.dao.EventCategoryDAO;
-import com.yvelabs.timerecording.utils.LogUtils;
 import com.yvelabs.timerecording.utils.MyKeyValuePair;
 import com.yvelabs.timerecording.utils.SpinnerUtils;
 import com.yvelabs.timerecording.utils.TypefaceUtils;
@@ -58,7 +56,7 @@ public class ConfigCategoryFraAddDialog extends DialogFragment {
 		//init state spinner
 		List<MyKeyValuePair> stateList = new SpinnerUtils().statusSpinner(getActivity());
 		
-		ArrayAdapter<MyKeyValuePair> stateSppinerAdapter = new ArrayAdapter<MyKeyValuePair>(getActivity(), android.R.layout.simple_spinner_item, stateList); 
+		ArrayAdapter<MyKeyValuePair> stateSppinerAdapter = new SpinnerUtils().new MySpinnerAdapter2(getActivity(), stateList); 
 		stateSp.setAdapter(stateSppinerAdapter);
 
 		saveBut.setOnClickListener(new View.OnClickListener() {

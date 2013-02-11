@@ -154,7 +154,7 @@ public class SpinnerUtils {
 			TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
             tv.setText(pairList.get(position).getValue());
             tv.setTextSize(15);
-            tv.setPadding(5, 7, 5, 7);
+            tv.setPadding(7, 10, 7, 10);
             tv.setBackground(context.getResources().getDrawable(R.drawable.my_recorder_main_bg));
             
 			return convertView;
