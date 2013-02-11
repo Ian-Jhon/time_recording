@@ -32,15 +32,12 @@
         android:textColor="@drawable/my_recorder_text_gray_2"
         android:textSize="30sp" />
 
-    <com.yvelabs.chronometer.Chronometer
+    <com.yvelabs.chronometer2.Chronometer
         android:id="@+id/event_chro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/event_name"
         android:layout_centerHorizontal="true"
-        android:singleLine="true"
-        android:textColor="@drawable/my_recorder_text_gray_1"
-        android:textSize="45sp"
         android:paddingBottom="2dp"
         android:paddingLeft="22dp" />
 

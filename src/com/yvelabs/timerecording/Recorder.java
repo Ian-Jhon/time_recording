@@ -1,6 +1,5 @@
 package com.yvelabs.timerecording;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,13 +26,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.yvelabs.chronometer.Chronometer;
-import com.yvelabs.chronometer.utils.FontUtils;
+import com.yvelabs.chronometer2.Chronometer;
 import com.yvelabs.timerecording.dao.EventDAO;
 import com.yvelabs.timerecording.dao.EventRecordsDAO;
 import com.yvelabs.timerecording.dao.EventStatusDAO;
 import com.yvelabs.timerecording.utils.DateUtils;
-import com.yvelabs.timerecording.utils.LogUtils;
 import com.yvelabs.timerecording.utils.TypefaceUtils;
 
 public class Recorder extends Fragment {
@@ -107,17 +104,9 @@ public class Recorder extends Fragment {
 
 		//init chronometer
 		eventChro.setPlayPauseAlphaAnimation(true);
-		eventChro.setFont(FontUtils.FONT_DUPLEX);
+		eventChro.setTypeFace(Chronometer.getTypeface_FONT_DUPLEX(getActivity()));
+		eventChro.setTextSize(45);
 		eventChro.reset();
-		eventChro.setOnChronometerTickListener(new com.yvelabs.chronometer.Chronometer.OnChronometerTickListener() {
-			@Override
-			public void onChronometerTick(Chronometer chro) {
-				//24 hours = 86400000l - 5000l
-				if (chro.duringTime() >= 86395000l) {
-					chro.pause();
-				}
-			}
-		});
 		
 		//chronometer reset
 		resetBut.setOnClickListener(new OnClickListener() {
@@ -133,33 +122,24 @@ public class Recorder extends Fragment {
 		startBut.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//24 hours = 86400000l - 5000l
-				if (eventChro.duringTime() >= 86395000l) {
-					eventChro.pause();
-					DialogFragment newFragment = MyAlertDialogFragment.newInstance(
-				            R.string.attention, R.drawable.ic_my_alert, getString(R.string.timer_can_not_exceed_24_hours), null, null);
-				    newFragment.show(getFragmentManager(), "record_myrecorder_morethen24_alert_dialog");
-					
-				} else {
-					startBut.setVisibility(View.GONE);
-					pauseBut.setVisibility(View.VISIBLE);
-					eventChro.start();
-					
-					currentEvent.setStartElapsedTime(System.currentTimeMillis() - eventChro.duringTime());
-					if (EventModel.STATE_STOP.equals(currentEvent.getChro_state())) {
-						currentEvent.setStartTime(new Date());
-					}
-					currentEvent.setChro_state(EventModel.STATE_START);
-					
-					//当前事件写入状态表
-					eventStatusDAO.deleteNInert(currentEvent);
-					
-					//刷新列表
-					recorderEventListAdapter.notifyDataSetChanged();
-					
-					//更新状态信息
-					updateStatusTv ();
+				startBut.setVisibility(View.GONE);
+				pauseBut.setVisibility(View.VISIBLE);
+				eventChro.start();
+				
+				currentEvent.setStartElapsedTime(System.currentTimeMillis() - eventChro.duringTime());
+				if (EventModel.STATE_STOP.equals(currentEvent.getChro_state())) {
+					currentEvent.setStartTime(new Date());
 				}
+				currentEvent.setChro_state(EventModel.STATE_START);
+				
+				//当前事件写入状态表
+				eventStatusDAO.deleteNInert(currentEvent);
+				
+				//刷新列表
+				recorderEventListAdapter.notifyDataSetChanged();
+				
+				//更新状态信息
+				updateStatusTv ();
 			}
 		});
 		
@@ -210,19 +190,6 @@ public class Recorder extends Fragment {
 				currentEvent.setSummary(eventSummary.getText().toString());
 				new Thread(new ControlPanleRunnable(eventModels.get(arg2))).start();
 				currentEvent = eventModels.get(arg2);
-			}
-		});
-		
-		//列表长按菜单
-		eventList.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
-			@Override
-			public void onCreateContextMenu(ContextMenu menu, View v,
-					ContextMenuInfo menuInfo) {
-				menu.setHeaderTitle("");
-                menu.setHeaderIcon(R.drawable. ic_launcher);
-//				menu.add(0, 1, 5, R.string.delete_all);
-//				menu.add(0, 2, 5, R.string.delete_this);
-
 			}
 		});
 		
