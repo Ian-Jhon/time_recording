@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.yvelabs.satellitemenu.DefaultAnimation2;
 import com.yvelabs.satellitemenu.SatelliteItemModel;
 import com.yvelabs.satellitemenu.SatelliteMenu;
 import com.yvelabs.satellitemenu.SettingPara;
+import com.yvelabs.timerecording.ConfigCategoryFragment.DeleteListener;
 
 public class BottomFragment extends Fragment {
 	
@@ -76,6 +78,16 @@ public class BottomFragment extends Fragment {
 						Intent intent = new Intent(getActivity(), DiaryActivity.class);
 						getActivity().startActivity(intent);
 						getActivity().overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+					} else if (satelliteId == 1) {
+						DialogFragment newFragment = MyAlertDialogFragment.newInstance(
+					            R.string.exit, R.drawable.ic_my_alert, getString(R.string.even_through_quit_the_app_the_timer_will_still_work), 
+					            new MyAlertDialogFragment.OKOnClickListener() {
+									@Override
+									public void onClick(View view) {
+										getActivity().finish();
+									}
+								}, null);
+					    newFragment.show(getFragmentManager(), "satellite_menu_exit_dialog");
 					}
 				}
 			});
@@ -119,6 +131,16 @@ public class BottomFragment extends Fragment {
 						Intent intent = new Intent(getActivity(), DiaryActivity.class);
 						getActivity().startActivity(intent);
 						getActivity().overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+					} else if (satelliteId == 4) {
+						DialogFragment newFragment = MyAlertDialogFragment.newInstance(
+					            R.string.exit, R.drawable.ic_my_alert, getString(R.string.even_through_quit_the_app_the_timer_will_still_work), 
+					            new MyAlertDialogFragment.OKOnClickListener() {
+									@Override
+									public void onClick(View view) {
+										getActivity().finish();
+									}
+								}, null);
+					    newFragment.show(getFragmentManager(), "satellite_menu_exit_dialog");
 					}
 					
 				}

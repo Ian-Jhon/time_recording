@@ -58,4 +58,6 @@
     <string name="timer_can_not_exceed_24_hours">Timer can not exceed 24 hours</string>
     <string name="diary">Diary</string>
     <string name="total_using_time">Total using time</string>
+    <string name="exit">Exit</string>
+    <string name="even_through_quit_the_app_the_timer_will_still_work">Even through quit the app, the timer will still work.</string>
 </resources>

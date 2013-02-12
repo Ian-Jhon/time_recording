@@ -90,11 +90,13 @@ public class DiaryListFragment extends ListFragment {
 	}
 	
 	private void searchDate (Date searchDate) {
+		LogUtils.d(getClass(), "searchDate:" + searchDate);
 		for (int i = 0 ; i < diaryList.size() ; i ++) {
 			List<EventRecordModel> subList = diaryList.get(i);
 			if (subList != null && subList.size() > 0) {
 				if (subList.get(0).getEventDate().compareTo(searchDate) <= 0) {
 					setSelection(i);
+					LogUtils.d(getClass(), "i:" + i);
 					break;
 				}
 			}

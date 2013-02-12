@@ -82,18 +82,14 @@ public class ConfigActivity extends FragmentActivity {
 			} else if (position == 1) {
 				categoryFragment = ConfigCategoryFragment.newInstance(map);
 				return categoryFragment;
-			} else {
-				Fragment fragment = new DummySectionFragment();
-				Bundle args = new Bundle();
-				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-				fragment.setArguments(args);
-				return fragment;
-			}
+			} 
+			
+			return null;
 		}
 
 		@Override
 		public int getCount() {
-			return 3;
+			return 2;
 		}
 		
 		@Override
@@ -103,8 +99,6 @@ public class ConfigActivity extends FragmentActivity {
 				return getString(R.string.configure_the_events);
 			case 1:
 				return getString(R.string.configure_the_categories);
-			case 2:
-				return getString(R.string.settings);
 			}
 			return null;
 		}

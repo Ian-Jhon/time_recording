@@ -238,12 +238,10 @@ public class EventRecordsDAO {
 			if (parameter.getStartEventDate() != null) {
 				sql.append(" and event_date >= ? ");
 				paraList.add(parameter.getStartEventDate().getTime() + "");
-				LogUtils.d(getClass(), "parameter.getStartEventDate().getTime():" + parameter.getStartEventDate().getTime());
 			}
 			if (parameter.getEndEventDate() != null) {
 				sql.append(" and event_date <= ? ");
 				paraList.add(parameter.getEndEventDate().getTime() + "");
-				LogUtils.d(getClass(), "parameter.getEndEventDate().getTime():" + parameter.getEndEventDate().getTime());
 			}
 			if (parameter.getStartCreateTime() != null) {
 				sql.append(" and create_time > ? ");
@@ -255,8 +253,6 @@ public class EventRecordsDAO {
 			}
 			
 			sql.append(" order by create_time desc ");
-			
-			LogUtils.d(this.getClass(), "sql:" + sql);
 			
 			if (paraList.size() <= 0) {
 				c = db.rawQuery(sql.toString(), null);

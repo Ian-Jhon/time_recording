@@ -240,6 +240,7 @@ public final class R {
         public static final int enable=0x7f05001a;
         public static final int enter_the_category_name=0x7f050017;
         public static final int enter_the_event_name=0x7f050027;
+        public static final int even_through_quit_the_app_the_timer_will_still_work=0x7f05003a;
         public static final int event=0x7f050033;
         public static final int event_category=0x7f05000d;
         public static final int event_date=0x7f05000e;
@@ -248,6 +249,7 @@ public final class R {
         public static final int event_name=0x7f05000c;
         public static final int events_are_timed=0x7f050010;
         public static final int events_have_been_suspended=0x7f050012;
+        public static final int exit=0x7f050039;
         public static final int has_been_used_in_the_event=0x7f05001f;
         public static final int has_been_used_in_the_record=0x7f05002f;
         public static final int hello_world=0x7f050004;
