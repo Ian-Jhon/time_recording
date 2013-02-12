@@ -1,5 +1,6 @@
 package com.yvelabs.timerecording;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -34,9 +35,10 @@ public class RecordHistorySearchDialog extends DialogFragment {
 	private TextView startEventDateTv;
 	private TextView endeventDateTv;
 	private ImageButton searchBut;
+	private ImageButton eventDateClearBut;
 	
 	private ArrayAdapter<MyKeyValuePair> eventSppinerAdapter;
-	private List<MyKeyValuePair> eventSpinnerList;
+	private List<MyKeyValuePair> eventSpinnerList = new ArrayList<MyKeyValuePair>();
 	private EventRecordModel parameter = new EventRecordModel();
 	private Date startEventDate;
 	private Date endEventDate;
@@ -65,6 +67,7 @@ public class RecordHistorySearchDialog extends DialogFragment {
 		searchBut = (ImageButton) view.findViewById(R.id.record_history_search_dialog_search_but);
 		startEventDateTv = (TextView) view.findViewById(R.id.record_history_search_dialog_event_date_from);
 		endeventDateTv = (TextView) view.findViewById(R.id.record_history_search_dialog_event_date_to);
+		eventDateClearBut = (ImageButton) view.findViewById(R.id.record_history_search_dialog_event_date_clear_but);
 		
 		startEventDateTv.setKeyListener(null);
 		startEventDateTv.setOnClickListener(new View.OnClickListener() {
@@ -113,12 +116,15 @@ public class RecordHistorySearchDialog extends DialogFragment {
 		
 		new TypefaceUtils().setTypeface(titleTextTv, TypefaceUtils.MOBY_MONOSPACE);
 		
-		List<MyKeyValuePair> categoryList = new SpinnerUtils().categorySpinner(getActivity());
+		List<MyKeyValuePair> categoryList = new ArrayList<MyKeyValuePair>();
+		categoryList.add(new MyKeyValuePair(null, ""));
+		categoryList.addAll(new SpinnerUtils().categorySpinner(getActivity()));
 		ArrayAdapter<MyKeyValuePair> categorySppinerAdapter = new SpinnerUtils().new MySpinnerAdapter2(getActivity(), categoryList); 
 		eventCategoryNameSp.setAdapter(categorySppinerAdapter);
 		MyKeyValuePair categoryPair = (MyKeyValuePair) eventCategoryNameSp.getSelectedItem();
 		
-		eventSpinnerList = new SpinnerUtils().eventSpinner(getActivity(), categoryPair == null ? null : categoryPair.getKey().toString());
+		eventSpinnerList.add(new MyKeyValuePair(null, ""));
+		eventSpinnerList.addAll(new SpinnerUtils().eventSpinner(getActivity(), categoryPair.getKey() == null ? null : categoryPair.getKey().toString()));
 		eventSppinerAdapter = new SpinnerUtils().new MySpinnerAdapter2(getActivity(), eventSpinnerList);
 		eventNameSp.setAdapter(eventSppinerAdapter);
 		
@@ -130,7 +136,8 @@ public class RecordHistorySearchDialog extends DialogFragment {
 				MyKeyValuePair categoryPair = (MyKeyValuePair)eventCategoryNameSp.getSelectedItem();
 				
 				eventSpinnerList.removeAll(eventSpinnerList);
-				eventSpinnerList.addAll(new SpinnerUtils().eventSpinner(getActivity(), categoryPair == null ? null : categoryPair.getKey().toString())); 
+				eventSpinnerList.add(new MyKeyValuePair(null, ""));
+				eventSpinnerList.addAll(new SpinnerUtils().eventSpinner(getActivity(), categoryPair.getKey() == null ? null : categoryPair.getKey().toString())); 
 				eventSppinerAdapter.notifyDataSetChanged();
 			}
 
@@ -146,10 +153,10 @@ public class RecordHistorySearchDialog extends DialogFragment {
 				
 				MyKeyValuePair categoryPair = (MyKeyValuePair) eventCategoryNameSp.getSelectedItem();
 				MyKeyValuePair eventPair = (MyKeyValuePair) eventNameSp.getSelectedItem();
-				parameter.setEventName(eventPair.getKey().toString());
-				parameter.setEventCategoryName(categoryPair.getKey().toString());
+				parameter.setEventName(eventPair.getKey() == null ? null : eventPair.getKey().toString());
+				parameter.setEventCategoryName(categoryPair.getKey() == null ? null : categoryPair.getKey().toString());
 				
-				if (endEventDate != null) {
+				if (startEventDate != null) {
 					parameter.setStartEventDate(startEventDate);
 				}
 				if (endEventDate != null) {
@@ -158,6 +165,17 @@ public class RecordHistorySearchDialog extends DialogFragment {
 				
 				((RecordActivity)getActivity()).refreshHistoryList(parameter);
 				getDialog().dismiss();
+			}
+		});
+		
+		eventDateClearBut.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startEventDate = null;
+				endEventDate = null;
+				
+				startEventDateTv.setText("");
+				endeventDateTv.setText("");
 			}
 		});
 		

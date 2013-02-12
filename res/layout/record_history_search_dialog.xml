@@ -41,7 +41,7 @@
         android:layout_alignBottom="@+id/record_history_search_dialog_event_category_name"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/record_history_search_dialog_dividing_line"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:paddingTop="10dp"
         android:text="@string/category"
@@ -53,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/record_history_search_dialog_dividing_line"
         android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp"
         android:layout_toRightOf="@+id/record_history_search_dialog_event_category_name_label" />
 
     <!-- event -->
@@ -64,7 +65,7 @@
         android:layout_alignBottom="@+id/record_history_search_dialog_event_name"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/record_history_search_dialog_event_category_name_label"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:paddingTop="10dp"
         android:text="@string/event"
@@ -76,6 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/record_history_search_dialog_event_category_name"
         android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp"
         android:layout_toRightOf="@+id/record_history_search_dialog_event_name_label" />
 
     <!-- event date -->
@@ -86,32 +88,42 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/record_history_search_dialog_event_name_label"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="10dp"
         android:hint="@string/event_date" />
 
     <TextView
         android:id="@+id/record_history_search_dialog_event_date_to_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="7dp"
-        android:layout_marginRight="7dp"
         android:layout_alignBottom="@+id/record_history_search_dialog_event_date_from"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
         android:layout_toRightOf="@+id/record_history_search_dialog_event_date_from"
-        android:text="@string/to" 
-        android:textSize="18sp"/>
+        android:text="@string/to"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/record_history_search_dialog_event_date_to"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/record_history_search_dialog_event_date_from"
+        android:layout_marginRight="6dp"
         android:layout_toRightOf="@+id/record_history_search_dialog_event_date_to_label"
         android:hint="@string/event_date" />
+
+    <ImageButton
+        android:id="@+id/record_history_search_dialog_event_date_clear_but"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/record_history_search_dialog_event_date_to"
+        android:layout_toRightOf="@+id/record_history_search_dialog_event_date_to"
+        android:background="@drawable/brush_but_selector" />
 
     <ImageButton
         android:id="@+id/record_history_search_dialog_search_but"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_below="@+id/record_history_search_dialog_event_date_to"
         android:layout_centerHorizontal="true"
         android:background="@drawable/search_but_selector" />

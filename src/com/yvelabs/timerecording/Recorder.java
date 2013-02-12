@@ -6,17 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnCreateContextMenuListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -105,7 +103,9 @@ public class Recorder extends Fragment {
 		//init chronometer
 		eventChro.setPlayPauseAlphaAnimation(true);
 		eventChro.setTypeFace(Chronometer.getTypeface_FONT_DUPLEX(getActivity()));
-		eventChro.setTextSize(45);
+		eventChro.setTextSize(40);
+		ColorStateList csl = (ColorStateList) getActivity().getResources().getColorStateList(R.drawable.my_recorder_text_gray_1);  
+		eventChro.setTextColor(csl);
 		eventChro.reset();
 		
 		//chronometer reset

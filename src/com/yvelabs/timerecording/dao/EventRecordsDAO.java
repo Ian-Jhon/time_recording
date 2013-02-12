@@ -236,12 +236,12 @@ public class EventRecordsDAO {
 				paraList.add(parameter.getEventCategoryName().toLowerCase());
 			}
 			if (parameter.getStartEventDate() != null) {
-				sql.append(" and event_date > ? ");
+				sql.append(" and event_date >= ? ");
 				paraList.add(parameter.getStartEventDate().getTime() + "");
 				LogUtils.d(getClass(), "parameter.getStartEventDate().getTime():" + parameter.getStartEventDate().getTime());
 			}
 			if (parameter.getEndEventDate() != null) {
-				sql.append(" and event_date < ? ");
+				sql.append(" and event_date <= ? ");
 				paraList.add(parameter.getEndEventDate().getTime() + "");
 				LogUtils.d(getClass(), "parameter.getEndEventDate().getTime():" + parameter.getEndEventDate().getTime());
 			}

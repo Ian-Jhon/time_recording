@@ -101,8 +101,6 @@ public class RecordHistoryFragment extends Fragment {
 		eventRecordModels.removeAll(eventRecordModels);
 		eventRecordModels.addAll(new EventRecordsDAO(getActivity()).query(parameter));
 		
-		LogUtils.d(this.getClass(), "eventRecordModels:" + eventRecordModels);
-		
 		if (recordHistoryListAdapter == null)
 			recordHistoryListAdapter = new RecordHistoryListAdapter(getActivity(), eventRecordModels);
 		
