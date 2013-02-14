@@ -9,10 +9,10 @@
     <string name="settings">Settings</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
-    <string name="recorder_page_stop">是否要将以下信息写入日记中</string>
+    <string name="recorder_page_stop">If save the information as below into the diary?</string>
     <string name="start_time_lab">Start time</string>
     <string name="summary">Summary</string>
-    <string name="my_recorder_rest_alert">是否清除当前计时信息?</string>
+    <string name="my_recorder_rest_alert">If clear up the present counting information?</string>
     <string name="event_name">Event name</string>
     <string name="event_category">Event category</string>
     <string name="event_date">Event date</string>
@@ -60,4 +60,6 @@
     <string name="total_using_time">Total using time</string>
     <string name="exit">Exit</string>
     <string name="even_through_quit_the_app_the_timer_will_still_work">Even through quit the app, the timer will still work.</string>
+    <string name="add">Add</string>
+    <string name="successfully_added">successfully added</string>
 </resources>

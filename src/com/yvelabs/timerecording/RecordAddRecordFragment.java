@@ -9,6 +9,7 @@ import java.util.Map;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,7 @@ public class RecordAddRecordFragment extends Fragment {
 	private EditText summaryEv;
 	private ImageButton saveIb;
 	private TimeEdit usingTimeTE;
+	private ImageButton addCategoryNEventBut;
 	
 	private ArrayAdapter<MyKeyValuePair> eventSppinerAdapter;
 	private List<MyKeyValuePair> eventSpinnerList = new ArrayList<MyKeyValuePair>();
@@ -84,6 +86,7 @@ public class RecordAddRecordFragment extends Fragment {
 		usingTimeTE = (TimeEdit) view.findViewById(R.id.record_add_record_using_time);
 		summaryEv = (EditText) view.findViewById(R.id.record_add_record_summary);
 		saveIb = (ImageButton) view.findViewById(R.id.record_add_record_save);
+		addCategoryNEventBut = (ImageButton) view.findViewById(R.id.record_add_record_add_cate_event_but);
 		
 		categoryLabelTv.setFocusable(true);
 		categoryLabelTv.setFocusableInTouchMode(true);
@@ -140,6 +143,15 @@ public class RecordAddRecordFragment extends Fragment {
 				eventDate = DateUtils.getDateByYMD(year, monthOfYear, dayOfMonth);
 			}
 		});
+		
+		addCategoryNEventBut.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentTransaction ft = getFragmentManager().beginTransaction();
+				RecordMyRecorderAddCategoryEventDialog addDialog = RecordMyRecorderAddCategoryEventDialog.newInstance();
+				addDialog.show(ft, "record_add_record_add_category_event_dialog");
+			}
+		});
 
 		return view;
 	}
@@ -151,7 +163,7 @@ public class RecordAddRecordFragment extends Fragment {
 		refreshEventNCategorySp ();
 	}
 	
-	private void refreshEventNCategorySp () {
+	public void refreshEventNCategorySp () {
 		//refresh category
 		categoryList.removeAll(categoryList);
 		categoryList.addAll(new SpinnerUtils().categorySpinner(getActivity()));

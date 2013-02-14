@@ -47,9 +47,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/event_chro"
+        android:hint="@string/summary"
         android:singleLine="true"
-        android:textColor="@drawable/my_recorder_text_gray_1"
-        android:hint="@string/summary" />
+        android:textColor="@drawable/my_recorder_text_gray_1" />
 
     <ImageButton
         android:id="@+id/reset_but"
@@ -88,20 +88,26 @@
         android:id="@+id/event_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/reset_but"
-        android:layout_above="@+id/status_tv" >
+        android:layout_above="@+id/status_tv"
+        android:layout_below="@+id/reset_but" >
     </ListView>
-    
-    <TextView 
+
+    <TextView
         android:id="@+id/status_tv"
         android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:gravity="center_horizontal|bottom"
-        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/record_my_recoder_add_category_event_but"
         android:layout_alignParentLeft="true"
-        android:textStyle="bold"
-        android:textColor="@drawable/pager_title_strip"
-        android:paddingBottom="6dp"
-        />
+        android:padding="5dp"
+        android:textColor="@drawable/my_recorder_text_gray_2"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/record_my_recoder_add_category_event_but"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/add_but_selector" />
 
 </RelativeLayout>

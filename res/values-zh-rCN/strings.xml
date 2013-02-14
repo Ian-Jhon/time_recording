@@ -59,4 +59,6 @@
     <string name="total_using_time">合计用时</string>
     <string name="exit">退出</string>
     <string name="even_through_quit_the_app_the_timer_will_still_work">退出应用后, 计时器仍将工作.</string>
+    <string name="add">添加</string>
+    <string name="successfully_added">添加成功</string>
 </resources>

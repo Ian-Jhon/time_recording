@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/refresh_but_selector" />
         <TextView 
-            android:layout_width="38dp"
+            android:layout_width="37dp"
             android:layout_height="wrap_content"
             android:text="　"/>
 

@@ -34,7 +34,8 @@ public class RecordActivity extends FragmentActivity {
 	private PagerTitleStrip mPagerTitleStrip;
 	
 	private Recorder recorderFragment;
-	private RecordHistoryFragment recordHistoryFragment;  
+	private RecordHistoryFragment recordHistoryFragment;
+	private RecordAddRecordFragment recordAddRecordFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +128,18 @@ public class RecordActivity extends FragmentActivity {
 	}
 	
 	public void refreshHistoryList (EventRecordModel parameter) {
-		recordHistoryFragment.refreshHistoryList(parameter);
+		if (recordHistoryFragment != null) 
+			recordHistoryFragment.refreshHistoryList(parameter);
+	}
+	
+	public void refreshMyRecordEventList () {
+		if (recorderFragment != null) 
+			recorderFragment.refreshEventList();
+	}
+	
+	public void refreshAddRecordCategoryNEvent () {
+		if (recordAddRecordFragment != null)
+			recordAddRecordFragment.refreshEventNCategorySp();
 	}
 	
 	@Override

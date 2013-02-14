@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -46,6 +47,7 @@ public class Recorder extends Fragment {
 	private ImageButton pauseBut;
 	private ImageButton stopBut;
 	private TextView statusTv;
+	private ImageButton addCateogryNEventBut;
 	
 	private ControlPanelHandler controlPanelHandler;
 	private RecorderEventListAdapter recorderEventListAdapter;
@@ -89,6 +91,7 @@ public class Recorder extends Fragment {
 		pauseBut = (ImageButton) view.findViewById(R.id.pause_but);
 		stopBut = (ImageButton) view.findViewById(R.id.stop_but);
 		statusTv = (TextView) view.findViewById(R.id.status_tv);
+		addCateogryNEventBut = (ImageButton) view.findViewById(R.id.record_my_recoder_add_category_event_but);
 		
 		TypefaceUtils.setTypeface(eventName, TypefaceUtils.RBNO2_LIGHT_A);
 		TypefaceUtils.setTypeface(eventCategory, TypefaceUtils.RBNO2_LIGHT_A);
@@ -193,13 +196,19 @@ public class Recorder extends Fragment {
 			}
 		});
 		
+		addCateogryNEventBut.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentTransaction ft = getFragmentManager().beginTransaction();
+				RecordMyRecorderAddCategoryEventDialog addDialog = RecordMyRecorderAddCategoryEventDialog.newInstance();
+				addDialog.show(ft, "record_my_recorder_add_category_event_dialog");
+			}
+		});
+		
 		return view;
 	}
 	
-	
-	@Override
-	public void onResume() {
-		super.onResume();
+	public void refreshEventList () {
 		//select t_event
 		EventModel parameterEvent = new EventModel();
 		parameterEvent.setStatus("1");
@@ -241,7 +250,13 @@ public class Recorder extends Fragment {
 		eventList.setAdapter(recorderEventListAdapter);
 		
 		updateStatusTv ();
-		
+	}
+	
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		refreshEventList () ;
 	}
 	
 	public HashMap<String, Integer> getEventsStatusMap (List<EventModel> eventModels) {
@@ -273,17 +288,18 @@ public class Recorder extends Fragment {
         StringBuilder content = new StringBuilder();
         if (startTotle > 0) {
 	        if (startTotle == 1) {
-	            content.append(startTotle + " ").append(getActivity().getResources().getString(R.string.event_is_timed)).append("\r\n" );
+	            content.append(startTotle + " ").append(getString(R.string.event_is_timed));
 	        } else {
-	            content.append(startTotle + " ").append(getActivity().getResources().getString(R.string.events_are_timed)).append("\r\n" );
+	            content.append(startTotle + " ").append(getString(R.string.events_are_timed));
 	        }
         }
 
         if (pauseTotle > 0) {
+        	
             if (pauseTotle == 1) {
-                content.append(pauseTotle + " ").append(getActivity().getResources().getString(R.string.event_has_been_suspended)).append("\r\n" );
+                content.append(" " + pauseTotle + " ").append(getString(R.string.event_has_been_suspended));
             } else {
-                content.append(pauseTotle + " ").append(getActivity().getResources().getString(R.string.events_have_been_suspended)).append("\r\n" );
+                content.append(" " + pauseTotle + " ").append(getString(R.string.events_have_been_suspended));
             }
         }
         

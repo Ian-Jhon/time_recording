@@ -14,6 +14,7 @@
         android:paddingTop="15dp" >
 
         <!-- category -->
+
         <TextView
             android:id="@+id/record_add_record_event_category_label"
             android:layout_width="wrap_content"
@@ -36,6 +37,7 @@
             android:layout_toRightOf="@+id/record_add_record_event_category_label" />
 
         <!-- event -->
+
         <TextView
             android:id="@+id/record_add_record_event_label"
             android:layout_width="wrap_content"
@@ -56,8 +58,9 @@
             android:layout_alignBottom="@+id/record_add_record_event_label"
             android:layout_below="@+id/record_add_record_event_category"
             android:layout_toRightOf="@+id/record_add_record_event_label" />
-        
+
         <!-- using time -->
+
         <TextView
             android:id="@+id/record_add_record_using_time_label"
             android:layout_width="wrap_content"
@@ -79,6 +82,7 @@
             android:layout_toRightOf="@+id/record_add_record_using_time_label" />
 
         <!-- event date -->
+
         <TextView
             android:id="@+id/record_add_record_event_date_label"
             android:layout_width="wrap_content"
@@ -108,13 +112,31 @@
             android:layout_marginBottom="10dp"
             android:hint="@string/summary" />
 
-        <ImageButton
-            android:id="@+id/record_add_record_save"
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/record_add_record_but_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/record_add_record_summary"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/save_but_selector" />
+            android:layout_centerHorizontal="true" >
+
+            <ImageButton
+                android:id="@+id/record_add_record_add_cate_event_but"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/add_but_selector" />
+
+            <TextView
+                android:layout_width="37dp"
+                android:layout_height="wrap_content"
+                android:text="　" />
+
+            <ImageButton
+                android:id="@+id/record_add_record_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/save_but_selector" />
+        </LinearLayout>
     </RelativeLayout>
 
 </ScrollView>

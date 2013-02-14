@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/my_recorder_main_bg" >
+
+    <ImageView
+        android:id="@+id/record_my_record_add_category_event_dialog_title_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        android:background="@drawable/ic_add_normal" />
+
+    <TextView
+        android:id="@+id/record_my_record_add_category_event_dialog_title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/record_my_record_add_category_event_dialog_title_icon"
+        android:layout_marginBottom="18dp"
+        android:layout_toRightOf="@+id/record_my_record_add_category_event_dialog_title_icon"
+        android:text="@string/add"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/record_my_record_add_category_event_dialog_dividing_line"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/record_my_record_add_category_event_dialog_title_icon"
+        android:background="@drawable/pager_title_strip" />
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/record_my_record_add_category_event_dialog_dividing_line"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/record_my_recorder_add_category_event_dialog_add_cate_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/add_category"
+            android:textColor="@drawable/pager_title_strip" />
+
+        <EditText
+            android:id="@+id/record_my_record_add_category_event_dialog_category_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/record_my_recorder_add_category_event_dialog_add_cate_label"
+            android:hint="@string/enter_the_category_name"
+            android:singleLine="true" />
+
+        <ImageButton
+            android:id="@+id/record_my_record_add_category_event_dialog_add_category_but"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/record_my_record_add_category_event_dialog_category_name_et"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/add_but_selector" />
+
+        <TextView
+            android:id="@+id/record_my_record_add_category_event_dialog_dividing_line_2"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/record_my_record_add_category_event_dialog_add_category_but"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/pager_title_strip" />
+
+        <TextView
+            android:id="@+id/record_my_record_add_category_event_dialog_add_event_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/record_my_record_add_category_event_dialog_dividing_line_2"
+            android:layout_centerHorizontal="true"
+            android:text="@string/add_event"
+            android:textColor="@drawable/pager_title_strip" >
+        </TextView>
+
+        <Spinner
+            android:id="@+id/record_my_record_add_category_event_dialog_category_sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/record_my_record_add_category_event_dialog_add_event_label" />
+
+        <EditText
+            android:id="@+id/record_my_record_add_category_event_dialog_event_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/record_my_record_add_category_event_dialog_category_sp"
+            android:hint="@string/enter_the_event_name"
+            android:singleLine="true" />
+
+        <ImageButton
+            android:id="@+id/record_my_record_add_category_event_dialog_add_event_but"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/record_my_record_add_category_event_dialog_event_name_et"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/add_but_selector" />
+    </RelativeLayout>
+
+</RelativeLayout>
