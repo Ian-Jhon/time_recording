@@ -74,6 +74,29 @@ public class MyDBHelper extends SQLiteOpenHelper {
 		eventStatusTableSql.append("   create_on INTEGER ");
 		eventStatusTableSql.append(" ) ");
 		db.execSQL(eventStatusTableSql.toString());
+		
+		initData(db);
+	}
+	
+	private void initData (SQLiteDatabase db) {
+		String sql = "insert into t_event_category (event_category_name, status) values ('Work', '1')";
+		db.execSQL(sql);
+		
+		sql = "insert into t_event_category (event_category_name, status) values ('Other', '1')";
+		db.execSQL(sql);
+		
+		sql = "insert into t_event (event_name, event_category_name, status, event_order) values ('Project 1', 'Work', '1', 3)";
+		db.execSQL(sql);
+		
+		sql = "insert into t_event (event_name, event_category_name, status, event_order) values ('Project 2', 'Work', '1', 3)";
+		db.execSQL(sql);
+		
+		sql = "insert into t_event (event_name, event_category_name, status, event_order) values ('Watch TV', 'Other', '1', 3)";
+		db.execSQL(sql);
+		
+		sql = "insert into t_event (event_name, event_category_name, status, event_order) values ('Movies', 'Other', '1', 3)";
+		db.execSQL(sql);
+		
 	}
 
 	@Override
