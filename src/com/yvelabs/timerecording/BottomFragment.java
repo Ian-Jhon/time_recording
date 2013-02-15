@@ -53,7 +53,7 @@ public class BottomFragment extends Fragment {
 	        leftRatllites.add(new SatelliteItemModel(3, R.drawable.satellite_diary));
 	        leftRatllites.add(new SatelliteItemModel(4, R.drawable.satellite_recorder));
 			
-			SettingPara settingPara = new SettingPara(13, 90, 200, R.drawable.satellite_planet_menu, leftRatllites);
+			SettingPara settingPara = new SettingPara(23, 90, 200, R.drawable.satellite_planet_menu, leftRatllites);
 			//设置动画
 			DefaultAnimation anim = new DefaultAnimation();
 			settingPara.setMenuAnimation(anim);
@@ -95,7 +95,7 @@ public class BottomFragment extends Fragment {
 //			rightRatllites.add(new SatelliteItemModel(4, R.drawable.satellite_shutdown));
 			
 			//parameter
-			SettingPara rightSettingPara = new SettingPara(90, 167, 200, R.drawable.satellite_planet_menu, rightRatllites);
+			SettingPara rightSettingPara = new SettingPara(90, 157, 200, R.drawable.satellite_planet_menu, rightRatllites);
 			rightSettingPara.setCustomerRadiusAdjust(50);
 			
 			//设置动画
