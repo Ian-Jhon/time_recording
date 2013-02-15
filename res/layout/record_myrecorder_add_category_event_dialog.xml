@@ -48,11 +48,19 @@
             android:text="@string/add_category"
             android:textColor="@drawable/pager_title_strip" />
 
+        <TextView
+            android:id="@+id/record_my_record_add_category_event_dialog_category_error_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/record_my_recorder_add_category_event_dialog_add_cate_label"
+            android:textColor="@drawable/warn_text" />
+
         <EditText
             android:id="@+id/record_my_record_add_category_event_dialog_category_name_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/record_my_recorder_add_category_event_dialog_add_cate_label"
+            android:layout_below="@+id/record_my_record_add_category_event_dialog_category_error_tv"
             android:hint="@string/enter_the_category_name"
             android:singleLine="true" />
 
@@ -84,12 +92,20 @@
             android:textColor="@drawable/pager_title_strip" >
         </TextView>
 
+        <TextView
+            android:id="@+id/record_my_record_add_category_event_dialog_event_error_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/record_my_record_add_category_event_dialog_add_event_label"
+            android:textColor="@drawable/warn_text" />
+
         <Spinner
             android:id="@+id/record_my_record_add_category_event_dialog_category_sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/record_my_record_add_category_event_dialog_add_event_label" />
+            android:layout_below="@+id/record_my_record_add_category_event_dialog_event_error_tv" />
 
         <EditText
             android:id="@+id/record_my_record_add_category_event_dialog_event_name_et"

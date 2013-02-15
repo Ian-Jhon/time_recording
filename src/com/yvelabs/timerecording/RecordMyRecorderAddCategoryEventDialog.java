@@ -31,6 +31,8 @@ public class RecordMyRecorderAddCategoryEventDialog extends DialogFragment {
 	private Spinner categorySP;
 	private EditText eventNameET;
 	private ImageButton addEventBut;
+	private TextView categoryErrorTV;
+	private TextView eventErrorTV;
 	
 	private List<MyKeyValuePair> categoryList = new ArrayList<MyKeyValuePair>();
 	private ArrayAdapter<MyKeyValuePair> categorySppinerAdapter;
@@ -60,6 +62,8 @@ public class RecordMyRecorderAddCategoryEventDialog extends DialogFragment {
 		categorySP = (Spinner) view.findViewById(R.id.record_my_record_add_category_event_dialog_category_sp);
 		eventNameET = (EditText) view.findViewById(R.id.record_my_record_add_category_event_dialog_event_name_et);
 		addEventBut = (ImageButton) view.findViewById(R.id.record_my_record_add_category_event_dialog_add_event_but);
+		categoryErrorTV = (TextView) view.findViewById(R.id.record_my_record_add_category_event_dialog_category_error_tv);
+		eventErrorTV = (TextView) view.findViewById(R.id.record_my_record_add_category_event_dialog_event_error_tv);
 		
 		new TypefaceUtils().setTypeface(titleTextTV, TypefaceUtils.MOBY_MONOSPACE);
 		new TypefaceUtils().setTypeface(addCateogryLabel, TypefaceUtils.MOBY_MONOSPACE);
@@ -73,12 +77,22 @@ public class RecordMyRecorderAddCategoryEventDialog extends DialogFragment {
 		addCategoryBut.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (categoryNameET.getText().toString().trim().length() <= 0) 
+				categoryErrorTV.setText("");
+				//validate
+				if (categoryNameET.getText().toString().trim().length() <= 0) {
+					categoryErrorTV.setText(getString(R.string.please_enter_the_category_name));
 					return;
+				}
 				
-				//insert into t_event_category
 				EventCategoryModel categoryModel = new EventCategoryModel();
 				categoryModel.setEventCategoryName(categoryNameET.getText().toString().trim());
+				List<EventCategoryModel> repeatList = new EventCategoryDAO(getActivity()).query(categoryModel);
+				if (repeatList.size() > 0) {
+					categoryErrorTV.setText(categoryNameET.getText().toString().trim() + " " + getString(R.string.already_exists));
+					return;
+				}
+				
+				//insert into t_event_category
 				categoryModel.setStatus("1");
 				new EventCategoryDAO(getActivity()).insert(categoryModel);
 					
@@ -91,17 +105,29 @@ public class RecordMyRecorderAddCategoryEventDialog extends DialogFragment {
 		addEventBut.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (eventNameET.getText().toString().trim().length() <= 0) 
+				eventErrorTV.setText("");
+				//validate
+				if (eventNameET.getText().toString().trim().length() <= 0) {
+					eventErrorTV.setText(getString(R.string.please_enter_the_event));
 					return;
+				}
 				
 				EventModel parameter = new EventModel();
 				parameter.setEventName(eventNameET.getText().toString().trim());
 				MyKeyValuePair categoryPair = (MyKeyValuePair) categorySP.getSelectedItem();
 				parameter.setEventCategoryName(categoryPair.getKey().toString());
+				List<EventModel> repeatList = new EventDAO(getActivity()).query(parameter);
+				if (repeatList.size() > 0) {
+					eventErrorTV.setText(getString(R.string.this_event_already_exists_in_the_category) + "(" + categoryPair.getKey().toString() + ")");
+					return;
+				}
+				
+				//insert
 				parameter.setOrder(3);
 				parameter.setStatus("1");
 				new EventDAO(getActivity()).insert(parameter);
 				
+				//refresh
 				((RecordActivity)getActivity()).refreshAddRecordCategoryNEvent();
 				((RecordActivity)getActivity()).refreshMyRecordEventList();
 				

@@ -73,6 +73,7 @@ public class ConfigEventFraAddDialog extends DialogFragment {
 		addBut.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				warning.setText("");
 				//validate
 				if (eventName.getText().toString().trim().length() <= 0) {
 					warning.setText(getString(R.string.please_enter_the_event));

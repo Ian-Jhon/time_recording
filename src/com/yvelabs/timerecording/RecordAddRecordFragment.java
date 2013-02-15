@@ -22,9 +22,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.TimePicker.OnTimeChangedListener;
+import android.widget.Toast;
 
+import com.yvelabs.satellitemenu.MainActivity;
 import com.yvelabs.timeedit.TimeEdit;
 import com.yvelabs.timerecording.dao.EventRecordsDAO;
 import com.yvelabs.timerecording.utils.DateUtils;
@@ -121,7 +121,17 @@ public class RecordAddRecordFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				MyKeyValuePair categoryPair = (MyKeyValuePair) categorySp.getSelectedItem();
+				if (categoryPair == null || categoryPair.getKey() == null ||
+						categoryPair.getKey().toString().length() <= 0) {
+					Toast.makeText(getActivity(), getString(R.string.please_select_a_category), Toast.LENGTH_SHORT ).show();
+					return;
+				}
 				MyKeyValuePair eventPair = (MyKeyValuePair) eventSp.getSelectedItem();
+				if (eventPair == null || eventPair.getKey() == null ||
+						eventPair.getKey().toString().length() <= 0) {
+					Toast.makeText(getActivity(), getString(R.string.please_select_an_event), Toast.LENGTH_SHORT ).show();
+					return;
+				}
 				
 				saveModel = new EventRecordModel();
 				saveModel.setEventName(eventPair.getKey().toString());

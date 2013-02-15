@@ -62,4 +62,6 @@
     <string name="even_through_quit_the_app_the_timer_will_still_work">Even through quit the app, the timer will still work.</string>
     <string name="add">Add</string>
     <string name="successfully_added">successfully added</string>
+    <string name="please_select_a_category">Please select a category.</string>
+    <string name="please_select_an_event">Please select an event.</string>
 </resources>

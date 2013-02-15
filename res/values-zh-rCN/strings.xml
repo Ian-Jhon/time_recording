@@ -61,4 +61,6 @@
     <string name="even_through_quit_the_app_the_timer_will_still_work">退出应用后, 计时器仍将工作.</string>
     <string name="add">添加</string>
     <string name="successfully_added">添加成功</string>
+    <string name="please_select_a_category">请选择一个大类.</string>
+    <string name="please_select_an_event">请选择一个事件.</string>
 </resources>
