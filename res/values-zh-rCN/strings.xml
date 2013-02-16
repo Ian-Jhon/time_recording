@@ -48,6 +48,7 @@
     <string name="this_event_already_exists_in_the_category">此事件已存在, 所在大类为</string>
     <string name="please_enter_the_event">请输入事件名称.</string>
     <string name="order">优先级</string>
+    <string name="has_been_used_in_the_record">在记录中已使用</string>
     <string name="edit_event">编辑事件</string> 
     <string name="please_enter_the_event_name">请录入事件名称</string>
     <string name="search">查询</string>
