@@ -99,9 +99,7 @@ public class BottomFragment extends Fragment {
 			rightSettingPara.setCustomerRadiusAdjust(50);
 			
 			//…Ë÷√∂Øª≠
-			DefaultAnimation2 rightAnimation = new DefaultAnimation2();
-			rightAnimation.setSatelliteStartOffsetMin(0);
-			rightAnimation.setSatelliteStartOffsetMax(150);
+			DefaultAnimation rightAnimation = new DefaultAnimation();
 			rightSettingPara.setMenuAnimation(rightAnimation);
 			
 			rightSatelliteMenu.setting(rightSettingPara);

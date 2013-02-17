@@ -15,7 +15,7 @@
     <string name="my_recorder_rest_alert">是否清除当前计时信息?</string>
     <string name="event_name">事件名称</string>
     <string name="event_category">事件大类</string>
-    <string name="event_date">事件日期</string>
+    <string name="event_date">日期</string>
     <string name="using_time">使用时间</string>
     <string name="events_are_timed">个事件正在计时.</string>
     <string name="event_is_timed">个事件正在计时.</string>
